@@ -1,16 +1,40 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 
-import { AppComponent } from './app.component';
-import { TopNavbarComponent } from './component/top-navbar/top-navbar.component';
-import { HomePageComponent } from './component/home-page/home-page.component';
+import {ComponentModule} from './component/component.module';
+import {ServiceModule} from './service/service.module';
+import {PipeModule} from './pipe/pipe.module';
+import {DirectiveModule} from './directive/directive.module';
+
+import {AppComponent} from './app.component';
+
+import {TranslateLoaderUtil} from "./utils/translate-loader.util";
 
 @NgModule({
-  declarations: [AppComponent, TopNavbarComponent, HomePageComponent],
-  imports: [BrowserModule, NgbModule, BrowserAnimationsModule],
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    NgbModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ComponentModule,
+    ServiceModule,
+    PipeModule,
+    DirectiveModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (TranslateLoaderUtil.createTranslateLoader),
+        deps: [HttpClient]
+      }
+    }),
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}
