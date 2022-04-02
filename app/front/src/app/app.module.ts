@@ -5,9 +5,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { TopNavbarComponent } from './component/top-navbar/top-navbar.component';
+import { HomePageComponent } from './component/home-page/home-page.component';
 
 @NgModule({
-  declarations: [AppComponent, TopNavbarComponent],
+  declarations: [AppComponent, TopNavbarComponent, HomePageComponent],
   imports: [BrowserModule, NgbModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
