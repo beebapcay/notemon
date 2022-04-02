@@ -5,6 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 
+import {MaterialModule} from './material.module';
 import {ComponentModule} from './component/component.module';
 import {ServiceModule} from './service/service.module';
 import {PipeModule} from './pipe/pipe.module';
@@ -21,6 +22,7 @@ import {TranslateLoaderUtil} from "./utils/translate-loader.util";
     NgbModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MaterialModule,
     ComponentModule,
     ServiceModule,
     PipeModule,
