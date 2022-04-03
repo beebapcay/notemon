@@ -1,0 +1,41 @@
+// setup breakpoint
+$grid-breakpoints: (
+  xs: 0,
+  sm: 414px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1440px,
+  xxl: 1920px
+);
+
+$container-max-widths: (
+  xs: 414px,
+  sm: 768px,
+  md: 1024px,
+  lg: 1440px,
+  xl: 1920px,
+  xxl: 2560px
+);
+
+// setup color
+$color-primary: #29947F;
+$color-primary-overlay: #218574;
+$color-on-primary: #fff;
+
+$color-variant: #04263D;
+$color-on-variant: #fff;
+
+$color-background: #fff;
+$color-on-background: #000;
+$color-on-background-variant: #04263D;
+
+$color-input-outline: #00a0e9;
+
+// setup font
+
+// mixin function
+@mixin outline-focus($color: $color-input-outline) {
+  outline: 2px solid $color;
+}
+
+

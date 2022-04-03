@@ -1,0 +1,34 @@
+@import "~src/variables";
+
+.application-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .supported-content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .main-container {
+      flex-grow: 1;
+    }
+  }
+
+  .err-overlay {
+    display: none;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: map-get($container-max-widths, md)) {
+  .application-container {
+    .supported-content-container {
+      display: none;
+    }
+
+    .err-overlay.err-not-support-overlay {
+      display: block;
+    }
+  }
+}

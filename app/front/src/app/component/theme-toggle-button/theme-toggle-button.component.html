@@ -1,0 +1,14 @@
+<div class="theme-toggle-button-container">
+  <input
+    (change)="onThemeChange()"
+    [checked]="isDarkTheme"
+    class="theme-toggle-chk"
+    id="theme-toggle-chk"
+    type="checkbox"
+  >
+  <label class="theme-toggle-lbl" for="theme-toggle-chk">
+    <fa-icon [icon]="faMoon" class="theme-dark-icon"></fa-icon>
+    <fa-icon [icon]="faSun" class="theme-light-icon"></fa-icon>
+    <span class="toggle-thumb"></span>
+  </label>
+</div>
