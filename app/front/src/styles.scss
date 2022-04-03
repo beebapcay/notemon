@@ -1,13 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import 'variables';
+
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
 
 html,
 body {
   height: 100%;
 }
+
 body {
-  margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
