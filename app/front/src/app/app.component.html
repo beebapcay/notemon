@@ -5,11 +5,13 @@
       <app-feature-page></app-feature-page>
     </div>
     <app-bottom-navbar></app-bottom-navbar>
-    <div class="err-overlay err-not-found-overlay">
-      <p>404 Error Page Not Found</p>
-    </div>
+    <app-error-alert
+      [error]="ErrorCodeEnum.NotFound"
+      class="err-overlay err-not-found-overlay"
+    ></app-error-alert>
   </div>
-  <div class="err-overlay err-not-support-overlay">
-    <p>Your Browser or Device Not Supported</p>
-  </div>
+  <app-error-alert
+    [error]="ErrorCodeEnum.NotSupported"
+    class="err-overlay err-not-supported-overlay"
+  ></app-error-alert>
 </div>

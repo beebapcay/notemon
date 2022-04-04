@@ -1,0 +1,26 @@
+<div *ngIf="error" class="error container-fluid">
+  <ng-container *ngIf="error === ErrorCodeEnum.NotFound">
+    <div class="row">
+      <div class="err-img col-8">
+        <img alt="" class="col" src="assets/images/err_404_1.png">
+      </div>
+      <div class="err-description col-4">
+        <h1>Oops, Something's Not Right</h1>
+        <h2>404</h2>
+        <p>Looks like we can't find this page any more</p>
+        <p>You can visit our home page instead</p>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="error === ErrorCodeEnum.NotSupported">
+    <div class="err-img col-8">
+      <img alt="" src="assets/images/err_404_2.png">
+    </div>
+    <div class="err-description">
+      <h1>Oops, Something's Not Right</h1>
+      <p>Your device our browser is not supported yet</p>
+    </div>
+  </ng-container>
+</div>
+
+
