@@ -1,0 +1,20 @@
+<div class="error-page container-fluid">
+  <div class="err-img">
+    <img [src]="AssetsSrcConstant.ERROR_404_2" alt="">
+  </div>
+  <div class="err-description">
+    <h1 class="oops">Oops!</h1>
+    <h2 class="code">{{error?.code || errorInput?.code}}</h2>
+    <p class="msg">{{error?.message || errorInput?.message}}</p>
+    <ng-container
+      *ngIf="error?.code !== ErrorCodeEnum.NotSupported || errorInput?.code !== ErrorCodeEnum.NotSupported">
+      <p class="go-home-page">You can visit our home page instead</p>
+      <a [routerLink]="AppRouteConstant.HOME" class="go-home-page-btn" mat-flat-button>
+        Go to Home Page
+      </a>
+    </ng-container>
+  </div>
+</div>
+
+
+

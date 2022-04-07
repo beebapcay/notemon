@@ -1,0 +1,61 @@
+@import "~src/variables";
+
+.error-page {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .err-img {
+    padding: 0 20px;
+    margin-right: 100px;
+
+    img {
+      margin: 0 20px;
+      max-width: 500px;
+      height: auto;
+      opacity: 0.75;
+    }
+  }
+
+  .err-description {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .oops {
+      font-size: 28px;
+      color: $color-warning;
+    }
+
+    .code {
+      font-size: 68px;
+      font-weight: bold;
+      margin: 32px 0 48px;
+    }
+
+    .msg,
+    .go-home-page {
+      font-size: 16px;
+      color: #7C8183;
+      margin: 0 0 5px;
+    }
+
+    .go-home-page-btn {
+      margin-top: 18px;
+      background-color: $color-primary;
+      color: $color-on-primary;
+
+
+      &:active {
+        @include outline-focus($color-focus-gray);
+      }
+    }
+  }
+}

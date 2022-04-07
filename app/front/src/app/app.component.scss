@@ -11,13 +11,21 @@
     flex-direction: column;
 
     .main-container {
-      flex-grow: 1;
+      flex: 1;
+      padding: 0 75px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 
-  .err-overlay {
+  .not-supported-content-container {
     display: none;
-    text-align: center;
+    flex: 1;
+  }
+
+  .err-overlay {
+    flex: 1;
   }
 }
 
@@ -27,7 +35,7 @@
       display: none;
     }
 
-    .err-overlay.err-not-supported-overlay {
+    .not-supported-content-container {
       display: block;
     }
   }

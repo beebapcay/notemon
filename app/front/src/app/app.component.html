@@ -1,17 +1,12 @@
 <div class="application-container">
-  <div class="supported-content-container">
+  <ng-container *showItSizes="{min: BreakPointResponsiveConstant.LG}">
     <app-top-navbar></app-top-navbar>
     <div class="main-container">
-      <app-feature-page></app-feature-page>
+      <router-outlet></router-outlet>
     </div>
     <app-bottom-navbar></app-bottom-navbar>
-    <app-error-alert
-      [error]="ErrorCodeEnum.NotFound"
-      class="err-overlay err-not-found-overlay"
-    ></app-error-alert>
-  </div>
-  <app-error-alert
-    [error]="ErrorCodeEnum.NotSupported"
-    class="err-overlay err-not-supported-overlay"
-  ></app-error-alert>
+  </ng-container>
+  <ng-container *showItSizes="{max: BreakPointResponsiveConstant.LG - 1}">
+    <app-error-page [error]="NotSupportedErrorModel.create()"></app-error-page>
+  </ng-container>
 </div>

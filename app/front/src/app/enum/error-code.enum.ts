@@ -1,6 +1,6 @@
 export enum ErrorCodeEnum {
-  NotSupported = 'NotSupported',
-  NotFound = 'NotFound',
+  NotSupported = 'Not Supported',
+  NotFound = '404',
   BadRequest = 'BadRequest',
   Unauthorized = 'Unauthorized',
   Forbidden = 'Forbidden',
