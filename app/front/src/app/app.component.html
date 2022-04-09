@@ -1,12 +1,12 @@
 <div class="application-container">
-  <ng-container *showItSizes="{min: BreakPointResponsiveConstant.LG}">
+  <div class="supported-content-container">
     <app-top-navbar></app-top-navbar>
     <div class="main-container">
       <router-outlet></router-outlet>
     </div>
     <app-bottom-navbar></app-bottom-navbar>
-  </ng-container>
-  <ng-container *showItSizes="{max: BreakPointResponsiveConstant.LG - 1}">
+  </div>
+  <div class="unsupported-content-container">
     <app-error-page [error]="NotSupportedErrorModel.create()"></app-error-page>
-  </ng-container>
+  </div>
 </div>

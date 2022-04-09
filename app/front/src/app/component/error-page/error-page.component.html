@@ -4,10 +4,10 @@
   </div>
   <div class="err-description">
     <h1 class="oops">Oops!</h1>
-    <h2 class="code">{{error?.code || errorInput?.code}}</h2>
-    <p class="msg">{{error?.message || errorInput?.message}}</p>
+    <h2 class="code">{{error?.code}}</h2>
+    <p [innerHTML]="error?.message" class="msg"></p>
     <ng-container
-      *ngIf="error?.code !== ErrorCodeEnum.NotSupported || errorInput?.code !== ErrorCodeEnum.NotSupported">
+      *ngIf="error?.code !== ErrorCodeEnum.NotSupported">
       <p class="go-home-page">You can visit our home page instead</p>
       <a [routerLink]="AppRouteConstant.HOME" class="go-home-page-btn" mat-flat-button>
         Go to Home Page

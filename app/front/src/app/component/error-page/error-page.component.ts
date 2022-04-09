@@ -12,9 +12,7 @@ import {ErrorCodeEnum} from '../../enum/error-code.enum';
   styleUrls: ['./error-page.component.scss']
 })
 export class ErrorPageComponent implements OnInit, OnDestroy {
-  @Input('error') errorInput: ErrorModel | null = null;
-
-  public error: ErrorModel | null = null;
+  @Input() error: ErrorModel | null = null;
 
   readonly AppRouteConstant = AppRouteConstant;
   readonly AssetsSrcConstant = AssetsSrcConstant;
