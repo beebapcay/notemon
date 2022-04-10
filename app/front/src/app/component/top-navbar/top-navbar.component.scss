@@ -75,7 +75,7 @@
     }
 
     &:active {
-      @include outline-focus(#c0c8ce);
+      @include outline-focus($color-focus-gray);
       background-color: $color-primary-overlay;
     }
   }

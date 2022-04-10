@@ -1,3 +1,11 @@
+//import typo font
+@import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700';
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,700';
+@import 'https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,700';
+@import 'https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,500,600,700';
+
+
 // setup breakpoint
 $grid-breakpoints: (
   xs: 0,
@@ -23,11 +31,19 @@ $color-primary-overlay: #218574;
 $color-on-primary: #fff;
 
 $color-variant: #04263D;
+$color-variant-light: #2836A0;
+$color-variant-light-overlay: #222d86;
 $color-on-variant: #fff;
+
 
 $color-background: #fff;
 $color-on-background: #000;
+$color-on-background-light: #2D363F;
 $color-on-background-variant: #04263D;
+
+$color-gray: #435358;
+$color-gray-dark: #4C5C6B;
+$color-gray-dark-overlay: #394550;
 
 $color-input-outline: #00a0e9;
 
@@ -40,8 +56,25 @@ $color-bottom-nav-bot-bg: #2E3639;
 $color-error: #f44336;
 
 $color-focus-gray: #c0c8ce;
+$color-focus-gray-light: rgba(192, 200, 206, 0.05);
+
+$color-green-light-background: #F6FCFB;
+$color-yellow-light-background: #FDFAF5;
+$color-blue-light-background: #F1F4FA;
 
 // setup font
+$font-family-primary: 'Roboto', sans-serif;
+$font-family-secondary: 'Montserrat', sans-serif;
+$font-family-tertiary: 'Open Sans', sans-serif;
+$font-family-quaternary: 'Poppins', sans-serif;
+
+$font-family-action-primary: 'Roboto', sans-serif;
+$font-family-action-secondary: 'Poppins', sans-serif;
+
+$font-family-input-primary: 'Poppins', sans-serif;
+$font-family-input-secondary: 'Roboto', sans-serif;
+
+$font-family-mono: 'Roboto Mono', monospace;
 
 // mixin function
 @mixin outline-focus($color: $color-input-outline) {

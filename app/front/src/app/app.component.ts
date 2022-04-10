@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 
-import {NotSupportedErrorModel} from './model/error.model';
-import {BreakPointResponsiveConstant} from './common/break-point-responsive.constant';
+import {NotSupportedErrorModel} from './model/error.model'
 
 import defaultLanguage from '../assets/i18n/en.json';
 
@@ -14,7 +13,6 @@ import defaultLanguage from '../assets/i18n/en.json';
 export class AppComponent implements OnInit {
 
   readonly NotSupportedErrorModel = NotSupportedErrorModel;
-  readonly BreakPointResponsiveConstant = BreakPointResponsiveConstant;
 
   constructor(private translateService: TranslateService) {
     this.translateService.setTranslation('en', defaultLanguage);
