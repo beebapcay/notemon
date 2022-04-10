@@ -7,7 +7,6 @@ import {AppRouteConstant} from '../../common/app-route.constant';
   styleUrls: ['./top-navbar.component.scss']
 })
 export class TopNavbarComponent implements OnInit {
-
   readonly AppRouteConstant = AppRouteConstant;
 
   constructor() {

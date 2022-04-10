@@ -9,11 +9,11 @@ $grid-breakpoints: (
 );
 
 $container-max-widths: (
-  xs: 414px,
-  sm: 768px,
-  md: 1024px,
-  lg: 1440px,
-  xl: 1920px,
+  xs: map-get($grid-breakpoints, sm),
+  sm: map-get($grid-breakpoints, md),
+  md: map-get($grid-breakpoints, lg),
+  lg: map-get($grid-breakpoints, xl),
+  xl: map-get($grid-breakpoints, xxl),
   xxl: 2560px
 );
 
@@ -36,6 +36,10 @@ $color-on-bottom-nav-dim: #7C8183;
 $color-on-bottom-nav-hover: #ffffff;
 $color-bottom-nav-up-bg: #374043;
 $color-bottom-nav-bot-bg: #2E3639;
+
+$color-error: #f44336;
+
+$color-focus-gray: #c0c8ce;
 
 // setup font
 
