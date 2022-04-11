@@ -44,6 +44,7 @@ $color-on-variant: #fff;
 $color-background: #fff;
 $color-on-background: #000;
 $color-on-background-gray: #435358;
+$color-on-background-gray-light: #7C8183;
 $color-on-background-gray-dark: #4C5C6B;
 $color-on-background-gray-dark-over: #394550;
 $color-on-background-variant: #04263D;
@@ -65,16 +66,11 @@ $color-on-nav-bot: #ffffff;
 // setup font
 $font-family-primary: 'Roboto', sans-serif;
 $font-family-secondary: 'Montserrat', sans-serif;
-$font-family-tertiary: 'Open Sans', sans-serif;
-$font-family-quaternary: 'Poppins', sans-serif;
-
-$font-family-action-primary: 'Roboto', sans-serif;
-$font-family-action-secondary: 'Poppins', sans-serif;
-
-$font-family-input-primary: 'Poppins', sans-serif;
-$font-family-input-secondary: 'Roboto', sans-serif;
+$font-family-tertiary: 'Poppins', sans-serif;
+$font-family-quaternary: 'Open Sans', sans-serif;
 
 $font-family-mono: 'Roboto Mono', monospace;
+
 
 // mixin function
 @mixin outline-focus($color: $color-focus-primary, $width: 2px) {

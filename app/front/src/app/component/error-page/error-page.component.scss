@@ -33,7 +33,7 @@
 
     .code {
       font-size: 68px;
-      font-family: $font-family-quaternary;
+      font-family: $font-family-tertiary;
       font-weight: 700;
       margin: 32px 0 48px;
     }
@@ -43,7 +43,7 @@
       font-family: $font-family-primary;
       text-align: center;
       font-size: 16px;
-      color: #7C8183;
+      color: $color-on-background-gray-light;
       margin: 0 0 5px;
     }
 
@@ -88,7 +88,6 @@
       .msg {
         font-size: 12px;
       }
-
     }
   }
 }
