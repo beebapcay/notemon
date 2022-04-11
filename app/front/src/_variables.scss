@@ -1,10 +1,9 @@
 //import typo font
 @import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700';
-@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,700';
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,600,700';
 @import 'https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,700';
 @import 'https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700';
 @import 'https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,500,600,700';
-
 
 // setup breakpoint
 $grid-breakpoints: (
@@ -28,24 +27,30 @@ $container-max-widths: (
 // setup color
 $color-primary: #29947F;
 $color-primary-overlay: #218574;
+$color-primary-light: #61c5ae;
+$color-primary-dark: #006553;
 $color-on-primary: #fff;
 
-$color-variant: #04263D;
-$color-variant-light: #2836A0;
-$color-variant-light-overlay: #222d86;
-$color-on-variant: #fff;
+$color-secondary: #007bff;
+$color-secondary-light: #69a9ff;
+$color-secondary-dark: #0050cb;
+$color-on-secondary: #fff;
 
+$color-variant: #113930;
+$color-variant-light: #4c6d5a;
+$color-variant-dark: #0e2d1e;
+$color-on-variant: #fff;
 
 $color-background: #fff;
 $color-on-background: #000;
-$color-on-background-light: #2D363F;
+$color-on-background-gray: #435358;
+$color-on-background-gray-dark: #4C5C6B;
+$color-on-background-gray-dark-over: #394550;
 $color-on-background-variant: #04263D;
 
-$color-gray: #435358;
-$color-gray-dark: #4C5C6B;
-$color-gray-dark-overlay: #394550;
-
-$color-input-outline: #00a0e9;
+$color-focus-primary: #00a0e9;
+$color-focus-gray: #c0c8ce;
+$color-focus-gray-light: #C0C8CE0C;
 
 $color-on-bottom-nav: #ffffff;
 $color-on-bottom-nav-dim: #7C8183;
@@ -54,9 +59,6 @@ $color-bottom-nav-up-bg: #374043;
 $color-bottom-nav-bot-bg: #2E3639;
 
 $color-error: #f44336;
-
-$color-focus-gray: #c0c8ce;
-$color-focus-gray-light: rgba(192, 200, 206, 0.05);
 
 $color-green-light-background: #F6FCFB;
 $color-yellow-light-background: #FDFAF5;
@@ -77,8 +79,8 @@ $font-family-input-secondary: 'Roboto', sans-serif;
 $font-family-mono: 'Roboto Mono', monospace;
 
 // mixin function
-@mixin outline-focus($color: $color-input-outline) {
-  outline: 2px solid $color;
+@mixin outline-focus($color: $color-focus-primary, $width: 2px) {
+  outline: $width solid $color;
 }
 
 
