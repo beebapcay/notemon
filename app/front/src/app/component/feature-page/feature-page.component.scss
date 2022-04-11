@@ -1,6 +1,5 @@
 @import "~src/variables";
 
-
 .feature-page-container {
   width: 100%;
   height: 100%;
@@ -12,7 +11,7 @@
     font-weight: 700;
     line-height: 38.5px;
     letter-spacing: 1.05px;
-    color: $color-variant;
+    color: $color-on-background-variant;
   }
 
   .welcome-intro {
@@ -32,28 +31,29 @@
       font-size: 16px;
       line-height: 25px;
       letter-spacing: 1.25px;
-      color: $color-gray;
+      color: $color-on-background-gray;
     }
 
     .action-button-group {
       margin: 25px 0 0;
 
       .btn-general {
-        font-family: $font-family-action-secondary;
+        font-family: $font-family-tertiary;
         font-size: 14px;
-        font-weight: 400;
+        font-weight: 500;
         border-radius: 100px;
         padding: 0 35px;
+        transition: all 0.15s ease-in-out;
       }
 
       .btn-start-quick-note {
         @extend .btn-general;
         color: $color-on-variant;
-        background-color: $color-variant-light;
+        background-color: $color-secondary;
         margin-right: 30px;
 
         &:hover {
-          background-color: $color-variant-light-overlay;
+          background-color: $color-secondary-overlay;
         }
 
         &:active {
@@ -74,17 +74,17 @@
 
     .btn-watch-intro-video {
       margin-top: 22.5px;
-      font-family: $font-family-action-primary;
+      font-family: $font-family-primary;
       font-size: 14px;
       font-weight: 500;
-      color: $color-gray-dark;
+      color: $color-on-background-gray-dark;
       text-decoration: none;
 
       display: flex;
       align-items: center;
 
       &:hover {
-        color: $color-gray-dark-overlay;
+        color: $color-on-background-gray-dark-overlay;
       }
     }
 
@@ -121,10 +121,10 @@
         border-radius: 5px;
 
         h3 {
-          font-family: $font-family-tertiary;
+          font-family: $font-family-quaternary;
           font-size: 17.5px;
           font-weight: 600;
-          color: $color-on-background-light;
+          color: $color-on-background-gray-dark;
           margin-bottom: 15px;
         }
 
@@ -155,7 +155,7 @@
           p {
             font-family: $font-family-secondary;
             font-size: 15.5px;
-            color: $color-gray;
+            color: $color-on-background-gray;
           }
 
         }
@@ -220,7 +220,7 @@
     p {
       font-family: $font-family-secondary;
       font-size: 16px;
-      color: $color-gray;
+      color: $color-on-background-gray;
     }
   }
 
@@ -247,7 +247,7 @@
     }
 
     .btn-start-quick-note {
-      font-family: $font-family-quaternary;
+      font-family: $font-family-tertiary;
       font-size: 14px;
       font-weight: 400;
       border-radius: 100px;

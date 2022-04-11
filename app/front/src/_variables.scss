@@ -31,9 +31,15 @@ $color-primary-light: #61c5ae;
 $color-primary-dark: #006553;
 $color-on-primary: #fff;
 
-$color-secondary: #007bff;
-$color-secondary-light: #69a9ff;
-$color-secondary-dark: #0050cb;
+//$color-secondary: #007bff;
+//$color-secondary-light: #69a9ff;
+//$color-secondary-dark: #0050cb;
+//$color-on-secondary: #fff;
+
+$color-secondary: #2836a0;
+$color-secondary-overlay: #222d86;
+$color-secondary-light: #6260d2;
+$color-secondary-dark: #001170;
 $color-on-secondary: #fff;
 
 $color-variant: #113930;
@@ -41,12 +47,13 @@ $color-variant-light: #4c6d5a;
 $color-variant-dark: #0e2d1e;
 $color-on-variant: #fff;
 
+
 $color-background: #fff;
 $color-on-background: #000;
 $color-on-background-gray: #435358;
 $color-on-background-gray-light: #7C8183;
 $color-on-background-gray-dark: #4C5C6B;
-$color-on-background-gray-dark-over: #394550;
+$color-on-background-gray-dark-overlay: #394550;
 $color-on-background-variant: #04263D;
 
 $color-focus-primary: #00a0e9;
