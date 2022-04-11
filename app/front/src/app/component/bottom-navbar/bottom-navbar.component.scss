@@ -6,10 +6,10 @@
   .footer-up-wrapper {
     padding: 22.5px 75px;
     margin: 0;
-    background-color: $color-bottom-nav-up-bg;
+    background-color: $color-nav-bot-light-bg;
 
     .footer-up-item {
-      color: $color-on-bottom-nav;
+      color: $color-on-nav-bot;
       opacity: 0.925;
 
       &:hover {
@@ -56,7 +56,6 @@
 
     .contact-email {
       @extend .footer-up-item;
-      color: $color-on-bottom-nav;
       text-align: end;
       font-size: 14px;
       margin: 0;
@@ -71,13 +70,13 @@
   .footer-bot-wrapper {
     padding: 10px 75px;
     margin: 0;
-    background-color: $color-bottom-nav-bot-bg;
+    background-color: $color-nav-bot-dark-bg;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     .footer-bot-item {
-      color: $color-on-bottom-nav;
+      color: $color-on-nav-bot;
       opacity: 0.65;
 
       &:hover {
