@@ -5,6 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {MaterialModule} from './material.module';
+import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 import {ComponentModule} from './component/component.module';
 import {ServiceModule} from './service/service.module';
 import {PipeModule} from './pipe/pipe.module';
@@ -30,6 +31,7 @@ import {ViewResponsiveModule} from './view-responsive.module';
     DirectiveModule,
     AppRoutingModule,
     ViewResponsiveModule,
+    CKEditorModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
