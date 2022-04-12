@@ -97,12 +97,12 @@ Editor.builtinPlugins = [
 Editor.defaultConfig = {
   toolbar: {
     items: [
-      'heading',
-      '|',
       'bold',
       'italic',
       'underline',
       'strikethrough',
+      '|',
+      'heading',
       '|',
       'alignment',
       'fontBackgroundColor',
