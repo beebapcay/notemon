@@ -4,8 +4,9 @@ export class AppRouteConstant {
   static readonly LOGIN = 'login';
   static readonly SIGNUP = 'sign-up';
   static readonly FEATURE = 'feature';
-  static readonly NOTEMON = 'notemon';
+  static readonly NOTE = 'note';
   static readonly CONTACT_US = 'contact-us';
-  static readonly NOT_SUPPORTED = 'not-supported';
   static readonly OTHER = '**';
+
+  static readonly FULL_PAGE_ROUTE_LIST = [AppRouteConstant.NOTE]
 }

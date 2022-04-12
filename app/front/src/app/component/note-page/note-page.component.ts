@@ -2,10 +2,10 @@ import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-notemon-page',
-  templateUrl: './notemon-page.component.html',
-  styleUrls: ['./notemon-page.component.scss']
+  templateUrl: './note-page.component.html',
+  styleUrls: ['./note-page.component.scss']
 })
-export class NotemonPageComponent implements OnInit {
+export class NotePageComponent implements OnInit {
 
   constructor() {
   }
