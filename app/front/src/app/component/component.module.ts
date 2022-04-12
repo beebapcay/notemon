@@ -9,10 +9,11 @@ import {FeaturePageComponent} from "./feature-page/feature-page.component";
 import {ThemeToggleButtonComponent} from './theme-toggle-button/theme-toggle-button.component';
 import {BottomNavbarComponent} from './bottom-navbar/bottom-navbar.component';
 import {ErrorPageComponent} from './error-page/error-page.component';
+import {NotemonEditorComponent} from './notemon-editor/notemon-editor.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule],
-  declarations: [TopNavbarComponent, FeaturePageComponent, ThemeToggleButtonComponent, BottomNavbarComponent, ErrorPageComponent],
+  declarations: [TopNavbarComponent, FeaturePageComponent, ThemeToggleButtonComponent, BottomNavbarComponent, ErrorPageComponent, NotemonEditorComponent],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
 export class ComponentModule {
