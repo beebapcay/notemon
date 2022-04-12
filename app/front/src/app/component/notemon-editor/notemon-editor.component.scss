@@ -101,10 +101,11 @@ $ck-color-content-border: #dadce0;
 :host ::ng-deep .ck-editor__editable {
   flex: 1;
   width: 1024px;
-  margin-top: 25px;
+  margin: 25px 0;
   background-color: $ck-color-content-background;
   border: 1px solid $ck-color-content-border !important;
   box-shadow: none !important;
+  padding: 27.5px 42.5px;
 }
 
 .notemon-editor-container {
