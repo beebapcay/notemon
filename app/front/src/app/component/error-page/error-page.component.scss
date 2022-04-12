@@ -1,20 +1,17 @@
 @import "~src/variables";
 
 .error-page {
-  height: 100%;
   width: 100%;
+  height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  padding: 0;
-  margin: 0;
+  padding: 0 75px;
 
   .err-img {
-    padding: 0 20px;
-    margin-right: 100px;
+    margin-right: 50px;
 
     img {
-      margin: 0 20px;
       max-width: 500px;
       height: auto;
       opacity: 0.75;
@@ -22,7 +19,6 @@
   }
 
   .err-description {
-    padding: 0 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,20 +26,24 @@
 
     .oops {
       font-size: 28px;
+      font-family: $font-family-primary;
+      font-weight: 500;
       color: $color-error;
     }
 
     .code {
       font-size: 68px;
-      font-weight: bold;
+      font-family: $font-family-tertiary;
+      font-weight: 700;
       margin: 32px 0 48px;
     }
 
     .msg,
     .go-home-page {
+      font-family: $font-family-primary;
       text-align: center;
       font-size: 16px;
-      color: #7C8183;
+      color: $color-on-background-gray-light;
       margin: 0 0 5px;
     }
 
@@ -51,7 +51,6 @@
       margin-top: 18px;
       background-color: $color-primary;
       color: $color-on-primary;
-
 
       &:active {
         @include outline-focus($color-focus-gray);
@@ -64,30 +63,31 @@
 @media screen and (max-width: map-get($container-max-widths, md)) {
   .error-page {
     flex-direction: column;
+    justify-content: center;
 
     .err-img {
       margin-right: 0;
-      margin-bottom: 50px;
+      margin-bottom: 85px;
 
       img {
-        max-width: 300px;
+        max-width: 325px;
       }
     }
 
     .err-description {
       .oops {
-        font-size: 22px;
+        font-size: 26px;
+        font-weight: 500;
       }
 
       .code {
-        font-size: 40px;
-        margin: 25px 0 30px;
+        font-size: 38px;
+        margin: 15px 0 30px;
       }
 
       .msg {
         font-size: 12px;
       }
-
     }
   }
 }

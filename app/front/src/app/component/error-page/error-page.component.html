@@ -8,8 +8,9 @@
     <p [innerHTML]="error?.message" class="msg"></p>
     <ng-container
       *ngIf="error?.code !== ErrorCodeEnum.NotSupported">
-      <p class="go-home-page">You can visit our home page instead</p>
-      <a [routerLink]="AppRouteConstant.HOME" class="go-home-page-btn" mat-flat-button>
+      <p class="go-home-page">You can visit our home page instead.</p>
+      <a [routerLink]="AppRouteConstant.HOME" class="go-home-page-btn" disableRipple
+         mat-flat-button>
         Go to Home Page
       </a>
     </ng-container>
