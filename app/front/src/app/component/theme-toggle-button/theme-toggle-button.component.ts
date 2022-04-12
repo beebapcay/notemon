@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+
 import {ThemeEnum} from '../../enum/theme.enum';
 
 import {faMoon, faSun} from '@fortawesome/free-solid-svg-icons';

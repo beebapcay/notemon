@@ -1,1 +1,7 @@
-<p>notemon-editor works!</p>
+<div class="notemon-editor-container">
+  <ckeditor
+    (ready)="onReady($event)"
+    [editor]="Editor"
+    data="<p>Hello, world!</p>">
+  </ckeditor>
+</div>
