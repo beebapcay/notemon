@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(event => {
           const url = (event as NavigationEnd).url;
-          this.hideNavBar = !UrlMatcherUtil.match(url, AppRouteConstant.FULL_PAGE_ROUTE_LIST);
+          this.hideNavBar = !UrlMatcherUtil.match(url, AppRouteConstant.FULL_PAGE_ROUTE_PATTERN_LIST);
         })
     );
   }

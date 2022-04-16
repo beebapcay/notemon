@@ -14,17 +14,13 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   readonly AssetsSrcConstant = AssetsSrcConstant;
 
   page: string = AppRouteConstant.LOGIN;
-  bgImgSrc: string = AssetsSrcConstant.LOGIN_BG_IMG;
 
   constructor(private route: ActivatedRoute) {
     super();
 
     this.registerSubscription(
-      this.route.data.subscribe(data => {
-        this.page = data['page'];
-        this.bgImgSrc = data['page'] === AppRouteConstant.LOGIN
-          ? AssetsSrcConstant.LOGIN_BG_IMG
-          : AssetsSrcConstant.SIGNUP_BG_IMG;
+      this.route.url.subscribe(url => {
+        this.page = url[0].path;
       })
     )
   }

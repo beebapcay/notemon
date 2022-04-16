@@ -5,36 +5,15 @@
   <div class="left-side-image-bg">
     <img [src]="AssetsSrcConstant.FLAT_LOGO" alt="" class="logo-img">
     <h3 class="slogan">Making Your Work<br>Become<br>Easy and Professional</h3>
-    <img [src]="bgImgSrc" alt="" class="center-img-bg">
+    <img [src]="page | authBgImg" alt="" class="center-img-bg">
   </div>
   <div class="right-side-auth-form">
     <div class="d-flex flex-column">
       <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo-img">
       <h1 class="auth-title">{{page | titlecase}} to Notemon</h1>
       <form class="auth-form">
-        <div class="form-field">
-          <mat-label>Email</mat-label>
-          <mat-form-field appearance="legacy" class="email-field" floatLabel="never">
-            <input
-              class="email-input"
-              id="email-input"
-              matInput
-              placeholder="Enter your email"
-              type="email">
-          </mat-form-field>
-        </div>
-
-        <div class="form-field">
-          <mat-label>Password</mat-label>
-          <mat-form-field appearance="legacy" class="email-field" floatLabel="never">
-            <input
-              class="password-input"
-              id="password-input"
-              matInput
-              placeholder="Enter your password"
-              type="password">
-          </mat-form-field>
-        </div>
+        <app-login-form *ngIf="page === AppRouteConstant.LOGIN"></app-login-form>
+        <app-signup-form *ngIf="page === AppRouteConstant.SIGNUP"></app-signup-form>
         <a class="forgot-password" href="">Forgot Password?</a>
         <div class="auth-action-buttons">
           <button class="local-auth-btn" disableRipple mat-button>{{page | titlecase}}</button>
@@ -44,7 +23,14 @@
             <img [src]="AssetsSrcConstant.GOOGLE_LOGO" alt="" class="google-logo">
           </button>
         </div>
-        <p class="go-signup">New a member? <a href="" mat-button>Signup now</a></p>
+        <p *ngIf="page === AppRouteConstant.LOGIN" class="go-navigate">
+          New a member?
+          <a [routerLink]="['/', AppRouteConstant.SIGNUP]" mat-button>Signup now</a>
+        </p>
+        <p *ngIf="page === AppRouteConstant.SIGNUP" class="go-navigate">
+          Already have an account?
+          <a [routerLink]="['/', AppRouteConstant.LOGIN]" mat-button>Login now</a>
+        </p>
       </form>
     </div>
   </div>
