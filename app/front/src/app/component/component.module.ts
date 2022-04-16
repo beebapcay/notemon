@@ -12,10 +12,27 @@ import {BottomNavbarComponent} from './bottom-navbar/bottom-navbar.component';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {NotemonEditorComponent} from './notemon-editor/notemon-editor.component';
 import {NotePageComponent} from './note-page/note-page.component';
+import {AuthPageComponent} from './auth-page/auth-page.component';
+import {LoginFormComponent} from './auth-page/login-form/login-form.component';
+import {SignupFormComponent} from './auth-page/signup-form/signup-form.component';
+import {AuthInputComponent} from './auth-page/auth-input/auth-input.component';
+import {PipeModule} from '../pipe/pipe.module';
 
 @NgModule({
-  imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule],
-  declarations: [TopNavbarComponent, FeaturePageComponent, ThemeToggleButtonComponent, BottomNavbarComponent, ErrorPageComponent, NotemonEditorComponent, NotePageComponent],
+  imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
+  declarations: [
+    TopNavbarComponent,
+    FeaturePageComponent,
+    ThemeToggleButtonComponent,
+    BottomNavbarComponent,
+    ErrorPageComponent,
+    NotemonEditorComponent,
+    NotePageComponent,
+    AuthPageComponent,
+    LoginFormComponent,
+    SignupFormComponent,
+    AuthInputComponent
+  ],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
 export class ComponentModule {
