@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {AppRouteConstant} from '../../common/app-route.constant';
+import {AssetsSrcConstant} from '../../common/assets-src.constant';
 import {IconProp} from '@fortawesome/fontawesome-svg-core';
 
 import {faFacebook} from '@fortawesome/free-brands-svg-icons/faFacebook';
@@ -23,6 +24,7 @@ export class BottomNavbarComponent implements OnInit {
   };
 
   readonly AppRouteConstant = AppRouteConstant;
+  readonly AssetsSrcConstant = AssetsSrcConstant;
 
   constructor() {
   }

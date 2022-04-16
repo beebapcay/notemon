@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AssetsSrcConstant} from '../../common/assets-src.constant';
 
 @Component({
   selector: 'app-feature-page',
@@ -6,6 +7,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./feature-page.component.scss']
 })
 export class FeaturePageComponent implements OnInit {
+  readonly AssetsSrcConstant = AssetsSrcConstant;
 
   constructor() {
   }
