@@ -1,0 +1,135 @@
+@import "~src/variables";
+
+$color-hashtag-orange: #F16C00;
+$color-hashtag-orange-overlay: #e36701;
+$color-hashtag-orange-shadow: rgba(241, 108, 0, 0.75);
+
+$color-hashtag-blue: #2196F3;
+$color-hashtag-blue-overlay: #1b7dcc;
+$color-hashtag-blue-shadow: rgba(33, 150, 243, 0.75);
+
+$color-hashtag-green: #4CAF50;
+$color-hashtag-green-overlay: #388e3c;
+$color-hashtag-green-shadow: rgba(76, 175, 80, 0.75);
+
+$color-hashtag-red: #F44336;
+$color-hashtag-red-overlay: #de3e32;
+$color-hashtag-red-shadow: rgba(244, 67, 54, 0.75);
+
+$color-hashtag-gray: #9E9E9E;
+$color-hashtag-gray-overlay: #868686;
+$color-hashtag-gray-shadow: rgba(158, 158, 158, 0.75);
+
+$color-hashtag-purple: #9C27B0;
+$color-hashtag-purple-overlay: #88229a;
+$color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
+
+.hashtag-container {
+  border-radius: 99px;
+  background-color: $color-hashtag-gray;
+  color: #fff;
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $font-family-tertiary;
+  line-height: initial;
+
+  &:hover.animated {
+    transform: translateY(-2.5px);
+  }
+
+  &.orange {
+    background-color: $color-hashtag-orange;
+
+    &:hover {
+      background-color: $color-hashtag-orange-overlay;
+      box-shadow: 0 0 10px $color-hashtag-orange-shadow;
+    }
+
+    &.sm {
+      box-shadow: 0 0 7.5px $color-hashtag-orange-shadow;
+    }
+  }
+
+  &.blue {
+    background-color: $color-hashtag-blue;
+
+    &:hover {
+      background-color: $color-hashtag-blue-overlay;
+      box-shadow: 0 0 10px $color-hashtag-blue-shadow;
+    }
+
+    &.sm {
+      box-shadow: 0 0 7.5px $color-hashtag-blue-shadow;
+    }
+  }
+
+  &.green {
+    background-color: $color-hashtag-green;
+
+    &:hover {
+      background-color: $color-hashtag-green-overlay;
+      box-shadow: 0 0 10px $color-hashtag-green-shadow;
+    }
+
+    &.sm {
+      box-shadow: 0 0 7.5px $color-hashtag-green-shadow;
+    }
+  }
+
+  &.red {
+    background-color: $color-hashtag-red;
+
+    &:hover {
+      background-color: $color-hashtag-red-overlay;
+      box-shadow: 0 0 10px $color-hashtag-red-shadow;
+    }
+
+    &.sm {
+      box-shadow: 0 0 7.5px $color-hashtag-red-shadow;
+    }
+  }
+
+  &.gray {
+    background-color: $color-hashtag-gray;
+
+    &:hover {
+      background-color: $color-hashtag-gray-overlay;
+      box-shadow: 0 0 10px $color-hashtag-gray-shadow;
+    }
+
+    &.sm {
+      box-shadow: 0 0 7.5px $color-hashtag-gray-shadow;
+    }
+  }
+
+  &.purple {
+    background-color: $color-hashtag-purple;
+
+    &:hover {
+      background-color: $color-hashtag-purple-overlay;
+      box-shadow: 0 0 10px $color-hashtag-purple-shadow;
+    }
+
+    &.sm {
+      box-shadow: 0 0 7.5px $color-hashtag-purple-shadow;
+    }
+  }
+
+  &.small {
+    font-size: 11.5px;
+    padding: 3.5px 15px;
+  }
+
+  &.medium {
+    font-size: 12.5px;
+    padding: 5px 22.5px;
+  }
+
+  &.large {
+    font-size: 14.5px;
+    padding: 5px 30px;
+  }
+
+}

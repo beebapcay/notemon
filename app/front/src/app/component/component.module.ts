@@ -18,6 +18,7 @@ import {SignupFormComponent} from './auth-page/signup-form/signup-form.component
 import {AuthInputComponent} from './auth-page/auth-input/auth-input.component';
 import {PipeModule} from '../pipe/pipe.module';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
+import {HashtagComponent} from './hashtag/hashtag.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
@@ -33,7 +34,8 @@ import {DashboardPageComponent} from './dashboard-page/dashboard-page.component'
     LoginFormComponent,
     SignupFormComponent,
     AuthInputComponent,
-    DashboardPageComponent
+    DashboardPageComponent,
+    HashtagComponent
   ],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
