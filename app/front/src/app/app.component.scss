@@ -3,35 +3,35 @@
 .application-container {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
 
-  .supported-content-container {
-    flex-grow: 1;
+  .supported-container {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
     .main-container {
       flex: 1;
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
     }
   }
 
-  .unsupported-content-container {
-    flex-grow: 1;
+  .unsupported-container {
+    width: 100%;
+    height: 100%;
     display: none;
   }
 }
 
 @media screen and (max-width: map-get($container-max-widths, md)) {
   .application-container {
-    .supported-content-container {
+    .supported-container {
       display: none;
     }
 
-    .unsupported-content-container {
+    .unsupported-container {
       display: block;
     }
   }
