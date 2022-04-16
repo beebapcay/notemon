@@ -1,0 +1,124 @@
+@import "~src/variables";
+
+$ck-color-toolbar-border: #dadce0;
+$ck-color-toolbar-focus: $color-primary;
+$ck-color-toolbar-on: $color-primary-overlay;
+$ck-color-toolbar-list-on: $color-primary;
+
+$ck-color-editor-background: #f8f9fa;
+
+$ck-color-content-background: $color-background;
+$ck-color-content-border: #dadce0;
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+:host ::ng-deep .ck-toolbar.ck-toolbar_grouping {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid $ck-color-toolbar-border;
+  padding: 1.5px 0;
+
+  & > .ck-toolbar__items {
+    justify-content: center;
+
+    .ck-button {
+      cursor: pointer;
+    }
+
+    & > .ck-dropdown, & > .ck-button {
+      padding: 4.5px 5px;
+      margin: 0 1.85px !important;
+
+      &:not(.ck-on):hover,
+      &:hover > .ck-button:not(.ck-on),
+      &:hover > .ck-splitbutton > .ck-button:not(.ck-on) {
+        color: $ck-color-toolbar-focus;
+      }
+
+      &.ck-on,
+      & > .ck-button.ck-on,
+      & > .ck-splitbutton > .ck-button.ck-on {
+        color: $ck-color-toolbar-on;
+      }
+    }
+
+    & > .ck-toolbar__separator {
+      margin: 2.85px !important;
+      background-color: $ck-color-toolbar-border;
+    }
+
+    & > .ck-heading-dropdown > .ck-button {
+      border: 1px solid #dadce0;
+    }
+
+    .ck-list-styles-list {
+      padding: 5px;
+
+      & > .ck-button {
+        width: 32.5px;
+        height: 32.5px;
+
+        > .ck-icon {
+          width: 32.5px;
+          height: 32.5px;
+        }
+      }
+    }
+
+    .ck-dropdown__panel {
+      border: 1px solid $ck-color-toolbar-border;
+
+      .ck-list .ck-list__item {
+        > .ck-button_with-text {
+          border: none;
+
+          &.ck-on {
+            background-color: $ck-color-toolbar-list-on;
+          }
+        }
+
+
+        &:first-child {
+          border-top-left-radius: 3.5px;
+          border-top-right-radius: 3.5px;
+        }
+
+        &:last-child {
+          border-bottom-left-radius: 3.5px;
+          border-bottom-right-radius: 3.5px;
+        }
+      }
+
+    }
+  }
+
+  background-color: $color-background;
+}
+
+:host ::ng-deep .ck-editor__editable {
+  flex: 1;
+  width: 1024px;
+  margin: 25px 0;
+  background-color: $ck-color-content-background;
+  border: 1px solid $ck-color-content-border !important;
+  box-shadow: none !important;
+  padding: 27.5px 42.5px;
+}
+
+.notemon-editor-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  ckeditor {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $ck-color-editor-background;
+  }
+}
