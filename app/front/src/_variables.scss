@@ -55,8 +55,10 @@ $color-on-background-gray-light: #7C8183;
 $color-on-background-gray-dark: #4C5C6B;
 $color-on-background-gray-dark-overlay: #394550;
 $color-on-background-variant: #04263D;
+$color-on-background-variant-dark: #212121;
 
 $color-focus-primary: #00a0e9;
+$color-focus-primary-light: #d0d8e4;
 $color-focus-gray: #c0c8ce;
 $color-focus-gray-light: #C0C8CE0C;
 
@@ -69,6 +71,10 @@ $color-blue-light-background: #F1F4FA;
 $color-nav-bot-light-bg: #374043;
 $color-nav-bot-dark-bg: #2E3639;
 $color-on-nav-bot: #ffffff;
+
+$color-input-primary: #1A73E8;
+$color-input-primary-overlay: #1976D2;
+$color-input-bg-light-blue: #E1F5FE;
 
 // setup font
 $font-family-primary: 'Roboto', sans-serif;
@@ -84,4 +90,17 @@ $font-family-mono: 'Roboto Mono', monospace;
   outline: $width solid $color;
 }
 
+@mixin reset-button() {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
 

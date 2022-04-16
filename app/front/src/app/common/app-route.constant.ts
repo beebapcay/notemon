@@ -8,5 +8,5 @@ export class AppRouteConstant {
   static readonly CONTACT_US = 'contact-us';
   static readonly OTHER = '**';
 
-  static readonly FULL_PAGE_ROUTE_LIST = [AppRouteConstant.NOTE]
+  static readonly FULL_PAGE_ROUTE_LIST = [AppRouteConstant.LOGIN, AppRouteConstant.NOTE]
 }

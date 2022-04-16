@@ -12,10 +12,12 @@ import {BottomNavbarComponent} from './bottom-navbar/bottom-navbar.component';
 import {ErrorPageComponent} from './error-page/error-page.component';
 import {NotemonEditorComponent} from './notemon-editor/notemon-editor.component';
 import {NotePageComponent} from './note-page/note-page.component';
+import {LoginPageComponent} from './login-page/login-page.component';
+import {AuthPageComponent} from './auth-page/auth-page.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule],
-  declarations: [TopNavbarComponent, FeaturePageComponent, ThemeToggleButtonComponent, BottomNavbarComponent, ErrorPageComponent, NotemonEditorComponent, NotePageComponent],
+  declarations: [TopNavbarComponent, FeaturePageComponent, ThemeToggleButtonComponent, BottomNavbarComponent, ErrorPageComponent, NotemonEditorComponent, NotePageComponent, LoginPageComponent, AuthPageComponent],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
 export class ComponentModule {
