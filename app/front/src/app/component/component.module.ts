@@ -19,6 +19,10 @@ import {AuthInputComponent} from './auth-page/auth-input/auth-input.component';
 import {PipeModule} from '../pipe/pipe.module';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 import {HashtagComponent} from './hashtag/hashtag.component';
+import {DirectoryMainComponent} from './directory/directory-main/directory-main.component';
+import {DirectoryVariantComponent} from './directory/directory-variant/directory-variant.component';
+import {DocumentMainComponent} from './document/document-main/document-main.component';
+import {DocumentVariantComponent} from './document/document-variant/document-variant.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
@@ -35,7 +39,11 @@ import {HashtagComponent} from './hashtag/hashtag.component';
     SignupFormComponent,
     AuthInputComponent,
     DashboardPageComponent,
-    HashtagComponent
+    HashtagComponent,
+    DirectoryMainComponent,
+    DirectoryVariantComponent,
+    DocumentMainComponent,
+    DocumentVariantComponent
   ],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
