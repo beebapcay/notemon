@@ -17,6 +17,7 @@ import {LoginFormComponent} from './auth-page/login-form/login-form.component';
 import {SignupFormComponent} from './auth-page/signup-form/signup-form.component';
 import {AuthInputComponent} from './auth-page/auth-input/auth-input.component';
 import {PipeModule} from '../pipe/pipe.module';
+import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
@@ -31,7 +32,8 @@ import {PipeModule} from '../pipe/pipe.module';
     AuthPageComponent,
     LoginFormComponent,
     SignupFormComponent,
-    AuthInputComponent
+    AuthInputComponent,
+    DashboardPageComponent
   ],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
