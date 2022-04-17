@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NotemonCardTypeEnum} from '../../enum/notemon-card-type.enum';
+import {NotemonTypeEnum} from '../../enum/notemon-type.enum';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -8,7 +8,7 @@ import {NotemonCardTypeEnum} from '../../enum/notemon-card-type.enum';
 })
 export class DashboardPageComponent implements OnInit {
 
-  readonly NotemonCardTypeEnum = NotemonCardTypeEnum;
+  readonly NotemonCardTypeEnum = NotemonTypeEnum;
 
   constructor() {
   }

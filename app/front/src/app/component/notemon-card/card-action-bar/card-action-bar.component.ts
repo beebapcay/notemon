@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NotemonCardTypeEnum} from '../../../enum/notemon-card-type.enum';
+import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
 
 @Component({
   selector: 'card-action-bar',
@@ -7,7 +7,7 @@ import {NotemonCardTypeEnum} from '../../../enum/notemon-card-type.enum';
   styleUrls: ['./card-action-bar.component.scss']
 })
 export class CardActionBarComponent implements OnInit {
-  @Input() type: NotemonCardTypeEnum = NotemonCardTypeEnum.DEFAULT;
+  @Input() type: NotemonTypeEnum = NotemonTypeEnum.DEFAULT;
 
   constructor() {
   }

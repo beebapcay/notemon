@@ -1,4 +1,4 @@
-export enum NotemonCardTypeEnum {
+export enum NotemonTypeEnum {
   DIRECTORY = 'directory',
   DOCUMENT = 'document',
   DEFAULT = 'default',

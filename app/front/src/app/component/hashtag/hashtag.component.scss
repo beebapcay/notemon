@@ -47,7 +47,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
       box-shadow: 0 0 10px $color-hashtag-orange-shadow;
     }
 
-    &.small {
+    &:hover.small {
       box-shadow: 0 0 5px $color-hashtag-orange-shadow;
     }
   }
@@ -73,7 +73,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
       box-shadow: 0 0 10px $color-hashtag-green-shadow;
     }
 
-    &.small {
+    &:hover.small {
       box-shadow: 0 0 5px $color-hashtag-green-shadow;
     }
   }
@@ -86,7 +86,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
       box-shadow: 0 0 10px $color-hashtag-red-shadow;
     }
 
-    &.small {
+    &:hover.small {
       box-shadow: 0 0 5px $color-hashtag-red-shadow;
     }
   }
@@ -99,7 +99,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
       box-shadow: 0 0 10px $color-hashtag-gray-shadow;
     }
 
-    &.small {
+    &:hover.small {
       box-shadow: 0 0 5px $color-hashtag-gray-shadow;
     }
   }
@@ -112,7 +112,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
       box-shadow: 0 0 10px $color-hashtag-purple-shadow;
     }
 
-    &.small {
+    &:hover.small {
       box-shadow: 0 0 5px $color-hashtag-purple-shadow;
     }
   }

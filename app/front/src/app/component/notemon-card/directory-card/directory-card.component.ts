@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NotemonCardTypeEnum} from '../../../enum/notemon-card-type.enum';
+import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
 
 @Component({
   selector: 'app-directory-card-main',
@@ -7,7 +7,7 @@ import {NotemonCardTypeEnum} from '../../../enum/notemon-card-type.enum';
   styleUrls: ['./directory-card.component.scss']
 })
 export class DirectoryCardComponent implements OnInit {
-  readonly NotemonCardTypeEnum = NotemonCardTypeEnum;
+  readonly NotemonCardTypeEnum = NotemonTypeEnum;
 
   constructor() {
   }

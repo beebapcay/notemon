@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {NotemonCardTypeEnum} from '../enum/notemon-card-type.enum';
+import {NotemonTypeEnum} from '../enum/notemon-type.enum';
 import {AssetsSrcConstant} from '../common/assets-src.constant';
 
 @Pipe({
@@ -9,9 +9,9 @@ import {AssetsSrcConstant} from '../common/assets-src.constant';
 export class NotemonCardImgPipe implements PipeTransform {
   transform(value: any, ...args: any[]): any {
     switch (value) {
-      case NotemonCardTypeEnum.DOCUMENT:
+      case NotemonTypeEnum.DOCUMENT:
         return AssetsSrcConstant.DOCUMENT;
-      case NotemonCardTypeEnum.DIRECTORY:
+      case NotemonTypeEnum.DIRECTORY:
         return AssetsSrcConstant.DIRECTORY;
       default:
         return AssetsSrcConstant.LOGO;
