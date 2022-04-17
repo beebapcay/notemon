@@ -1,0 +1,49 @@
+@import "~src/variables";
+
+.action-bar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 10px 0;
+
+  .action-btn-style {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+
+    .mat-icon {
+      width: 22.5px;
+      height: 22.5px;
+      font-size: 22.5px;
+      line-height: 22.5px;
+    }
+  }
+
+  .star-btn {
+    @extend .action-btn-style;
+    color: $color-started-icon;
+  }
+
+  .more-btn {
+    @extend .action-btn-style;
+    background-color: $color-bg-btn-gray;
+    color: $color-on-background-gray;
+  }
+
+  &.variant {
+    .action-btn-style {
+      width: 30px;
+      height: 30px;
+
+      .mat-icon {
+        width: 18.5px;
+        height: 18.5px;
+        font-size: 18.5px;
+        line-height: 18.5px;
+      }
+    }
+  }
+}
