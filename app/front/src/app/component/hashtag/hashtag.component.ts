@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {SizeEnum} from '../../enum/size.enum';
 import {HashtagColorEnum} from '../../enum/hashtag-color.enum';
+import _ from 'lodash';
 
 @Component({
   selector: 'app-hashtag',
@@ -24,7 +25,13 @@ export class HashtagComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getRandomColor(): HashtagColorEnum {
+    const hashtagColorKeys = Object.keys(HashtagColorEnum);
+    const randomIdx = _.random(0, hashtagColorKeys.length - 1);
+    return HashtagColorEnum[hashtagColorKeys[randomIdx]];
+  }
+
   getClass(): string {
-    return `hashtag-container ${this.size.toLocaleLowerCase()} ${this.color.toLocaleLowerCase()} ${this.animated ? 'animated' : ''}`;
+    return `hashtag-container ${this.size.toLocaleLowerCase()} ${this.getRandomColor().toLocaleLowerCase()} ${this.animated ? 'animated' : ''}`;
   }
 }
