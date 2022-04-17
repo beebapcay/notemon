@@ -19,10 +19,18 @@ import {AuthInputComponent} from './auth-page/auth-input/auth-input.component';
 import {PipeModule} from '../pipe/pipe.module';
 import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
 import {HashtagComponent} from './hashtag/hashtag.component';
-import {DirectoryMainComponent} from './directory/directory-main/directory-main.component';
-import {DirectoryVariantComponent} from './directory/directory-variant/directory-variant.component';
-import {DocumentMainComponent} from './document/document-main/document-main.component';
-import {DocumentVariantComponent} from './document/document-variant/document-variant.component';
+import {
+  DirectoryCardMainComponent
+} from './directory-card/directory-card-main/directory-card-main.component';
+import {
+  DirectoryCardVariantComponent
+} from './directory-card/directory-card-variant/directory-card-variant.component';
+import {
+  DocumentCardMainComponent
+} from './document-card/document-card-main/document-card-main.component';
+import {
+  DocumentCardVariantComponent
+} from './document-card/document-card-variant/document-card-variant.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
@@ -40,10 +48,10 @@ import {DocumentVariantComponent} from './document/document-variant/document-var
     AuthInputComponent,
     DashboardPageComponent,
     HashtagComponent,
-    DirectoryMainComponent,
-    DirectoryVariantComponent,
-    DocumentMainComponent,
-    DocumentVariantComponent
+    DirectoryCardMainComponent,
+    DirectoryCardVariantComponent,
+    DocumentCardMainComponent,
+    DocumentCardVariantComponent,
   ],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
