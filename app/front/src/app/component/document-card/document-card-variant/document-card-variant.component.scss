@@ -1,0 +1,74 @@
+@import "~src/variables";
+
+.document-card-variant-container {
+  display: flex;
+  cursor: pointer;
+  padding: 10px 15px 10px 20px;
+  border-radius: 10px;
+  background-color: $color-background;
+  border: 1px solid $color-border-gray;
+  width: 385px;
+  height: 105px;
+
+  .illus-img {
+    align-self: center;
+    width: 60px;
+    height: auto;
+    opacity: 95%;
+
+    padding: 0 10px
+  }
+
+  .content-container {
+    flex: 1;
+    margin: 0 25px;
+
+    .name {
+      font-family: $font-family-mono;
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 2.5px;
+      color: $color-on-background-variant-dark;
+    }
+
+    .author {
+      font-family: $font-family-primary;
+      font-size: 13.5px;
+      color: $color-on-background-gray-dark;
+    }
+  }
+
+  .action-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .action-btn-style {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      line-height: 0;
+
+      .mat-icon {
+        width: 18.5px;
+        height: 18.5px;
+        font-size: 18.5px;
+        line-height: 18.5px;
+      }
+    }
+
+    .star-btn {
+      @extend .action-btn-style;
+      color: $color-started-icon;
+    }
+
+    .more-btn {
+      @extend .action-btn-style;
+      background-color: $color-bg-btn-gray;
+      color: $color-on-background-gray;
+    }
+  }
+}
