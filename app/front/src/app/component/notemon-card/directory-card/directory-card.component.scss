@@ -1,49 +1,16 @@
-@import "~src/variables";
+@import "src/variables";
 
 .directory-card-main-container {
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
+  cursor: pointer;
   background-color: $color-background;
-  border-radius: 12.5px;
   border: 1px solid $color-border-gray;
+  border-radius: 12.5px;
   width: 250px;
   height: 325px;
-
-  .action-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 10px 10px 0;
-
-    .action-btn-style {
-      width: 36px;
-      height: 36px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      line-height: 0;
-
-      .mat-icon {
-        width: 22.5px;
-        height: 22.5px;
-        font-size: 22.5px;
-      }
-    }
-
-    .star-btn {
-      @extend .action-btn-style;
-      color: $color-started-icon;
-    }
-
-    .more-btn {
-      @extend .action-btn-style;
-      background-color: $color-bg-btn-gray;
-      color: $color-on-background-gray;
-    }
-  }
 
   .content-container {
     flex: 1;

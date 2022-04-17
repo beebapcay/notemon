@@ -1,15 +1,8 @@
 <div class="directory-card-main-container">
-  <div class="action-container">
-    <button class="star-btn" disableRipple mat-icon-button>
-      <mat-icon>star</mat-icon>
-    </button>
-    <button class="more-btn" mat-icon-button>
-      <mat-icon>more_vert</mat-icon>
-    </button>
-  </div>
+  <card-action-bar [type]="NotemonCardTypeEnum.DEFAULT"></card-action-bar>
   <div class="content-container">
     <div class="main-content">
-      <img alt="" class="illus-img" src="assets/images/directory.png">
+      <img [src]="NotemonCardTypeEnum.DIRECTORY | notemonCardImg" alt="" class="illus-img">
       <h3 class="name">Notemon Document</h3>
       <p class="author">Author: beebapcay</p>
     </div>

@@ -1,8 +1,9 @@
 @import "~src/variables";
 
-.directory-card-variant-container {
+.notemon-card-variant-container {
   display: flex;
   cursor: pointer;
+  align-items: stretch;
   padding: 10px 15px 10px 20px;
   border-radius: 10px;
   background-color: $color-background;
@@ -15,6 +16,8 @@
     width: 60px;
     height: auto;
     opacity: 95%;
+
+    padding: 0 10px
   }
 
   .content-container {
@@ -43,17 +46,18 @@
     align-items: center;
 
     .action-btn-style {
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
       line-height: 0;
 
       .mat-icon {
-        width: 22.5px;
-        height: 22.5px;
-        font-size: 22.5px;
+        width: 18.5px;
+        height: 18.5px;
+        font-size: 18.5px;
+        line-height: 18.5px;
       }
     }
 
