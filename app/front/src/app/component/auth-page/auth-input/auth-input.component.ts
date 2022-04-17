@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-auth-input',
+  selector: 'auth-input',
   templateUrl: './auth-input.component.html',
   styleUrls: ['./auth-input.component.scss']
 })

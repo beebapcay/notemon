@@ -12,8 +12,8 @@
       <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo-img">
       <h1 class="auth-title">{{page | titlecase}} to Notemon</h1>
       <form class="auth-form">
-        <app-login-form *ngIf="page === AppRouteConstant.LOGIN"></app-login-form>
-        <app-signup-form *ngIf="page === AppRouteConstant.SIGNUP"></app-signup-form>
+        <login-form *ngIf="page === AppRouteConstant.LOGIN"></login-form>
+        <signup-form *ngIf="page === AppRouteConstant.SIGNUP"></signup-form>
         <a class="forgot-password" href="">Forgot Password?</a>
         <div class="auth-action-buttons">
           <button class="local-auth-btn" disableRipple mat-button>{{page | titlecase}}</button>
