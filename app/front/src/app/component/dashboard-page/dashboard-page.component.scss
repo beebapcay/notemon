@@ -58,13 +58,13 @@
     margin-bottom: 65px;
   }
 
-  .directory-section, .document-section {
-    .directory-list-container, .document-list-container {
+  .directory-section, .document-section, .started-section {
+    .directory-list-container, .document-list-container, .started-list-container {
       width: 100%;
       display: flex;
       flex-wrap: wrap;
 
-      app-directory-card-main, app-document-card-main {
+      app-directory-card-main, app-document-card-main, app-notemon-card-variant {
         margin-bottom: 15px;
         margin-right: 15px;
       }
