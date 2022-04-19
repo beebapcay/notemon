@@ -5,7 +5,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {MaterialModule} from '../material.module';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 
-import {TopNavbarComponent} from "./top-navbar/top-navbar.component";
+import {TopNavbarMainComponent} from "./top-navbar/top-navbar-main/top-navbar-main.component";
 import {FeaturePageComponent} from "./feature-page/feature-page.component";
 import {ThemeToggleButtonComponent} from './theme-toggle-button/theme-toggle-button.component';
 import {BottomNavbarComponent} from './bottom-navbar/bottom-navbar.component';
@@ -29,7 +29,7 @@ import {NotemonCardEmptyComponent} from './notemon-card/notemon-card-empty/notem
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
   declarations: [
-    TopNavbarComponent,
+    TopNavbarMainComponent,
     FeaturePageComponent,
     ThemeToggleButtonComponent,
     BottomNavbarComponent,
@@ -49,7 +49,7 @@ import {NotemonCardEmptyComponent} from './notemon-card/notemon-card-empty/notem
     NewNotemonButtonComponent,
     NotemonCardEmptyComponent,
   ],
-  exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
+  exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
 export class ComponentModule {
 }
