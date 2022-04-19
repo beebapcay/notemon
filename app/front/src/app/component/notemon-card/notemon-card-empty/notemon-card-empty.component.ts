@@ -7,6 +7,9 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NotemonCardEmptyComponent implements OnInit {
 
+  emptyMessage = 'You don\'t have any notes yet. Click the button below to create one.';
+
+
   constructor() {
   }
 
