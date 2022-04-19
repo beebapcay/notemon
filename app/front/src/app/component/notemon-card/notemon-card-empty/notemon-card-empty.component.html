@@ -1,0 +1,8 @@
+<div class="notemon-card-empty-container">
+  <img [src]="AssetsSrcConstant.CARD_EMPTY" alt="" class="illus-img">
+  <div class="content-container">
+    <p class="message">You do not have any notemon {{type | lowercase}} yet</p>
+    <button *ngIf="type !== NotemonTypeEnum.STARTED" class="action">Create your {{type}} now</button>
+    <p *ngIf="type === NotemonTypeEnum.STARTED" class="action">Add started document now</p>
+  </div>
+</div>

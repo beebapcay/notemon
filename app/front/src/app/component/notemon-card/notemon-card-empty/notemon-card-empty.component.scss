@@ -1,0 +1,62 @@
+@import "~src/variables";
+
+.notemon-card-empty-container {
+  display: flex;
+  cursor: pointer;
+  align-items: stretch;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: $color-background;
+  border: 1px solid $color-border-gray;
+  width: 385px;
+  height: 105px;
+  opacity: 0.85;
+
+  .illus-img {
+    align-self: center;
+    width: 60px;
+    height: auto;
+    opacity: 0.85;
+    padding: 0 8.5px;
+  }
+
+  .content-container {
+    flex: 1;
+    margin: 0 25px;
+
+    .message {
+      font-family: $font-family-mono;
+      font-weight: 700;
+      opacity: 0.95;
+      font-size: 14px;
+      margin-bottom: 2.5px;
+      color: $color-on-background-gray-light;
+    }
+
+    .action-base-style {
+      font-family: $font-family-primary;
+      font-size: 12px;
+      opacity: 0.95;
+    }
+
+    button.action {
+      @include reset-button();
+      @extend .action-base-style;
+      color: $color-input-primary;
+
+      &:hover {
+        text-decoration: underline;
+        color: $color-input-primary-overlay;
+      }
+    }
+
+    p.action {
+      @extend .action-base-style;
+      color: $color-on-background-gray-light;
+    }
+  }
+
+  &:hover {
+    opacity: 0.95;
+  }
+}

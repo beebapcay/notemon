@@ -24,6 +24,7 @@ import {NotemonCardVariantComponent} from './notemon-card/notemon-card-variant/n
 import {DirectoryCardComponent} from './notemon-card/directory-card/directory-card.component';
 import {DocumentCardComponent} from './notemon-card/document-card/document-card.component';
 import {NewNotemonButtonComponent} from './new-notemon-button/new-notemon-button.component';
+import {NotemonCardEmptyComponent} from './notemon-card/notemon-card-empty/notemon-card-empty.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
@@ -46,6 +47,7 @@ import {NewNotemonButtonComponent} from './new-notemon-button/new-notemon-button
     DocumentCardComponent,
     NotemonCardVariantComponent,
     NewNotemonButtonComponent,
+    NotemonCardEmptyComponent,
   ],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
