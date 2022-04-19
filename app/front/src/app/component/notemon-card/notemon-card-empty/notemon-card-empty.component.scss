@@ -39,7 +39,7 @@
       opacity: 0.95;
     }
 
-    a.action {
+    button.action {
       @include reset-button();
       @extend .action-base-style;
       color: $color-input-primary;
