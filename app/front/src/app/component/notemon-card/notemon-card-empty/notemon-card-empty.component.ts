@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
 
 @Component({
   selector: 'app-notemon-card-empty',
@@ -6,9 +7,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./notemon-card-empty.component.scss']
 })
 export class NotemonCardEmptyComponent implements OnInit {
+  @Input() type: NotemonTypeEnum = NotemonTypeEnum.STARTED;
 
-  emptyMessage = 'You don\'t have any notes yet. Click the button below to create one.';
-
+  readonly NotemonTypeEnum = NotemonTypeEnum;
 
   constructor() {
   }

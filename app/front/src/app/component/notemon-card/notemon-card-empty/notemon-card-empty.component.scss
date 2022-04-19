@@ -4,7 +4,7 @@
   display: flex;
   cursor: pointer;
   align-items: stretch;
-  padding: 20px 15px;
+  padding: 15px;
   border-radius: 10px;
   background-color: $color-background;
   border: 1px solid $color-border-gray;
@@ -16,6 +16,7 @@
     align-self: center;
     width: 60px;
     height: auto;
+    opacity: 0.85;
     padding: 0 8.5px;
   }
 
@@ -32,17 +33,26 @@
       color: $color-on-background-gray-light;
     }
 
-    .action {
-      @include reset-button();
+    .action-base-style {
       font-family: $font-family-primary;
       font-size: 12px;
-      color: $color-input-primary;
       opacity: 0.95;
+    }
+
+    a.action {
+      @include reset-button();
+      @extend .action-base-style;
+      color: $color-input-primary;
 
       &:hover {
         text-decoration: underline;
         color: $color-input-primary-overlay;
       }
+    }
+
+    p.action {
+      @extend .action-base-style;
+      color: $color-on-background-gray-light;
     }
   }
 
