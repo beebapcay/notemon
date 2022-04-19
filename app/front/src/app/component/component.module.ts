@@ -5,7 +5,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {MaterialModule} from '../material.module';
 import {CKEditorModule} from '@ckeditor/ckeditor5-angular';
 
-import {TopNavbarComponent} from "./top-navbar/top-navbar.component";
+import {TopNavbarMainComponent} from "./top-navbar/top-navbar-main/top-navbar-main.component";
 import {FeaturePageComponent} from "./feature-page/feature-page.component";
 import {ThemeToggleButtonComponent} from './theme-toggle-button/theme-toggle-button.component';
 import {BottomNavbarComponent} from './bottom-navbar/bottom-navbar.component';
@@ -25,11 +25,12 @@ import {DirectoryCardComponent} from './notemon-card/directory-card/directory-ca
 import {DocumentCardComponent} from './notemon-card/document-card/document-card.component';
 import {NewNotemonButtonComponent} from './new-notemon-button/new-notemon-button.component';
 import {NotemonCardEmptyComponent} from './notemon-card/notemon-card-empty/notemon-card-empty.component';
+import {TopNavbarEditorComponent} from './top-navbar/top-navbar-editor/top-navbar-editor.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
   declarations: [
-    TopNavbarComponent,
+    TopNavbarMainComponent,
     FeaturePageComponent,
     ThemeToggleButtonComponent,
     BottomNavbarComponent,
@@ -48,8 +49,9 @@ import {NotemonCardEmptyComponent} from './notemon-card/notemon-card-empty/notem
     NotemonCardVariantComponent,
     NewNotemonButtonComponent,
     NotemonCardEmptyComponent,
+    TopNavbarEditorComponent,
   ],
-  exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
+  exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
 export class ComponentModule {
 }

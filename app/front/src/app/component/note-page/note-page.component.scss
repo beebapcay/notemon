@@ -9,8 +9,10 @@
 .note-page-container {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
+
+  app-top-navbar-editor {
+    width: 100%;
+  }
 
   app-notemon-editor {
     width: 100%;

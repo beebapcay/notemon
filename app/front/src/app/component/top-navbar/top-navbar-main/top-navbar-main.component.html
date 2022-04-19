@@ -1,4 +1,4 @@
-<nav class="navbar top-navbar-container navbar-expand-md">
+<nav class="navbar top-navbar-main-container navbar-expand-md">
   <a [routerLink]="AppRouteConstant.HOME" class="navbar-brand">
     <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo">
   </a>
@@ -11,6 +11,13 @@
     </li>
   </ul>
   <theme-toggle-button class="theme-toggle-button"></theme-toggle-button>
-  <a [routerLink]="AppRouteConstant.LOGIN" class="login-btn" mat-button>Login</a>
-  <a [routerLink]="AppRouteConstant.SIGNUP" class="signup-btn" disableRipple mat-button>Signup</a>
+  <ng-container *ngIf="!isLoggedIn">
+    <a [routerLink]="AppRouteConstant.LOGIN" class="login-btn" mat-button>Login</a>
+    <a [routerLink]="AppRouteConstant.SIGNUP" class="signup-btn" disableRipple mat-button>Signup</a>
+  </ng-container>
+  <ng-container *ngIf="isLoggedIn">
+    <button class="account-btn">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </ng-container>
 </nav>
