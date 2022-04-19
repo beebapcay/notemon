@@ -24,6 +24,9 @@ $container-max-widths: (
   xxl: 2560px
 );
 
+// setup size
+$app-top-navbar-height: 65px;
+
 // setup color
 $color-primary: #29947F;
 $color-primary-overlay: #218574;
@@ -83,8 +86,8 @@ $color-bg-btn-gray: rgba(196, 196, 196, 0.185);
 $color-started-icon: #FF4081;
 
 $color-on-button: #fff;
-$color-bg-blue-button: #3D5AFE;
-$color-bg-blue-button-overlay: #2C4FDA;
+$color-bg-blue-button: #007bff;
+$color-bg-blue-button-overlay: #0069d9;
 
 // setup font
 $font-family-primary: 'Roboto', sans-serif;

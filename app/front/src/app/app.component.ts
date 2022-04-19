@@ -17,7 +17,7 @@ import {UrlMatcherUtil} from './utils/url-matcher.util';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  public hideNavBar: boolean = false;
+  public isFull: boolean = false;
 
   readonly AppRouteConstant = AppRouteConstant;
   readonly NotSupportedErrorModel = NotSupportedErrorModel;
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(event => {
           const url = (event as NavigationEnd).url;
-          this.hideNavBar = !UrlMatcherUtil.match(url, AppRouteConstant.FULL_PAGE_ROUTE_PATTERN_LIST);
+          this.isFull = UrlMatcherUtil.match(url, AppRouteConstant.FULL_PAGE_ROUTE_PATTERN_LIST);
         })
     );
   }

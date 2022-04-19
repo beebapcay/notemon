@@ -10,11 +10,21 @@
     display: flex;
     flex-direction: column;
 
+    app-top-navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
     .main-container {
       flex: 1;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      &.has-top-navbar {
+        margin-top: $app-top-navbar-height;
+      }
     }
   }
 

@@ -2,8 +2,8 @@
   margin-top: 15px;
 }
 
-:host ::ng-deep app-auth-input {
-  + app-auth-input .auth-input {
+:host ::ng-deep auth-input {
+  + auth-input .auth-input {
     margin-top: 25px;
   }
 }

@@ -1,10 +1,13 @@
 <div class="application-container">
   <div class="supported-container">
-    <app-top-navbar *ngIf="hideNavBar"></app-top-navbar>
-    <div class="main-container">
+    <app-top-navbar *ngIf="!isFull"></app-top-navbar>
+    <div
+      [ngClass]="{'has-top-navbar': !isFull}"
+      class="main-container"
+    >
       <router-outlet></router-outlet>
     </div>
-    <app-bottom-navbar *ngIf="hideNavBar"></app-bottom-navbar>
+    <app-bottom-navbar *ngIf="!isFull"></app-bottom-navbar>
   </div>
   <div class="unsupported-container">
     <app-error-page [error]="NotSupportedErrorModel.create()"></app-error-page>

@@ -25,80 +25,89 @@
     justify-content: space-between;
     align-items: flex-start;
 
-    h1 {
-      @extend .section-title;
-      font-size: 26px;
-      margin-bottom: 25px;
-    }
+    .description-wrapper {
+      flex: 6;
 
-    p {
-      font-family: $font-family-secondary;
-      font-size: 16px;
-      line-height: 25px;
-      letter-spacing: 1.25px;
-      color: $color-on-background-gray;
-    }
+      h1 {
+        @extend .section-title;
+        font-size: 26px;
+        margin-bottom: 25px;
+      }
 
-    .action-button-group {
-      margin: 25px 0 0;
+      p {
+        font-family: $font-family-secondary;
+        font-size: 16px;
+        line-height: 25px;
+        letter-spacing: 1.25px;
+        color: $color-on-background-gray;
+      }
 
-      .btn-general {
-        font-family: $font-family-tertiary;
+      .action-button-group {
+        margin: 25px 0 0;
+        display: flex;
+        flex-wrap: wrap;
+
+        .btn-general {
+          font-family: $font-family-tertiary;
+          font-size: 14px;
+          font-weight: 500;
+          border-radius: 100px;
+          padding: 0 35px;
+          transition: all 0.15s ease-in-out;
+          margin-bottom: 15px;
+        }
+
+        .btn-start-quick-note {
+          @extend .btn-general;
+          color: $color-on-variant;
+          background-color: $color-secondary;
+          margin-right: 30px;
+
+          &:hover {
+            background-color: $color-secondary-overlay;
+          }
+
+          &:active {
+            @include outline-focus($color-focus-gray);
+          }
+        }
+
+        .btn-create-workspace {
+          @extend .btn-general;
+          color: $color-primary;
+          border-color: $color-primary-light;
+
+          &:active {
+            @include outline-focus($color-focus-gray-light);
+            color: $color-primary-overlay;
+          }
+        }
+      }
+
+      .btn-watch-intro-video {
+        font-family: $font-family-primary;
         font-size: 14px;
         font-weight: 500;
-        border-radius: 100px;
-        padding: 0 35px;
-        transition: all 0.15s ease-in-out;
-      }
+        color: $color-on-background-gray-dark;
+        text-decoration: none;
 
-      .btn-start-quick-note {
-        @extend .btn-general;
-        color: $color-on-variant;
-        background-color: $color-secondary;
-        margin-right: 30px;
+        display: flex;
+        align-items: center;
 
         &:hover {
-          background-color: $color-secondary-overlay;
+          color: $color-on-background-gray-dark-overlay;
         }
-
-        &:active {
-          @include outline-focus($color-focus-gray);
-        }
-      }
-
-      .btn-create-workspace {
-        @extend .btn-general;
-        color: $color-primary;
-
-        &:active {
-          @include outline-focus($color-focus-gray-light);
-          color: $color-primary-overlay;
-        }
-      }
-    }
-
-    .btn-watch-intro-video {
-      margin-top: 22.5px;
-      font-family: $font-family-primary;
-      font-size: 14px;
-      font-weight: 500;
-      color: $color-on-background-gray-dark;
-      text-decoration: none;
-
-      display: flex;
-      align-items: center;
-
-      &:hover {
-        color: $color-on-background-gray-dark-overlay;
       }
     }
 
     .intro-gif-wrapper {
+      flex: 6;
       display: flex;
       justify-content: flex-end;
+      margin-left: 35px;
 
       .intro-gif {
-        max-width: 585px;
+        width: 100%;
         height: auto;
         border-radius: 8.5px;
         margin-left: auto;
@@ -134,35 +143,44 @@
         }
 
         .feature-content {
+          width: 100%;
           display: flex;
           align-items: flex-start;
 
-          img {
-            height: auto;
+          .illus-img {
+            flex: 3;
 
-            &.time-saving-img {
-              width: 160px;
-            }
+            img {
+              width: 100%;
+              height: auto;
 
-            &.interface-img {
-              width: 215px;
-            }
+              &.time-saving-img {
+                //max-width: 160px;
+              }
 
-            &.free-img {
-              width: 180px;
-            }
+              &.interface-img {
+                //max-width: 215px;
+              }
 
-            &.function-img {
-              width: 215px;
+              &.free-img {
+                //max-width: 180px;
+              }
+
+              &.function-img {
+                //max-width: 215px;
+              }
             }
           }
 
-          p {
-            font-family: $font-family-secondary;
-            font-size: 15.5px;
-            color: $color-on-background-gray;
-          }
+          .content {
+            flex: 9;
 
+            p {
+              font-family: $font-family-secondary;
+              font-size: 15.5px;
+              color: $color-on-background-gray;
+            }
+          }
         }
 
         &:nth-child(2n + 1) {
@@ -173,7 +191,7 @@
           }
 
           .feature-content {
-            img {
+            .illus-img {
               margin-right: 15px;
             }
 
@@ -192,7 +210,7 @@
           .feature-content {
             flex-direction: row-reverse;
 
-            img {
+            .illus-img {
               margin-left: 15px;
             }
           }

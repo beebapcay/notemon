@@ -13,11 +13,13 @@
   align-items: stretch;
 
   .left-side-image-bg {
-    flex: 4;
+    flex: 4.5;
     padding: 35px 50px;
+    display: flex;
+    flex-direction: column;
 
     .logo-img {
-      width: 145px;
+      width: 135px;
       height: auto;
       opacity: 0.85;
     }
@@ -34,15 +36,16 @@
     }
 
     .center-img-bg {
-      width: 500px;
+      align-self: center;
+      width: 100%;
       height: auto;
       margin-top: 25px;
     }
   }
 
   .right-side-auth-form {
-    flex: 8;
-    padding: 0 85px 55px;
+    flex: 7.5;
+    padding: 0 65px 55px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

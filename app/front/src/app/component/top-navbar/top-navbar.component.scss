@@ -1,7 +1,12 @@
 @import "~src/variables";
 
+:host {
+  width: 100%;
+  z-index: 999;
+}
+
 .top-navbar-container {
-  height: 65px;
+  height: $app-top-navbar-height;
   padding: 0 75px;
   background-color: $color-background;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
