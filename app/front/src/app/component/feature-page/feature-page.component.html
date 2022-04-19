@@ -1,20 +1,20 @@
 <div class="feature-page-container">
-  <section class="welcome-intro row">
-    <div class="col-md-6">
+  <section class="welcome-intro">
+    <div class="description-wrapper">
       <h1>Make Your Work<br> Become<br> Easy and Professional.</h1>
       <p>We provide many awesome features that assists you to create and manage your documents.</p>
       <p>Share and keep connections in sync with all your co-workers.</p>
-      <div class="action-button-group row">
-        <a class="col-md-auto btn-start-quick-note" disableRipple href="#" mat-flat-button>Start a
+      <div class="action-button-group">
+        <a class="btn-start-quick-note" disableRipple href="#" mat-flat-button>Start a
           Quick Note</a>
-        <a class="col-md-auto btn-create-workspace" href="#" mat-button>Create your Workspace</a>
+        <a class="btn-create-workspace" href="#" mat-stroked-button>Create your Workspace</a>
       </div>
       <a class="btn-watch-intro-video" href="#">
         Watch the Introduction Video
         <mat-icon>keyboard_arrow_right</mat-icon>
       </a>
     </div>
-    <div class="col-md-6 intro-gif-wrapper">
+    <div class="intro-gif-wrapper">
       <img [src]="AssetsSrcConstant.FEATURE_INTRO_GIF" alt="" class="intro-gif">
     </div>
   </section>
@@ -25,8 +25,10 @@
       <div class="feature-card">
         <h3>Quick and easily create and manage documents</h3>
         <div class="feature-content">
-          <img [src]="AssetsSrcConstant.TIME_SAVING" alt="" class="time-saving-img">
-          <div>
+          <div class="illus-img">
+            <img [src]="AssetsSrcConstant.TIME_SAVING" alt="" class="time-saving-img">
+          </div>
+          <div class="content">
             <p>You can quickly and easily create a full-featured note document without any other
               requirements.</p>
             <p>For users with an account, we provide a fully functional interface to
@@ -37,8 +39,10 @@
       <div class="feature-card">
         <h3>User-friendly interface and easy to use</h3>
         <div class="feature-content">
-          <img [src]="AssetsSrcConstant.INTERFACE" alt="" class="interface-img">
-          <div>
+          <div class="illus-img">
+            <img [src]="AssetsSrcConstant.INTERFACE" alt="" class="interface-img">
+          </div>
+          <div class="content">
             <p>Easy to use interface for any user. Using Flat Design.</p>
             <p>We also provide 2 themes Light and Dark</p>
           </div>
@@ -47,8 +51,10 @@
       <div class="feature-card">
         <h3>Free and no advertisement</h3>
         <div class="feature-content">
-          <img [src]="AssetsSrcConstant.FREE" alt="" class="free-img">
-          <div>
+          <div class="illus-img">
+            <img [src]="AssetsSrcConstant.FREE" alt="" class="free-img">
+          </div>
+          <div class="content">
             <p>All features are free for everyone. The source code of the project is publicly
               available on Github.</p>
             <p>No advertisement, no hidden costs.</p>
@@ -58,8 +64,10 @@
       <div class="feature-card">
         <h3>Provides a variety of document writing support functions</h3>
         <div class="feature-content">
-          <img [src]="AssetsSrcConstant.FUNCTION" alt="" class="function-img">
-          <div>
+          <div class="illus-img">
+            <img [src]="AssetsSrcConstant.FUNCTION" alt="" class="function-img">
+          </div>
+          <div class="content">
             <p>We provide a variety of document writing support functions.</p>
             <p>You can easily create and manage your documents.</p>
           </div>
