@@ -1,0 +1,14 @@
+<div class="document-card-main-container">
+  <card-action-bar [type]="NotemonCardTypeEnum.DEFAULT"></card-action-bar>
+  <div class="content-container">
+    <img [src]="NotemonCardTypeEnum.DOCUMENT | notemonCardImg" alt="" class="illus-img">
+    <div class="hashtag-list-container">
+      <ng-container *ngFor="let number of [1,2,3]">
+        <app-hashtag [size]="SizeEnum.SMALL" class="hashtag-item" hashtag="hashtag"></app-hashtag>
+      </ng-container>
+    </div>
+    <h3 class="name">Notemon Document</h3>
+    <p class="author">Author: beebapcay</p>
+    <p class="last-updated">Last updated: 17/04/2021</p>
+  </div>
+</div>

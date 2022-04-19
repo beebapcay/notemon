@@ -17,6 +17,13 @@ import {LoginFormComponent} from './auth-page/login-form/login-form.component';
 import {SignupFormComponent} from './auth-page/signup-form/signup-form.component';
 import {AuthInputComponent} from './auth-page/auth-input/auth-input.component';
 import {PipeModule} from '../pipe/pipe.module';
+import {DashboardPageComponent} from './dashboard-page/dashboard-page.component';
+import {HashtagComponent} from './hashtag/hashtag.component';
+import {CardActionBarComponent} from './notemon-card/card-action-bar/card-action-bar.component';
+import {NotemonCardVariantComponent} from './notemon-card/notemon-card-variant/notemon-card-variant.component';
+import {DirectoryCardComponent} from './notemon-card/directory-card/directory-card.component';
+import {DocumentCardComponent} from './notemon-card/document-card/document-card.component';
+import {NewNotemonButtonComponent} from './new-notemon-button/new-notemon-button.component';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
@@ -31,7 +38,14 @@ import {PipeModule} from '../pipe/pipe.module';
     AuthPageComponent,
     LoginFormComponent,
     SignupFormComponent,
-    AuthInputComponent
+    AuthInputComponent,
+    DashboardPageComponent,
+    HashtagComponent,
+    CardActionBarComponent,
+    DirectoryCardComponent,
+    DocumentCardComponent,
+    NotemonCardVariantComponent,
+    NewNotemonButtonComponent,
   ],
   exports: [CommonModule, TopNavbarComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })

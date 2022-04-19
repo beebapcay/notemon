@@ -22,4 +22,8 @@ export class AssetsSrcConstant {
   public static COLAB = 'assets/images/colab.png';
   public static CHAT = 'assets/images/chat.png';
 
+  // resource for notemon card
+  public static DIRECTORY = 'assets/images/directory.png';
+  public static DOCUMENT = 'assets/images/document.svg';
+
 }
