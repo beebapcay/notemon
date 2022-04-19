@@ -1,8 +1,38 @@
 <div class="dashboard-page-container">
-  <div class="hashtag-list-container">
-    <app-hashtag
-      *ngFor="let hashtag of [1,2,3,4,5]; let i = index"
-      [hashtag]="'hashtag: ' + i"
-      [size]="SizeEnum.MEDIUM"
-    ></app-hashtag>
+  <section class="hashtag-section">
+    <h3 class="section-header">Your hashtag</h3>
+    <div class="hashtag-list-container">
+      <app-hashtag
+        *ngFor="let hashtag of [1,2,3,4,5,6,7,8,9,10]; let i = index"
+        [animated]="true"
+        [hashtag]="'hashtag: ' + i"
+        [size]="SizeEnum.MEDIUM"
+      ></app-hashtag>
+    </div>
+  </section>
+
+  <div class="action-buttons">
+    <app-new-notemon-button [type]="NotemonCardTypeEnum.DIRECTORY"></app-new-notemon-button>
+    <app-new-notemon-button [type]="NotemonCardTypeEnum.DOCUMENT"></app-new-notemon-button>
   </div>
+
+  <p class="summary">100 Directories - 20 Document</p>
+
+  <section class="directory-section">
+    <h3 class="section-header">Directories</h3>
+    <div class="directory-list-container">
+      <app-directory-card-main
+        *ngFor="let directory of [1,2,3]; let i = index"
+      ></app-directory-card-main>
+    </div>
+  </section>
+
+  <section class="document-section">
+    <h3 class="section-header">Documents</h3>
+    <div class="document-list-container">
+      <app-document-card-main
+        *ngFor="let directory of [1,2,3]; let i = index"
+      ></app-document-card-main>
+    </div>
+  </section>
+</div>

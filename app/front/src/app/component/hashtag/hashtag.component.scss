@@ -1,28 +1,28 @@
 @import "~src/variables";
 
-$color-hashtag-orange: #F16C00;
-$color-hashtag-orange-overlay: #e36701;
-$color-hashtag-orange-shadow: rgba(241, 108, 0, 0.75);
+$color-hashtag-orange: rgba(241, 108, 0, 0.9);
+$color-hashtag-orange-overlay: rgba(227, 103, 1, 0.9);
+$color-hashtag-orange-shadow: rgba(241, 108, 0, 0.5);
 
-$color-hashtag-blue: #2196F3;
-$color-hashtag-blue-overlay: #1e84d7;
-$color-hashtag-blue-shadow: rgba(33, 150, 243, 0.75);
+$color-hashtag-blue: rgba(33, 150, 243, 0.9);
+$color-hashtag-blue-overlay: rgba(30, 132, 215, 0.9);
+$color-hashtag-blue-shadow: rgba(33, 150, 243, 0.5);
 
-$color-hashtag-green: #4CAF50;
-$color-hashtag-green-overlay: #388e3c;
-$color-hashtag-green-shadow: rgba(76, 175, 80, 0.75);
+$color-hashtag-green: rgba(76, 175, 80, 0.9);
+$color-hashtag-green-overlay: rgba(56, 142, 60, 0.9);
+$color-hashtag-green-shadow: rgba(76, 175, 80, 0.5);
 
-$color-hashtag-red: #F44336;
-$color-hashtag-red-overlay: #de3e32;
-$color-hashtag-red-shadow: rgba(244, 67, 54, 0.75);
+$color-hashtag-red: rgba(244, 67, 54, 0.9);
+$color-hashtag-red-overlay: rgba(222, 62, 50, 0.9);
+$color-hashtag-red-shadow: rgba(244, 67, 54, 0.5);
 
-$color-hashtag-gray: #9E9E9E;
-$color-hashtag-gray-overlay: #868686;
-$color-hashtag-gray-shadow: rgba(158, 158, 158, 0.75);
+$color-hashtag-gray: rgba(158, 158, 158, 0.9);
+$color-hashtag-gray-overlay: rgba(134, 134, 134, 0.9);
+$color-hashtag-gray-shadow: rgba(158, 158, 158, 0.5);
 
-$color-hashtag-purple: #9C27B0;
-$color-hashtag-purple-overlay: #88229a;
-$color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
+$color-hashtag-purple: rgba(156, 39, 176, 0.9);
+$color-hashtag-purple-overlay: rgba(136, 34, 154, 0.9);
+$color-hashtag-purple-shadow: rgba(156, 39, 176, 0.5);
 
 .hashtag-container {
   border-radius: 99px;
@@ -36,7 +36,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
   line-height: initial;
 
   &:hover.animated {
-    transform: translateY(-2.5px);
+    transform: translateY(-1.5px);
   }
 
   &.orange {
@@ -44,7 +44,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
 
     &:hover {
       background-color: $color-hashtag-orange-overlay;
-      box-shadow: 0 0 10px $color-hashtag-orange-shadow;
+      box-shadow: 0 0 8.5px $color-hashtag-orange-shadow;
     }
 
     &:hover.small {
@@ -57,7 +57,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
 
     &:hover {
       background-color: $color-hashtag-blue-overlay;
-      box-shadow: 0 0 10px $color-hashtag-blue-shadow;
+      box-shadow: 0 0 8.5px $color-hashtag-blue-shadow;
     }
 
     &:hover.small {
@@ -70,7 +70,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
 
     &:hover {
       background-color: $color-hashtag-green-overlay;
-      box-shadow: 0 0 10px $color-hashtag-green-shadow;
+      box-shadow: 0 0 8.5px $color-hashtag-green-shadow;
     }
 
     &:hover.small {
@@ -83,7 +83,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
 
     &:hover {
       background-color: $color-hashtag-red-overlay;
-      box-shadow: 0 0 10px $color-hashtag-red-shadow;
+      box-shadow: 0 0 8.5px $color-hashtag-red-shadow;
     }
 
     &:hover.small {
@@ -96,7 +96,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
 
     &:hover {
       background-color: $color-hashtag-gray-overlay;
-      box-shadow: 0 0 10px $color-hashtag-gray-shadow;
+      box-shadow: 0 0 8.5px $color-hashtag-gray-shadow;
     }
 
     &:hover.small {
@@ -109,7 +109,7 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
 
     &:hover {
       background-color: $color-hashtag-purple-overlay;
-      box-shadow: 0 0 10px $color-hashtag-purple-shadow;
+      box-shadow: 0 0 8.5px $color-hashtag-purple-shadow;
     }
 
     &:hover.small {
@@ -123,8 +123,8 @@ $color-hashtag-purple-shadow: rgba(156, 39, 176, 0.75);
   }
 
   &.medium {
-    font-size: 12.5px;
-    padding: 5px 22.5px;
+    font-size: 12px;
+    padding: 3.85px 20.5px;
   }
 
   &.large {
