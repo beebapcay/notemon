@@ -34,11 +34,6 @@ $color-primary-light: #61c5ae;
 $color-primary-dark: #006553;
 $color-on-primary: #fff;
 
-//$color-secondary: #007bff;
-//$color-secondary-light: #69a9ff;
-//$color-secondary-dark: #0050cb;
-//$color-on-secondary: #fff;
-
 $color-secondary: #2836a0;
 $color-secondary-overlay: #222d86;
 $color-secondary-light: #6260d2;
@@ -119,3 +114,22 @@ $font-family-mono: 'Roboto Mono', monospace;
   -webkit-tap-highlight-color: transparent;
 }
 
+@mixin set-icon-size($size: 24px) {
+  width: $size;
+  height: $size;
+  font-size: $size;
+  line-height: $size;
+}
+
+@mixin set-icon-button-size($btn-size: 24px, $icon-size: 16px) {
+  width: $btn-size;
+  height: $btn-size;
+  font-size: initial;
+  line-height: initial;
+  padding: 0;
+  margin: 0;
+
+  .icon, .mat-icon {
+    @include set-icon-size($icon-size);
+  }
+}
