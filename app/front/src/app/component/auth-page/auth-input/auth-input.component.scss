@@ -3,6 +3,8 @@
 .input-base-style {
   font-family: $font-family-tertiary;
   font-size: 14px;
+
+  margin: 0;
 }
 
 :host ::ng-deep .mat-form-field {
@@ -17,14 +19,22 @@
     height: 45px;
     align-items: center;
 
-    .mat-form-field-label {
-      @extend .input-base-style;
-      color: $color-on-background-gray-light;
+    .mat-form-field-label-wrapper {
+      padding: 0;
+      top: 0;
+      left: 0;
+
+      .mat-form-field-label {
+        @extend .input-base-style;
+        top: 0;
+        left: 0;
+        transform: translateY(7.5px);
+        color: $color-on-background-gray-light;
+      }
     }
 
     &:hover {
-      border: 1px solid $color-focus-primary-light;
-      outline: 3.5px solid rgba(97, 197, 174, 0.15);
+      box-shadow: 0 0 0 1px $color-focus-primary-light, 0 0 0 3.5px rgba(97, 197, 174, 0.15);
     }
 
     .mat-form-field-infix, .mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
@@ -37,8 +47,7 @@
   }
 
   &.mat-focused .mat-form-field-flex {
-    border: 1px solid $color-primary-light;
-    outline: 3.5px solid rgba(97, 197, 174, 0.35);
+    box-shadow: 0 0 0 1px $color-primary-light, 0 0 0 3.5px rgba(97, 197, 174, 0.25);
 
     .mat-form-field-label {
       color: $color-on-background-gray;
