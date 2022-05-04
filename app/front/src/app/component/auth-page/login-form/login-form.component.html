@@ -2,15 +2,19 @@
   <auth-input
     label="Email"
     name="email"
+    control="email"
     placeholder="Enter your email"
     type="email"
+    [formGroup]="formGroup"
   >
   </auth-input>
   <auth-input
     label="Password"
     name="password"
+    control="password"
     placeholder="Enter your password"
     type="password"
+    [formGroup]="formGroup"
   >
   </auth-input>
 </ng-container>

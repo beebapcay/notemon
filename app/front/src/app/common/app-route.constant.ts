@@ -1,4 +1,5 @@
 export class AppRouteConstant {
+  static readonly APP_NAME = 'Notemon';
   static readonly ROOT = '/';
   static readonly HOME = '';
   static readonly LOGIN = 'login';

@@ -26,9 +26,25 @@ import {DocumentCardComponent} from './notemon-card/document-card/document-card.
 import {NewNotemonButtonComponent} from './new-notemon-button/new-notemon-button.component';
 import {NotemonCardEmptyComponent} from './notemon-card/notemon-card-empty/notemon-card-empty.component';
 import {TopNavbarEditorComponent} from './top-navbar/top-navbar-editor/top-navbar-editor.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ServiceModule} from '../service/service.module';
 
 @NgModule({
-  imports: [CommonModule, MaterialModule, FontAwesomeModule, RouterModule, CKEditorModule, PipeModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    FontAwesomeModule,
+    RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    CKEditorModule,
+    PipeModule,
+    ServiceModule
+  ],
   declarations: [
     TopNavbarMainComponent,
     FeaturePageComponent,
