@@ -1,4 +1,5 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { IKeyValue } from '../common/common.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,16 @@ export class PersistenceService {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (e) {
       console.error('Error saving to localStorage', e);
+    }
+  }
+
+  public write(data: IKeyValue): void {
+    try {
+      Object.keys(data).forEach(key => {
+        localStorage.setItem(key, data[key]);
+      });
+    } catch (e) {
+      console.error('Error writing data to localStorage', e);
     }
   }
 

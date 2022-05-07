@@ -1,10 +1,11 @@
-import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-snackbar',
   templateUrl: './snackbar.component.html',
-  styleUrls: ['./snackbar.component.scss']
+  styleUrls: ['./snackbar.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SnackbarComponent implements OnInit, OnDestroy {
   @Input() closeButtonLabel = 'Close';
@@ -12,7 +13,7 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   duration: number;
   displayDuration: number;
   message: string = 'Notemon Application';
-  time: 0;
+  time: number = 0;
   interval;
 
   constructor(private snackbarRef: MatSnackBarRef<SnackbarComponent>,
@@ -20,9 +21,12 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(this.data);
+
     if (this.data?.duration) {
       this.duration = this.data.duration;
       this.displayDuration = this.duration / 1000 - this.time;
+      console.log('duration', this.displayDuration);
       this.startTimer();
     }
 
@@ -50,5 +54,9 @@ export class SnackbarComponent implements OnInit, OnDestroy {
     if (this.data?.onClose) {
       this.data.onClose();
     }
+  }
+
+  getClass() {
+    return `snackbar-${this.data.status}`;
   }
 }

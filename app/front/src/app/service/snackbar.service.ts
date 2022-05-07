@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
-import {SnackbarStatusEnum} from '../enum/snackbar-status.enum';
-import {SnackbarComponent} from '../component/snackbar/snackbar.component';
+import { Injectable } from '@angular/core';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { SnackbarComponent } from '../component/snackbar/snackbar.component';
+import { SnackbarStatusEnum } from '../enum/snackbar-status.enum';
 
 export interface ISnackbarConfig extends MatSnackBarConfig {
   message?: string,
@@ -14,8 +14,8 @@ export interface ISnackbarConfig extends MatSnackBarConfig {
 export class SnackbarService {
   static readonly DEFAULT_CONFIG: ISnackbarConfig = {
     duration: 5000,
-    verticalPosition: 'bottom',
-    horizontalPosition: 'left',
+    verticalPosition: 'top',
+    horizontalPosition: 'right',
     status: SnackbarStatusEnum.info
   }
 
@@ -24,16 +24,17 @@ export class SnackbarService {
 
   getConfig(config: ISnackbarConfig): MatSnackBarConfig {
     return {
-      duration: config.duration || SnackbarService.DEFAULT_CONFIG.duration,
+      duration: config.duration ?? SnackbarService.DEFAULT_CONFIG.duration,
       data: {
         message: config.message,
-        duration: config.duration || SnackbarService.DEFAULT_CONFIG.duration,
+        duration: config.duration ?? SnackbarService.DEFAULT_CONFIG.duration,
         onClose: config.onClose,
-        closeButtonLabel: config.closeButtonLabel
+        closeButtonLabel: config.closeButtonLabel ?? 'Close',
+        status: config.status ?? SnackbarStatusEnum.info
       },
-      panelClass: [...(config.panelClass || []), `snackbar-${config.status ?? SnackbarService.DEFAULT_CONFIG.status}`],
-      verticalPosition: config.verticalPosition || SnackbarService.DEFAULT_CONFIG.verticalPosition,
-      horizontalPosition: config.horizontalPosition || SnackbarService.DEFAULT_CONFIG.horizontalPosition
+      panelClass: [...(config.panelClass ?? []), `snackbar-${config.status ?? SnackbarService.DEFAULT_CONFIG.status}`],
+      verticalPosition: config.verticalPosition ?? SnackbarService.DEFAULT_CONFIG.verticalPosition,
+      horizontalPosition: config.horizontalPosition ?? SnackbarService.DEFAULT_CONFIG.horizontalPosition
     }
   }
 
