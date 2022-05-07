@@ -30,6 +30,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ServiceModule} from '../service/service.module';
+import {SnackbarComponent} from './snackbar/snackbar.component';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import {ServiceModule} from '../service/service.module';
     NewNotemonButtonComponent,
     NotemonCardEmptyComponent,
     TopNavbarEditorComponent,
+    SnackbarComponent,
   ],
   exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
