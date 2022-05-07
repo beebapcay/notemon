@@ -1,13 +1,17 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {AssetsSrcConstant} from '../../common/assets-src.constant';
-import {AppRouteConstant} from '../../common/app-route.constant';
-import {ActivatedRoute} from '@angular/router';
-import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
-import {Title} from '@angular/platform-browser';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import _ from 'lodash';
-import {FormGroup} from '@angular/forms';
-import {LoginFormComponent} from './login-form/login-form.component';
-import {SignupFormComponent} from './signup-form/signup-form.component';
+import { take } from 'rxjs';
+import { AppRouteConstant } from '../../common/app-route.constant';
+import { AssetsSrcConstant } from '../../common/assets-src.constant';
+import { AuthService } from '../../service/auth.service';
+import { PersistenceService } from '../../service/persistence.service';
+import { SnackbarService } from '../../service/snackbar.service';
+import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 
 @Component({
   selector: 'app-auth-page',
@@ -26,14 +30,18 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   @ViewChild(SignupFormComponent) signupForm: SignupFormComponent;
 
   constructor(private route: ActivatedRoute,
-              private titleService: Title) {
+              private router: Router,
+              private titleService: Title,
+              private authService: AuthService,
+              private snackbarService: SnackbarService,
+              private persistenceService: PersistenceService) {
     super();
 
     this.registerSubscription(
-      this.route.url.subscribe(url => {
-        this.page = url[0].path.toLocaleLowerCase();
-        this.titleService.setTitle(`${AppRouteConstant.APP_NAME} - ${_.startCase(this.page)}`);
-      })
+        this.route.url.subscribe(url => {
+          this.page = url[0].path.toLocaleLowerCase();
+          this.titleService.setTitle(`${AppRouteConstant.APP_NAME} - ${_.startCase(this.page)}`);
+        })
     )
   }
 
@@ -47,16 +55,25 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   }
 
   onAuthSubmit() {
-    this.showErrors = true;
+    this.snackbarService.openRequestErrorAnnouncement('Hello World');
+    return;
 
+    this.showErrors = true;
     this.authForm.markAllAsTouched();
 
-    const data = this.authForm.value;
-    console.log(data);
-  }
+    if (this.authForm.invalid) return;
 
-  onForgotPasswordButtonClicked() {
-    console.log('Forgot password button clicked: ' + this.page);
+    const data = this.authForm.value;
+    this.authService
+        .loginLocal(data.email, data.password)
+        .pipe(take(1))
+        .subscribe({
+          next: (authData) => {
+            this.persistenceService.write(authData);
+            this.router.navigate([AppRouteConstant.DASHBOARD]).then();
+          },
+          error: (error) => this.snackbarService.openRequestErrorAnnouncement(error)
+        });
   }
 
   get isLoginPage() {
