@@ -3,9 +3,13 @@ package com.notemon.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+
+import java.util.Collection;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -15,7 +19,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Setter
 @NoArgsConstructor
 @SuppressWarnings("ALL")
-public class UserEntity extends AbstractEntity {
+public class UserEntity extends AbstractEntity implements UserDetails {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "ID", updatable = false, nullable = false)
@@ -38,4 +42,34 @@ public class UserEntity extends AbstractEntity {
 
     @Column(name = "GOOGLE_TOKEN", nullable = true)
     private String googleToken;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

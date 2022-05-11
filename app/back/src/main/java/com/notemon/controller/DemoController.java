@@ -1,12 +1,12 @@
 package com.notemon.controller;
 
-import com.notemon.constant.Endpoint;
+import com.notemon.constant.EndpointConstant;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(Endpoint.DEMO_ENDPOINT)
+@RequestMapping(EndpointConstant.DEMO_ENDPOINT)
 public class DemoController {
     @GetMapping
     public String get() {
