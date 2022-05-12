@@ -5,19 +5,21 @@ import com.notemon.enums.RoleEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
-@Table(name = "IROLE")
+@Table(name = "ROLE")
 @Getter
 @Setter
 @NoArgsConstructor
 @SuppressWarnings("ALL")
-public class RoleEntity {
+public class RoleEntity extends BaseEntity {
     @Id
+    @Type(type = "uuid-char")
     @GeneratedValue(generator = "UUID")
     @AppUUIDGenerator
     @Column(name = "ID",

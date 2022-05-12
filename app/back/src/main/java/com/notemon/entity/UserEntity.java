@@ -1,9 +1,11 @@
 package com.notemon.entity;
 
+import com.notemon.entity.annotation.AppUUIDGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,7 +22,9 @@ import java.util.UUID;
 @SuppressWarnings("ALL")
 public class UserEntity extends BaseEntity {
     @Id
+    @Type(type = "uuid-char")
     @GeneratedValue(generator = "UUID")
+    @AppUUIDGenerator
     @Column(name = "ID",
             updatable = false,
             nullable = false)
@@ -43,6 +47,11 @@ public class UserEntity extends BaseEntity {
 
     @Column(name = "GOOGLE_TOKEN", nullable = true)
     private String googleToken;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ROLE_ID", nullable = false)
+    @NotNull
+    private RoleEntity role;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))

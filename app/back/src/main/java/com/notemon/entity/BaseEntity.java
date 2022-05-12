@@ -2,36 +2,46 @@ package com.notemon.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @MappedSuperclass
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
     @Column(name = "USR_LOG_I", nullable = false)
     @NotNull
-    private Integer userLogInserted;
+    @CreatedBy
+    private String userLogInserted;
 
-    @Column(name = "DTE_LOG_I", nullable = false)
+    @Column(name = "DTE_LOG_I", nullable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     @NotNull
-    private String dateLogInserted;
+    @CreatedDate
+    private LocalDateTime dateLogInserted;
 
     @Column(name = "USR_LOG_U", nullable = false)
     @NotNull
-    private Integer userLogUpdated;
+    @LastModifiedBy
+    private String userLogUpdated;
 
-    @Column(name = "DTE_LOG_U", nullable = false)
+    @Column(name = "DTE_LOG_U", nullable = false, columnDefinition = "TIMESTAMP DEFAULT now()")
     @NotNull
-    private String dateLogUpdated;
+    @LastModifiedDate
+    private LocalDateTime dateLogUpdated;
 
-    @Column(name = "VERSION", nullable = false, columnDefinition = "int default 0")
+    @Column(name = "VERSION", nullable = false, columnDefinition = "INT DEFAULT 0")
     @NotNull
+    @Version
     private int version = 0;
 
     @Transient

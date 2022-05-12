@@ -1,13 +1,12 @@
 package com.notemon.entity;
 
+import com.notemon.entity.annotation.AppUUIDGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -19,6 +18,9 @@ import java.util.UUID;
 @SuppressWarnings("ALL")
 public class NoteEntity extends BaseEntity {
     @Id
+    @Type(type = "uuid-char")
+    @GeneratedValue(generator = "UUID")
+    @AppUUIDGenerator
     @Column(name = "ID", nullable = false, updatable = false)
     @NotNull
     private UUID id;
