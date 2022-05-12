@@ -1,7 +1,6 @@
 package com.notemon.config;
 
-import com.notemon.entity.UserEntity;
-import com.notemon.repository.UserRepository;
+import com.notemon.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +23,7 @@ import java.util.List;
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final JwtTokenUtil jwtTokenUtil;
-    private final UserRepository userRepository;
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -38,19 +37,18 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         // Get jwt token and validate
         final String token = authorizationHeader.split(" ")[1].trim();
-        if (!jwtTokenUtil.validate(token)) {
+        if (StringUtils.isEmpty(token) || !jwtTokenUtil.validateToken(token)) {
             filterChain.doFilter(request, response);
             return;
         }
 
         // Get user identity and set it on the spring security context
-        UserDetails userDetails = userRepository
-                .findByEmail(jwtTokenUtil.getUsername(token))
-                .orElse(null);
+        final String username = jwtTokenUtil.getUsernameFromToken(token);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
         UsernamePasswordAuthenticationToken
                 authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails == null ? List.of() : userDetails.getAuthorities());
+                userDetails, null, userDetails == null ? List.of() : userDetails.getAuthorities());
 
         authentication.setDetails(
                 new WebAuthenticationDetailsSource().buildDetails(request)
@@ -58,5 +56,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
+
+
     }
 }

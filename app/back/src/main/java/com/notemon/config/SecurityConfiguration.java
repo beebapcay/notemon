@@ -1,18 +1,16 @@
 package com.notemon.config;
 
 import com.notemon.enums.RoleEnum;
-import com.notemon.repository.UserRepository;
+import com.notemon.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Role;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -20,23 +18,17 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import javax.servlet.http.HttpServletResponse;
-
 @Configuration
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserRepository userRepository;
+    private final UserDetailsServiceImpl userDetailsService;
+    private final AuthEntryPointJwt unauthorizedHandler;
     private final JwtTokenFilter jwtTokenFilter;
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(email -> userRepository
-                .findByEmail(email)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException(
-                                String.format("User with email %s not found", email)
-                        )
-                ));
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
@@ -49,21 +41,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Set unauthorized requests exception handler
-        httpSecurity.exceptionHandling().authenticationEntryPoint(
-                (request, response, authException) ->
-                        response.sendError(
-                                HttpServletResponse.SC_UNAUTHORIZED,
-                                authException.getMessage()
-                        )
-                );
+        httpSecurity.exceptionHandling().authenticationEntryPoint(unauthorizedHandler);
 
         // Set permissions on endpoints
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/api/public/**").permitAll()
+                .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/api/admin/**").hasRole(RoleEnum.ADMIN.getValue())
                 .anyRequest().authenticated();
+
 
         // Set JWT token filter
         httpSecurity.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
@@ -86,6 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }

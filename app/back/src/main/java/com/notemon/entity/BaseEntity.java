@@ -8,11 +8,12 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.UUID;
 
 @MappedSuperclass
 @Getter
 @Setter
-public abstract class AbstractEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
     @Column(name = "USR_LOG_I", nullable = false)
     @NotNull
     private Integer userLogInserted;
@@ -29,14 +30,14 @@ public abstract class AbstractEntity implements Serializable {
     @NotNull
     private String dateLogUpdated;
 
-    @Column(name = "ENTITY_VERSION", nullable = false, columnDefinition = "int default 0")
+    @Column(name = "VERSION", nullable = false, columnDefinition = "int default 0")
     @NotNull
-    private int entityVersion = 0;
+    private int version = 0;
 
     @Transient
     private boolean transientHashCodeLeaked = false;
 
-    public abstract Long getId();
+    public abstract UUID getId();
 
     @Override
     public String toString() {
@@ -52,7 +53,7 @@ public abstract class AbstractEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        AbstractEntity that = (AbstractEntity) o;
+        BaseEntity that = (BaseEntity) o;
 
         if (isPersisted() && that.isPersisted()) {
             return getId().equals(that.getId());

@@ -1,5 +1,7 @@
 package com.notemon.entity;
 
+import com.notemon.entity.annotation.AppUUIDGenerator;
+import com.notemon.enums.RoleEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,25 +10,24 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 @Entity
-@Table(name = "NOTEMON_DOCUMENT")
+@Table(name = "IROLE")
 @Getter
 @Setter
 @NoArgsConstructor
 @SuppressWarnings("ALL")
-public class NotemonDocumentEntity extends BaseEntity {
+public class RoleEntity {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID", updatable = false, nullable = false)
+    @GeneratedValue(generator = "UUID")
+    @AppUUIDGenerator
+    @Column(name = "ID",
+            updatable = false,
+            nullable = false)
     @NotNull
     private UUID id;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "NAME", nullable = false)
     @NotNull
-    private String name;
-
-    @Column(name = "DESCRIPTION", nullable = true)
-    private String description;
+    private RoleEnum name;
 }

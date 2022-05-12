@@ -1,30 +1,31 @@
 package com.notemon.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import java.util.Collection;
-
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "USER")
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("ALL")
-public class UserEntity extends AbstractEntity implements UserDetails {
+public class UserEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID", updatable = false, nullable = false)
+    @GeneratedValue(generator = "UUID")
+    @Column(name = "ID",
+            updatable = false,
+            nullable = false)
     @NotNull
-    private Long id;
+    private UUID id;
 
     @Column(name = "NAME", nullable = false)
     @NotNull
@@ -43,33 +44,13 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     @Column(name = "GOOGLE_TOKEN", nullable = true)
     private String googleToken;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    private Set<RoleEntity> roles = new HashSet<>();
 
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
+    public UserEntity(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 }

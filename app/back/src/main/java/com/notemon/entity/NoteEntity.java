@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Entity
 @Table(name = "NOTE")
@@ -16,11 +17,11 @@ import javax.validation.constraints.NotNull;
 @Setter
 @NoArgsConstructor
 @SuppressWarnings("ALL")
-public class NoteEntity extends AbstractEntity {
+public class NoteEntity extends BaseEntity {
     @Id
     @Column(name = "ID", nullable = false, updatable = false)
     @NotNull
-    private Long id;
+    private UUID id;
 
     @Column(name = "CONTENT", nullable = true)
     private String content;
