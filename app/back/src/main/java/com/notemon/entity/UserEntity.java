@@ -9,8 +9,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -52,10 +50,6 @@ public class UserEntity extends BaseEntity {
     @JoinColumn(name = "ROLE_ID", nullable = false)
     @NotNull
     private RoleEntity role;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    private Set<RoleEntity> roles = new HashSet<>();
 
     public UserEntity(String name, String email, String password) {
         this.name = name;

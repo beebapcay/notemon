@@ -13,6 +13,7 @@ import com.notemon.enums.RoleEnum;
 import com.notemon.repository.RoleRepository;
 import com.notemon.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -24,10 +25,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashSet;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @RestController
@@ -85,25 +84,23 @@ public class AuthController {
         }
 
         UserEntity user = new UserEntity(signupDto.getName(), signupDto.getEmail(), encoder.encode(signupDto.getPassword()));
+        user.setUserLogInserted(signupDto.getName());
+        user.setDateLogInserted(LocalDateTime.now());
+        user.setUserLogUpdated(signupDto.getName());
+        user.setDateLogUpdated(LocalDateTime.now());
 
-        Set<RoleEnum> roles = Optional.ofNullable(signupDto.getRoles()).orElse(Set.of());
-        Set<RoleEntity> rolesEntity = new HashSet<>();
+        RoleEnum role = signupDto.getRoles();
+        RoleEntity roleEntity;
 
-        if (roles.isEmpty()) {
-            RoleEntity roleEntity = roleRepository.findByName(RoleEnum.USER)
+        if (ObjectUtils.isEmpty(role)) {
+            roleEntity = roleRepository.findByName(RoleEnum.USER)
                     .orElseThrow(() -> new RuntimeException("Role not found"));
-
-            rolesEntity.add(roleEntity);
         } else {
-            roles.forEach(roleEnum -> {
-                RoleEntity roleEntity = roleRepository.findByName(roleEnum)
-                        .orElseThrow(() -> new RuntimeException("Role not found"));
-
-                rolesEntity.add(roleEntity);
-            });
+            roleEntity = roleRepository.findByName(role)
+                    .orElseThrow(() -> new RuntimeException("Role not found"));
         }
 
-        user.setRoles(rolesEntity);
+        user.setRole(roleEntity);
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponseDto("User signup successfully"));
