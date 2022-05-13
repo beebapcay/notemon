@@ -1,6 +1,8 @@
 package com.notemon.config;
 
 import com.notemon.enums.RoleEnum;
+import com.notemon.security.AuthEntryPointJwt;
+import com.notemon.security.JwtTokenRequestFilter;
 import com.notemon.service.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -24,8 +26,8 @@ import org.springframework.web.filter.CorsFilter;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsServiceImpl userDetailsService;
+    private final JwtTokenRequestFilter jwtTokenRequestFilter;
     private final AuthEntryPointJwt unauthorizedHandler;
-    private final JwtTokenFilter jwtTokenFilter;
 
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -54,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
         // Set JWT token filter
-        httpSecurity.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(jwtTokenRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         // Disable frame options for h2-console
         httpSecurity.headers().frameOptions().disable();

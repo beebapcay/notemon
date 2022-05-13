@@ -51,6 +51,10 @@ public class UserEntity extends BaseEntity {
     @NotNull
     private RoleEntity role;
 
+    @Column(name = "ENABLE", nullable = false, columnDefinition = "BOOLEAN DEFAULT true")
+    @NotNull
+    private boolean enable = true;
+
     public UserEntity(String name, String email, String password) {
         this.name = name;
         this.email = email;

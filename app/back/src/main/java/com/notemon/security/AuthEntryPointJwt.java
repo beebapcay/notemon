@@ -1,4 +1,4 @@
-package com.notemon.config;
+package com.notemon.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
@@ -13,7 +13,6 @@ import java.io.IOException;
 @Component
 @Slf4j
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
-
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized");

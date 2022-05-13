@@ -11,7 +11,7 @@ public class LoginResponseDto {
     private String email;
     private String name;
     private String token;
-    private List<String> role;
+    private List<String> roles;
     private String expiresIn;
     private String refreshToken;
 }

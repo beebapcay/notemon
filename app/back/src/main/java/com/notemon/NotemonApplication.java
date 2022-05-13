@@ -9,7 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class NotemonApplication {
     public static void main(String[] args) {
         SpringApplication.run(NotemonApplication.class, args);
-        String backendUrl = "http://localhost:8080";
+
+        String backendUrl = String.format("http://localhost:%d", 8081);
         log.info("NOTEMON IS RUNNING AT: " + backendUrl);
     }
 }

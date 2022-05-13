@@ -1,7 +1,9 @@
-package com.notemon.config;
+package com.notemon.security;
 
 import com.notemon.service.impl.UserDetailsServiceImpl;
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,10 +19,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class JwtTokenFilter extends OncePerRequestFilter {
+@Slf4j
+public class JwtTokenRequestFilter extends OncePerRequestFilter {
 
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsServiceImpl userDetailsService;
@@ -29,34 +33,41 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         // Get authorization header and validate
-        final String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (StringUtils.isEmpty(authorizationHeader) || !authorizationHeader.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         // Get jwt token and validate
-        final String token = authorizationHeader.split(" ")[1].trim();
+        String token = authorizationHeader.split(" ")[1].trim();
         if (StringUtils.isEmpty(token) || !jwtTokenUtil.validateToken(token)) {
             filterChain.doFilter(request, response);
             return;
         }
 
         // Get user identity and set it on the spring security context
-        final String username = jwtTokenUtil.getUsernameFromToken(token);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+        String username = null;
+        try {
+            username = jwtTokenUtil.getUsernameFromToken(token);
+        } catch (IllegalArgumentException e) {
+            log.error("Unable to get username from token", e);
+        } catch (ExpiredJwtException e) {
+            log.error("Token has expired", e);
+        }
 
-        UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(
-                userDetails, null, userDetails == null ? List.of() : userDetails.getAuthorities());
+        // Retrieve user details and set it on the spring security context
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-        authentication.setDetails(
-                new WebAuthenticationDetailsSource().buildDetails(request)
-        );
+            UsernamePasswordAuthenticationToken
+                    authentication = new UsernamePasswordAuthenticationToken(
+                    userDetails, null, Optional.ofNullable(userDetails.getAuthorities()).orElse(List.of()));
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
         filterChain.doFilter(request, response);
-
-
     }
 }

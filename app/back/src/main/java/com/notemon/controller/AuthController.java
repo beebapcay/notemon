@@ -1,6 +1,6 @@
 package com.notemon.controller;
 
-import com.notemon.config.JwtTokenUtil;
+import com.notemon.security.JwtTokenUtil;
 import com.notemon.constant.EndpointConstant;
 import com.notemon.dto.LoginRequestDto;
 import com.notemon.dto.LoginResponseDto;
@@ -12,6 +12,7 @@ import com.notemon.entity.impl.UserDetailsImpl;
 import com.notemon.enums.RoleEnum;
 import com.notemon.repository.RoleRepository;
 import com.notemon.repository.UserRepository;
+import com.notemon.security.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
@@ -27,17 +28,22 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(EndpointConstant.AUTHENTICATION_ENDPOINT)
 @RequiredArgsConstructor
 public class AuthController {
+
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
+    private final PasswordEncoder encoder;
+
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder encoder;
+
+    private final SecurityUtil securityUtil;
 
     @GetMapping("/demo")
     public String getDemo() {
@@ -55,9 +61,10 @@ public class AuthController {
                     );
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            String jwtToken = jwtTokenUtil.generateJwtToken(authentication);
-
             UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+            String jwtToken = jwtTokenUtil.generateJwtToken(userDetails);
+
             List<String> roles = userDetails.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
@@ -68,7 +75,7 @@ public class AuthController {
                             userDetails.getName(),
                             jwtToken,
                             roles,
-                            JwtTokenUtil.JWT_TOKEN_VALIDITY_TIME,
+                            securityUtil.getJwtExpiration(),
                             userDetails.getRefreshToken()
                     ));
         } catch (BadCredentialsException e) {
@@ -77,7 +84,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@Valid @RequestBody SignupRequestDto signupDto) {
+    public ResponseEntity<?> signup(@RequestBody @Valid SignupRequestDto signupDto) {
         if (userRepository.existsByEmail(signupDto.getEmail())) {
             return ResponseEntity.badRequest()
                     .body(new MessageResponseDto("Error: Email is already taken"));
