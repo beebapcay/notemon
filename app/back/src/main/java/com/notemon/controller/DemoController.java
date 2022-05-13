@@ -12,4 +12,9 @@ public class DemoController {
     public String get() {
         return "Hello World";
     }
+
+    @GetMapping("/error")
+    public String getError() {
+        throw new RuntimeException("Error occurred.");
+    }
 }
