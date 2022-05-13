@@ -30,6 +30,7 @@ public class ExceptionHandlerConfiguration {
         return log("Access to forbidden data is not allowed.", exception);
     }
 
+
     @ResponseBody
     @ExceptionHandler(AppBusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)

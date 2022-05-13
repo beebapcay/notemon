@@ -17,4 +17,9 @@ public class DemoController {
     public String getError() {
         throw new RuntimeException("Error occurred.");
     }
+
+    @GetMapping("/auth")
+    public String getAuth() {
+        return "Hello World";
+    }
 }

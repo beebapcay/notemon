@@ -1,10 +1,9 @@
 package com.notemon.security;
 
-import com.notemon.entity.impl.UserDetailsImpl;
+import com.notemon.exception.AppRTException;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -58,9 +57,10 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
-    public Boolean validateToken(String authToken) {
+    public Boolean validateToken(String authToken) throws AppRTException {
         try {
             Jwts.parser().setSigningKey(securityUtil.getJwtSecret()).parseClaimsJws(authToken);
+            Claims claims = getAllClaimsFromToken(authToken);
             return true;
         } catch (SignatureException e) {
             log.error("Invalid JWT signature: {}", e.getMessage());

@@ -1,7 +1,6 @@
 package com.notemon.security;
 
 import com.notemon.service.impl.UserDetailsServiceImpl;
-import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -52,8 +51,6 @@ public class JwtTokenRequestFilter extends OncePerRequestFilter {
             username = jwtTokenUtil.getUsernameFromToken(token);
         } catch (IllegalArgumentException e) {
             log.error("Unable to get username from token", e);
-        } catch (ExpiredJwtException e) {
-            log.error("Token has expired", e);
         }
 
         // Retrieve user details and set it on the spring security context
