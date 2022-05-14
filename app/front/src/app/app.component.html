@@ -1,6 +1,6 @@
 <div class="application-container">
   <div class="supported-container">
-    <app-top-navbar-main *ngIf="!isFull"></app-top-navbar-main>
+    <app-top-navbar-main *ngIf="!isFull" [isLoggedIn]="isLoggedIn"></app-top-navbar-main>
     <div
       [ngClass]="{'has-top-navbar': !isFull}"
       class="main-container"

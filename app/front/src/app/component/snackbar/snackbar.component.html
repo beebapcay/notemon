@@ -1,0 +1,7 @@
+<div class="snackbar-container" [class]="getClass()">
+  <span class="snackbar-message">{{message}}</span>
+  <button class="snackbar-close" (click)="onClose()" mat-button>
+    {{closeButtonLabel | titlecase}}
+    <ng-container *ngIf="duration">{{displayDuration}}</ng-container>
+  </button>
+</div>

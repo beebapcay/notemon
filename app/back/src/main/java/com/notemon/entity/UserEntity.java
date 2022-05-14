@@ -1,26 +1,33 @@
 package com.notemon.entity;
 
+import com.notemon.entity.annotation.AppUUIDGenerator;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.UUID;
 
 @Entity
 @Table(name = "USER")
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("ALL")
-public class UserEntity extends AbstractEntity {
+public class UserEntity extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "ID", updatable = false, nullable = false)
+    @Type(type = "uuid-char")
+    @GeneratedValue(generator = "UUID")
+    @AppUUIDGenerator
+    @Column(name = "ID",
+            updatable = false,
+            nullable = false)
     @NotNull
-    private Long id;
+    private UUID id;
 
     @Column(name = "NAME", nullable = false)
     @NotNull
@@ -38,4 +45,19 @@ public class UserEntity extends AbstractEntity {
 
     @Column(name = "GOOGLE_TOKEN", nullable = true)
     private String googleToken;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ROLE_ID", nullable = false)
+    @NotNull
+    private RoleEntity role;
+
+    @Column(name = "ENABLE", nullable = false, columnDefinition = "BOOLEAN DEFAULT true")
+    @NotNull
+    private boolean enable = true;
+
+    public UserEntity(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
 }

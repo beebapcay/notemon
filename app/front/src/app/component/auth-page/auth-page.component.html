@@ -11,27 +11,29 @@
     <div class="d-flex flex-column">
       <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo-img">
       <h1 class="auth-title">{{page | titlecase}} to Notemon</h1>
-      <form class="auth-form">
-        <login-form *ngIf="page === AppRouteConstant.LOGIN"></login-form>
-        <signup-form *ngIf="page === AppRouteConstant.SIGNUP"></signup-form>
-        <a class="forgot-password" href="">Forgot Password?</a>
+      <div class="auth-form" [formGroup]="authForm">
+        <login-form *ngIf="isLoginPage"></login-form>
+        <signup-form *ngIf="isSignupPage"></signup-form>
+        <p class="msg-error">{{errorMessage}}</p>
+        <p class="msg-success">{{successMessage}}</p>
+        <a class="forgot-password" *ngIf="isLoginPage" href="">Forgot Password?</a>
         <div class="auth-action-buttons">
-          <button class="local-auth-btn" disableRipple mat-button>{{page | titlecase}}</button>
+          <button class="local-auth-btn" disableRipple mat-button (click)="onAuthSubmit()">{{page | titlecase}}</button>
           <span class="or-divider">or</span>
           <button class="google-auth-btn">
             Google
             <img [src]="AssetsSrcConstant.GOOGLE_LOGO" alt="" class="google-logo">
           </button>
         </div>
-        <p *ngIf="page === AppRouteConstant.LOGIN" class="go-navigate">
+        <p *ngIf="isLoginPage" class="go-navigate">
           New a member?
           <a [routerLink]="['/', AppRouteConstant.SIGNUP]" mat-button>Signup now</a>
         </p>
-        <p *ngIf="page === AppRouteConstant.SIGNUP" class="go-navigate">
+        <p *ngIf="isSignupPage" class="go-navigate">
           Already have an account?
           <a [routerLink]="['/', AppRouteConstant.LOGIN]" mat-button>Login now</a>
         </p>
-      </form>
+      </div>
     </div>
   </div>
 </div>

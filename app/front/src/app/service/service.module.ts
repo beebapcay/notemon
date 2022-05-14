@@ -1,11 +1,13 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from "@angular/common";
-import {PersistenceService} from './persistence.service';
+import { CommonModule } from "@angular/common";
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { AuthService } from './auth.service';
+import { PersistenceService } from './persistence.service';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   declarations: [],
-  providers: [PersistenceService],
+  providers: [PersistenceService, AuthService],
   exports: [CommonModule],
 })
 export class ServiceModule {

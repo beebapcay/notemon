@@ -32,12 +32,20 @@
     transform: translateX(26px);
   }
 
+  .theme-icon-base {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .theme-dark-icon {
     color: #f1c40f;
+    @extend .theme-icon-base;
   }
 
   .theme-light-icon {
     color: #f39c12;
+    @extend .theme-icon-base;
   }
 }
 

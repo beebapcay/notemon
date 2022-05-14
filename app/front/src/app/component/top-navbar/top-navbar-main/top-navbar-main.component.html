@@ -11,13 +11,13 @@
     </li>
   </ul>
   <theme-toggle-button class="theme-toggle-button"></theme-toggle-button>
-  <ng-container *ngIf="!isLoggedIn">
+  <ng-container *ngIf="!isLoggedIn; else loggedIn">
     <a [routerLink]="AppRouteConstant.LOGIN" class="login-btn" mat-button>Login</a>
     <a [routerLink]="AppRouteConstant.SIGNUP" class="signup-btn" disableRipple mat-button>Signup</a>
   </ng-container>
-  <ng-container *ngIf="isLoggedIn">
+  <ng-template #loggedIn>
     <button class="account-btn">
       <mat-icon>account_circle</mat-icon>
     </button>
-  </ng-container>
+  </ng-template>
 </nav>
