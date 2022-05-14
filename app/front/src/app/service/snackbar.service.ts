@@ -46,6 +46,10 @@ export class SnackbarService {
     this.open({message: message ?? 'Warning Announcement', status: SnackbarStatusEnum.warning});
   }
 
+  openSuccessAnnouncement(message: string): void {
+    this.open({message: message ?? 'Success Announcement', status: SnackbarStatusEnum.success});
+  }
+
   openSaveSuccessAnnouncement(message: string): void {
     this.open({message: message ?? 'Saved successfully', status: SnackbarStatusEnum.success});
   }

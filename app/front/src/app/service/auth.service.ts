@@ -16,13 +16,13 @@ export class AuthService {
     return this.http.post<AuthModel>(loginLocalUrl, {email, password});
   }
 
-  loginGoogle(googleToken: string): Observable<AuthModel> {
+  loginGoogle(email: string, googleToken: string): Observable<AuthModel> {
     const loginGoogleUrl = AuthService.AUTH_URL + '/login/google';
-    return this.http.post<AuthModel>(loginGoogleUrl, {googleToken});
+    return this.http.post<AuthModel>(loginGoogleUrl, {email, googleToken});
   }
 
-  signupLocal(name: string, email: string, password: string): Observable<AuthModel> {
-    const signupLocalUrl = AuthService.AUTH_URL + '/signup/local';
+  signup(name: string, email: string, password: string): Observable<AuthModel> {
+    const signupLocalUrl = AuthService.AUTH_URL + '/signup';
     return this.http.post<AuthModel>(signupLocalUrl, {name, email, password});
   }
 }

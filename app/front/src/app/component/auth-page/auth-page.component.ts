@@ -22,7 +22,9 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   readonly AppRouteConstant = AppRouteConstant;
   readonly AssetsSrcConstant = AssetsSrcConstant;
 
-  showErrors: boolean;
+  showMessage: boolean;
+  errorMessage: string | null;
+  successMessage: string | null;
   authForm: FormGroup = new FormGroup({});
   page: string = AppRouteConstant.LOGIN.toLocaleLowerCase();
 
@@ -55,16 +57,28 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   }
 
   onAuthSubmit() {
-    this.snackbarService.openRequestErrorAnnouncement('Hello World');
-    return;
-
-    this.showErrors = true;
+    this.showMessage = true;
     this.authForm.markAllAsTouched();
 
-    if (this.authForm.invalid) return;
+    if (this.authForm.invalid) {
+      this.showErrorMessage('Form is invalid. Please check your input');
+      return;
+    }
 
     const data = this.authForm.value;
-    this.authService
+
+    if (this.isLoginPage) {
+      this.onSubmitLogin(data);
+    } else if (this.isSignupPage) {
+      this.onSubmitSignup(data);
+    } else {
+      this.snackbarService.openErrorAnnouncement('Something was wrong. Unknown page');
+    }
+  }
+
+  onSubmitLogin(data: { email: string, password: string }) {
+    this.registerSubscription(
+      this.authService
         .loginLocal(data.email, data.password)
         .pipe(take(1))
         .subscribe({
@@ -72,8 +86,49 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
             this.persistenceService.write(authData);
             this.router.navigate([AppRouteConstant.DASHBOARD]).then();
           },
-          error: (error) => this.snackbarService.openRequestErrorAnnouncement(error)
-        });
+          error: (error) => {
+            this.snackbarService.openRequestErrorAnnouncement(error);
+            this.showErrorMessage(error);
+          }
+        })
+    );
+  }
+
+  onSubmitSignup(data: { name: string, email: string, password: string }) {
+    this.registerSubscription(
+      this.authService
+        .signup(data.name, data.email, data.password)
+        .pipe(take(1))
+        .subscribe({
+          next: (authData) => {
+            const signupSuccessMessage = 'You have successfully signed up';
+            this.snackbarService.openSaveSuccessAnnouncement(signupSuccessMessage);
+            this.showSuccessMessage(signupSuccessMessage);
+          },
+          error: (error) => {
+            this.snackbarService.openRequestErrorAnnouncement(error);
+            this.showErrorMessage(error);
+          }
+        })
+    );
+  }
+
+  showErrorMessage(error: any) {
+    if (this.showMessage) {
+      this.successMessage = null;
+      this.errorMessage = error?.error?.message ?? error?.message ?? error?.statusText ?? error ?? 'Request error';
+    } else {
+      this.errorMessage = null;
+    }
+  }
+
+  showSuccessMessage(message: string) {
+    if (this.showMessage) {
+      this.errorMessage = null;
+      this.successMessage = message;
+    } else {
+      this.successMessage = null;
+    }
   }
 
   get isLoginPage() {

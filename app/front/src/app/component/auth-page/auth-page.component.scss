@@ -5,6 +5,12 @@
   height: 100%;
 }
 
+.msg-base {
+  margin-top: 10px;
+  font-family: $font-family-tertiary;
+  font-size: 12px;
+}
+
 .auth-page-container {
   width: 100%;
   height: 100%;
@@ -45,7 +51,7 @@
 
   .right-side-auth-form {
     flex: 7.5;
-    padding: 0 65px 55px;
+    padding: 0 65px 85px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -67,6 +73,18 @@
     .auth-form {
       margin-top: 25px;
 
+      .msg {
+        &-error {
+          @extend .msg-base;
+          color: $color-error;
+        }
+
+        &-success {
+          @extend .msg-base;
+          color: $color-success;
+        }
+      }
+
       .forgot-password {
         display: block;
         margin-top: 7.5px;
@@ -78,7 +96,7 @@
       }
 
       .auth-action-buttons {
-        margin-top: 25px;
+        margin-top: 45px;
         display: flex;
         justify-content: space-between;
         align-items: stretch;

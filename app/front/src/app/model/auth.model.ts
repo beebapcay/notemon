@@ -5,8 +5,9 @@ export class AuthModel {
     public name: string,
     public email: string,
     public token: string,
-    public refreshToken: string,
-    public roles: RoleEnum[]
+    public roles: RoleEnum[],
+    public expiresIn: string,
+    public refreshToken: string
   ) {
   }
 }
