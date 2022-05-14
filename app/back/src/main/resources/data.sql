@@ -7,7 +7,7 @@ insert into PERMISSION(ID, CODE, DESCRIPTION, USR_LOG_I, USR_LOG_U)
 values ('69c81d37-9041-4c10-ae66-84ddbbce2b1e', 'VIEWER', 'You only can view the document', 'Phat Duong', 'Phat Duong'),
        ('0d63900e-7897-45ad-be77-eb0710ee5fb3', 'COMMENTER', 'You can comment the document', 'Phat Duong',
         'Phat Duong'),
-       ('f8f8f8f8-f8f8-f8f8-f8f8-f8f8f8f8f8f8', 'EDITOR', 'You can edit the document', 'Phat Duong', 'Phat Duong');
+       ('a1a6046d-3593-4e67-8b82-6ec30d47591a', 'EDITOR', 'You can edit the document', 'Phat Duong', 'Phat Duong');
 
 insert into USER(ID, NAME, EMAIL, PASSWORD, ROLE_ID, USR_LOG_I, USR_LOG_U)
 values ('7924d3a3-15de-4cd1-922a-9f7f802cb425', 'Phat Duong', 'beebapcay@gmail.com',

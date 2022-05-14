@@ -41,4 +41,10 @@ public class UserDocumentEntity extends BaseEntity {
     @JoinColumn(name = "PERMISSION_ID", nullable = false)
     @NotNull
     private PermissionEntity permission;
+
+    public UserDocumentEntity(UserEntity user, DocumentEntity document, PermissionEntity permission) {
+        this.user = user;
+        this.document = document;
+        this.permission = permission;
+    }
 }

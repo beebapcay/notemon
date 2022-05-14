@@ -1,9 +1,9 @@
-package com.notemon.service.impl;
+package com.notemon.service;
 
 import com.notemon.dto.UserDto;
 import com.notemon.entity.UserEntity;
 import com.notemon.exception.EntityNotFoundException;
-import com.notemon.mapper.annotation.UserMapper;
+import com.notemon.mapper.UserMapper;
 import com.notemon.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

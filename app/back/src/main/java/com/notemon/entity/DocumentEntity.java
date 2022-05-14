@@ -49,9 +49,9 @@ public class DocumentEntity extends BaseEntity {
     @Column(name = "CONTENT", nullable = true)
     private String content;
 
-    @Column(name = "IS_STARTED", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    @Column(name = "IS_STARRED", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
     @NotNull
-    private boolean isStarted = false;
+    private boolean isStarred = false;
 
     @Column(name = "IS_PINNED", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
     @NotNull

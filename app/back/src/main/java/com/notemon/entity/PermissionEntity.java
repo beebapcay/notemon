@@ -30,6 +30,7 @@ public class PermissionEntity extends BaseEntity {
 
     @Column(name = "CODE", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'VIEWER'")
     @NotNull
+    @Enumerated(EnumType.STRING)
     private PermissionEnum code = PermissionEnum.VIEWER;
 
     @Column(name = "DESCRIPTION", nullable = true)
