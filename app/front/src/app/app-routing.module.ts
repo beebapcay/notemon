@@ -7,12 +7,14 @@ import { AuthPageComponent } from './component/auth-page/auth-page.component';
 import { DashboardPageComponent } from './component/dashboard-page/dashboard-page.component';
 import { ErrorPageComponent } from './component/error-page/error-page.component';
 import { FeaturePageComponent } from './component/feature-page/feature-page.component';
+import { HomePageComponent } from './component/home-page/home-page.component';
 import { PageNotFoundErrorModel } from './model/error.model';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forRoot([
+      {path: AppRouteConstant.HOME, component: HomePageComponent},
       {path: AppRouteConstant.LOGIN, component: AuthPageComponent},
       {path: AppRouteConstant.SIGNUP, component: AuthPageComponent},
       {path: AppRouteConstant.FEATURE, component: FeaturePageComponent},

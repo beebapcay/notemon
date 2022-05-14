@@ -19,6 +19,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { FeaturePageComponent } from "./feature-page/feature-page.component";
 import { FormFieldComponent } from './form-field/form-field.component';
 import { HashtagComponent } from './hashtag/hashtag.component';
+import { HomePageComponent } from './home-page/home-page.component';
 import { NewNotemonButtonComponent } from './new-notemon-button/new-notemon-button.component';
 import { NotePageComponent } from './note-page/note-page.component';
 import { CardActionBarComponent } from './notemon-card/card-action-bar/card-action-bar.component';
@@ -70,6 +71,7 @@ import { TopNavbarMainComponent } from "./top-navbar/top-navbar-main/top-navbar-
     TopNavbarEditorComponent,
     SnackbarComponent,
     FormFieldComponent,
+    HomePageComponent,
   ],
   exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
