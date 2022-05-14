@@ -1,47 +1,76 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
-import {TranslateService} from "@ngx-translate/core";
-
-import {AppRouteConstant} from './common/app-route.constant';
-import {NotSupportedErrorModel} from './model/error.model';
+import { TranslateService } from "@ngx-translate/core";
+import { filter, take } from 'rxjs';
 
 import defaultLanguage from '../assets/i18n/en.json';
-import {NavigationEnd, Router} from '@angular/router';
-import {filter, Subscription} from 'rxjs';
-import {UrlMatcherUtil} from './utils/url-matcher.util';
+
+import { AppRouteConstant } from './common/app-route.constant';
+import { SubscriptionAwareAbstractComponent } from './component/subscription-aware.abstract.component';
+import { NotSupportedErrorModel } from './model/error.model';
+import { AuthService } from './service/auth.service';
+import { PersistenceService } from './service/persistence.service';
+import { UserService } from './service/user.service';
+import { UrlMatcherUtil } from './utils/url-matcher.util';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, OnDestroy {
-
-  public isFull: boolean = false;
+export class AppComponent extends SubscriptionAwareAbstractComponent implements OnInit {
 
   readonly AppRouteConstant = AppRouteConstant;
   readonly NotSupportedErrorModel = NotSupportedErrorModel;
 
-  private subscription: Subscription[] = [];
+  isFull: boolean = false;
+  isLoggedIn: boolean = false;
 
-  constructor(private translateService: TranslateService, private router: Router) {
+  constructor(private translateService: TranslateService,
+              private router: Router,
+              private persistenceService: PersistenceService,
+              private userService: UserService,
+              private authService: AuthService) {
+    super();
+
     this.translateService.setTranslation('en', defaultLanguage);
     translateService.setDefaultLang('en');
 
-    this.subscription.push(
+    this.registerSubscription(
       this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(event => {
           const url = (event as NavigationEnd).url;
           this.isFull = UrlMatcherUtil.match(url, AppRouteConstant.FULL_PAGE_ROUTE_PATTERN_LIST);
         })
+    )
+
+    this.registerSubscription(
+      this.authService.isLoggedIn.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn)
     );
   }
 
   ngOnInit(): void {
+    this.fetchLoggedIn();
   }
 
-  ngOnDestroy(): void {
-    this.subscription.forEach(subscription => subscription.unsubscribe());
+  fetchLoggedIn() {
+    const userId = this.persistenceService.get('id');
+    const jwtToken = this.persistenceService.get('token');
+
+    if (!userId && !jwtToken) {
+      this.authService.isLoggedIn.next(false);
+    }
+
+    this.registerSubscription(
+      this.userService.getUserById(userId)
+        .pipe(take(1))
+        .subscribe({
+            next: user => this.authService.isLoggedIn.next(true),
+            error: () => this.authService.isLoggedIn.next(false)
+          }
+        )
+    );
   }
 }

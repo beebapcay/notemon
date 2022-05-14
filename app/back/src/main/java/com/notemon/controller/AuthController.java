@@ -1,6 +1,5 @@
 package com.notemon.controller;
 
-import com.notemon.security.JwtTokenUtil;
 import com.notemon.constant.EndpointConstant;
 import com.notemon.dto.LoginRequestDto;
 import com.notemon.dto.LoginResponseDto;
@@ -12,6 +11,7 @@ import com.notemon.entity.impl.UserDetailsImpl;
 import com.notemon.enums.RoleEnum;
 import com.notemon.repository.RoleRepository;
 import com.notemon.repository.UserRepository;
+import com.notemon.security.JwtTokenUtil;
 import com.notemon.security.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -45,12 +44,12 @@ public class AuthController {
 
     private final SecurityUtil securityUtil;
 
-    @GetMapping("/demo")
+    @GetMapping("demo")
     public String getDemo() {
         return "Authentication Demo";
     }
 
-    @PostMapping("/login/local")
+    @PostMapping("login/local")
     public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto) {
         try {
             Authentication authentication = authenticationManager
@@ -71,6 +70,7 @@ public class AuthController {
 
             return ResponseEntity.ok()
                     .body(new LoginResponseDto(
+                            userDetails.getId(),
                             userDetails.getUsername(),
                             userDetails.getName(),
                             jwtToken,
@@ -83,7 +83,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/signup")
+    @PostMapping("signup")
     public ResponseEntity<?> signup(@RequestBody @Valid SignupRequestDto signupDto) {
         if (userRepository.existsByEmail(signupDto.getEmail())) {
             return ResponseEntity.badRequest()

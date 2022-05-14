@@ -84,10 +84,12 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
         .subscribe({
           next: (authData) => {
             this.persistenceService.write(authData);
+            this.authService.isLoggedIn.next(true);
             this.router.navigate([AppRouteConstant.DASHBOARD]).then();
           },
           error: (error) => {
             this.snackbarService.openRequestErrorAnnouncement(error);
+            this.authService.isLoggedIn.next(false);
             this.showErrorMessage(error);
           }
         })

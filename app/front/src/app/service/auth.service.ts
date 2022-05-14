@@ -1,12 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment'
 import { AuthModel } from '../model/auth.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   static readonly AUTH_URL = environment.backend.baseUrl + '/auth';
+
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
   }

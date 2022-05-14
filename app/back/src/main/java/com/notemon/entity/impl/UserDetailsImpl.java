@@ -21,6 +21,8 @@ public class UserDetailsImpl implements UserDetails {
 
     private UUID id;
 
+    private String email;
+
     private String name;
 
     private String username;
@@ -42,6 +44,7 @@ public class UserDetailsImpl implements UserDetails {
 
         return new UserDetailsImpl(
                 user.getId(),
+                user.getEmail(),
                 user.getName(),
                 user.getEmail(),
                 user.getPassword(),

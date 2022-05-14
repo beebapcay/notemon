@@ -10,5 +10,7 @@ export class AppRouteConstant {
   static readonly CONTACT_US = 'contact-us';
   static readonly OTHER = '**';
 
-  static readonly FULL_PAGE_ROUTE_PATTERN_LIST = [/^\/login$/, /^\/signup$/, /^\/note/]
+  static readonly FULL_PAGE_ROUTE_PATTERN_LIST = [/^\/login$/, /^\/signup$/, /^\/note/];
+
+  static readonly ANONYMOUS_PAGE_ROUTE_PATTERN_LIST = [/^\/login$/, /^\/signup$/, /^\/feature$/, /^\/quick-note/]
 }

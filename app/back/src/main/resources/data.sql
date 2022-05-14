@@ -5,7 +5,7 @@ values ('d46082e1-3cb9-410a-86f2-45437ad75c9b', 'USER', 'Phat Duong', 'Phat Duon
 
 insert into USER(ID, NAME, EMAIL, PASSWORD, ROLE_ID, USR_LOG_I, USR_LOG_U)
 values ('7924d3a3-15de-4cd1-922a-9f7f802cb425', 'Phat Duong', 'beebapcay@gmail.com',
-        '$2a$12$uatwy4.ZGwpFQxP.WuueaO4D1IjFrtiR1V175NdMjYCuCqN.CXFua', '94fad41f-f298-4fcd-b0e4-e6c8001585a4',
+        '$2a$10$aS7qA0M6yZ8xTYMZD1cTM.S404slZO6BshIb8p872Rt6DX9d2aNyi', '94fad41f-f298-4fcd-b0e4-e6c8001585a4',
         'Phat Duong', 'Phat Duong');
 
 

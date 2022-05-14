@@ -29,7 +29,7 @@ export class PersistenceService {
   public get(key: string): any {
     try {
       const value = localStorage.getItem(key);
-      return value ? JSON.parse(value) : null;
+      return value ?? null;
     } catch (e) {
       console.error('Error getting data from localStorage', e);
       return null;
