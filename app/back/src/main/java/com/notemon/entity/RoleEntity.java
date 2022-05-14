@@ -2,6 +2,7 @@ package com.notemon.entity;
 
 import com.notemon.entity.annotation.AppUUIDGenerator;
 import com.notemon.enums.RoleEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("ALL")
 public class RoleEntity extends BaseEntity {
     @Id

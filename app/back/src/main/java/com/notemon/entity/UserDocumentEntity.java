@@ -1,6 +1,7 @@
 package com.notemon.entity;
 
 import com.notemon.entity.annotation.AppUUIDGenerator;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,12 +12,13 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
-@Table(name = "NOTEMON_DOCUMENT")
+@Table(name = "USER_DOCUMENT")
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("ALL")
-public class NotemonDocumentEntity extends BaseEntity {
+public class UserDocumentEntity extends BaseEntity {
     @Id
     @Type(type = "uuid-char")
     @GeneratedValue(generator = "UUID")
@@ -25,10 +27,18 @@ public class NotemonDocumentEntity extends BaseEntity {
     @NotNull
     private UUID id;
 
-    @Column(name = "NAME", nullable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID", nullable = false)
     @NotNull
-    private String name;
+    private UserEntity user;
 
-    @Column(name = "DESCRIPTION", nullable = true)
-    private String description;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "DOCUMENT_ID", nullable = false)
+    @NotNull
+    private DocumentEntity document;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PERMISSION_ID", nullable = false)
+    @NotNull
+    private PermissionEntity permission;
 }

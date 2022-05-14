@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/api/demo/auth").authenticated()
                 .antMatchers("/api/demo/**").permitAll()
-                .antMatchers("/api/admin/**").hasRole(RoleEnum.ADMIN.getValue())
+                .antMatchers("/api/admin/**").hasRole(RoleEnum.ADMIN.toString())
                 .anyRequest().authenticated();
 
         // Set JWT token filter
