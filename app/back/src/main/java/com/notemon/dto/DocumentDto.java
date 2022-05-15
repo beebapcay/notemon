@@ -21,8 +21,8 @@ public class DocumentDto extends BaseDto {
     private Set<UUID> children;
 
     private boolean isDirectory;
-    private boolean isStarred;
-    private boolean isPinned;
+    private String content;
+    private String shareLink;
 
     private UserDto author;
     private LocalDateTime createdAt;

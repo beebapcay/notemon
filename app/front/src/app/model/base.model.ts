@@ -1,7 +1,7 @@
 export class BaseModel {
   constructor(
-    private id: string,
-    private version: number,
+    public id: string | null = null,
+    public version: number | null = null,
   ) {
   }
 }

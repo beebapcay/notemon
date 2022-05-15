@@ -42,6 +42,14 @@ public class UserDocumentEntity extends BaseEntity {
     @NotNull
     private PermissionEntity permission;
 
+    @Column(name = "IS_STARRED", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    @NotNull
+    private boolean isStarred = false;
+
+    @Column(name = "IS_PINNED", nullable = false, columnDefinition = "BOOLEAN DEFAULT false")
+    @NotNull
+    private boolean isPinned = false;
+
     public UserDocumentEntity(UserEntity user, DocumentEntity document, PermissionEntity permission) {
         this.user = user;
         this.document = document;
