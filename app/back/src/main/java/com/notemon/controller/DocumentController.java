@@ -3,6 +3,7 @@ package com.notemon.controller;
 import com.notemon.constant.EndpointConstant;
 import com.notemon.dto.DocumentDto;
 import com.notemon.dto.MessageResponseDto;
+import com.notemon.dto.UserDocumentDto;
 import com.notemon.exception.EntityWithIdNotFoundException;
 import com.notemon.exception.NotPermissionToAccessDocumentException;
 import com.notemon.exception.NotPermissionToEditDocumentException;
@@ -24,5 +25,12 @@ public class DocumentController {
             NotPermissionToAccessDocumentException,
             NotPermissionToEditDocumentException {
         return documentService.updateNameDocument(id, userId, documentDto);
+    }
+
+    @PatchMapping("{id}/users/{userId}/starred")
+    public MessageResponseDto updateStarredDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId, @RequestBody UserDocumentDto userDocumentDto)
+            throws EntityWithIdNotFoundException,
+            NotPermissionToAccessDocumentException {
+        return documentService.updateStarredDocument(id, userId, userDocumentDto);
     }
 }

@@ -2,6 +2,7 @@ package com.notemon.service;
 
 import com.notemon.dto.DocumentDto;
 import com.notemon.dto.MessageResponseDto;
+import com.notemon.dto.UserDocumentDto;
 import com.notemon.entity.DocumentEntity;
 import com.notemon.entity.PermissionEntity;
 import com.notemon.entity.UserDocumentEntity;
@@ -110,6 +111,26 @@ public class DocumentService {
         }
 
         return new MessageResponseDto("Document updated name successfully");
+    }
+
+    @Transactional
+    public MessageResponseDto updateStarredDocument(UUID documentId, UUID userId, UserDocumentDto userDocumentDto)
+            throws
+            EntityWithIdNotFoundException,
+            NotPermissionToAccessDocumentException {
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
+
+        DocumentEntity documentEntity = documentRepository.findById(documentId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        UserDocumentEntity userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(userId, documentId)
+                .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
+
+        userDocumentEntity.setStarred(userDocumentDto.isStarred());
+        documentRepository.save(documentEntity);
+
+        return new MessageResponseDto("Document updated starred successfully");
     }
 
 }
