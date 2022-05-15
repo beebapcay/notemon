@@ -33,4 +33,11 @@ public class DocumentController {
             NotPermissionToAccessDocumentException {
         return documentService.updateStarredDocument(id, userId, userDocumentDto);
     }
+
+    @DeleteMapping("{id}/users/{userId}")
+    public MessageResponseDto deleteDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId)
+            throws EntityWithIdNotFoundException,
+            NotPermissionToAccessDocumentException {
+        return documentService.deleteDocument(id, userId);
+    }
 }

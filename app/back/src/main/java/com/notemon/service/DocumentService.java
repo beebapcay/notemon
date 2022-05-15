@@ -64,9 +64,6 @@ public class DocumentService {
     @Transactional
     public Set<DocumentDto> getAllDocuments(UUID userId, UUID parentId, Boolean isDirectory)
             throws EntityWithIdNotFoundException, NotPermissionToAccessDocumentException {
-        UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
-
         Set<DocumentEntity> documentEntities;
         if (isDirectory == null) {
             documentEntities = documentRepository.findAllByParentId(parentId);
@@ -94,9 +91,6 @@ public class DocumentService {
             EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException,
             NotPermissionToEditDocumentException {
-        UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
-
         DocumentEntity documentEntity = documentRepository.findById(documentId)
                 .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
 
@@ -118,9 +112,6 @@ public class DocumentService {
             throws
             EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException {
-        UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
-
         DocumentEntity documentEntity = documentRepository.findById(documentId)
                 .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
 
@@ -131,6 +122,25 @@ public class DocumentService {
         documentRepository.save(documentEntity);
 
         return new MessageResponseDto("Document updated starred successfully");
+    }
+
+    @Transactional
+    public MessageResponseDto deleteDocument(UUID documentId, UUID userId)
+            throws EntityWithIdNotFoundException,
+            NotPermissionToAccessDocumentException {
+        DocumentEntity documentEntity = documentRepository.findById(documentId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        UserDocumentEntity userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(userId, documentId)
+                .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
+
+        userDocumentRepository.delete(userDocumentEntity);
+
+        if (!userDocumentRepository.existsByDocumentId(documentId)) {
+            documentRepository.delete(documentEntity);
+        }
+
+        return new MessageResponseDto("Document deleted successfully");
     }
 
 }

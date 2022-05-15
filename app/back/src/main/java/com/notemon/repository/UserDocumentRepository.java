@@ -11,4 +11,6 @@ import java.util.UUID;
 public interface UserDocumentRepository
         extends JpaRepository<UserDocumentEntity, UUID> {
     Optional<UserDocumentEntity> findByUserIdAndDocumentId(UUID userId, UUID documentId);
+
+    boolean existsByDocumentId(UUID documentId);
 }
