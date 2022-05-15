@@ -10,6 +10,7 @@ import com.notemon.enums.PermissionEnum;
 import com.notemon.exception.EntityWithFieldNotFoundException;
 import com.notemon.exception.EntityWithIdNotFoundException;
 import com.notemon.exception.NotPermissionToAccessDocumentException;
+import com.notemon.exception.NotPermissionToEditDocumentException;
 import com.notemon.mapper.DocumentMapper;
 import com.notemon.mapper.UserDocumentMapper;
 import com.notemon.repository.DocumentRepository;
@@ -84,6 +85,31 @@ public class DocumentService {
                     documentDto.setRelationship(userDocumentMapper.entityToDto(relationshipEntity));
                 })
                 .collect(Collectors.toSet());
+    }
+
+    @Transactional
+    public MessageResponseDto updateNameDocument(UUID userId, UUID documentId, DocumentDto documentDto)
+            throws
+            EntityWithIdNotFoundException,
+            NotPermissionToAccessDocumentException,
+            NotPermissionToEditDocumentException {
+        UserEntity userEntity = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
+
+        DocumentEntity documentEntity = documentRepository.findById(documentId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        UserDocumentEntity userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(userId, documentId)
+                .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
+
+        if (userDocumentEntity.getPermission().getCode().equals(PermissionEnum.EDITOR)) {
+            documentEntity.setName(documentDto.getName());
+            documentRepository.save(documentEntity);
+        } else {
+            throw new NotPermissionToEditDocumentException(userId, documentId);
+        }
+
+        return new MessageResponseDto("Document updated name successfully");
     }
 
 }
