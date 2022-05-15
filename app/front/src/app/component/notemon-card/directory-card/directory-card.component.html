@@ -7,7 +7,8 @@
   <div class="content-container">
     <div class="main-content">
       <img [src]="NotemonCardTypeEnum.DIRECTORY | notemonCardImg" alt="" class="illus-img">
-      <input *ngIf="isCreating || isUpdating; else notUpdating" type="text" class="name" [(ngModel)]="name" #nameInput>
+      <input [maxLength]="30" *ngIf="isCreating || isUpdating; else notUpdating" type="text" class="name"
+             [(ngModel)]="name" #nameInput>
       <ng-template #notUpdating>
         <p class="name">{{item?.name ?? DEFAULT_NAME}}</p>
       </ng-template>

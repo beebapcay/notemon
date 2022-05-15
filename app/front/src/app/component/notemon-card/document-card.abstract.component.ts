@@ -14,6 +14,7 @@ import { take } from 'rxjs';
 import { CardActionMenuEnum } from '../../enum/card-action-nemu.enum';
 import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
 import { DocumentModel } from '../../model/document.model';
+import { UserDocumentModel } from '../../model/user-document.model';
 import { DocumentService } from '../../service/document.service';
 import { SnackbarService } from '../../service/snackbar.service';
 import { UserService } from '../../service/user.service';
@@ -106,6 +107,8 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
   onDocumentNameUpdated() {
     if (!this.preProcessAction()) return;
 
+    if (this.item?.name === this.name) return;
+
     this.name = this.name ?? this.DEFAULT_NAME;
     this.item = {...this.item, name: this.name};
 
@@ -130,6 +133,26 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
           error: (error) => this.handleErrorResponse(error)
         });
     }
+  }
+
+  onDocumentStarredUpdate(isStarred: boolean) {
+    if (!this.preProcessAction()) return;
+
+    console.log('onDocumentStarredUpdate', isStarred);
+
+    if (this.item?.relationship.isStarred === isStarred) return;
+
+    const relationship: UserDocumentModel = {...this.item?.relationship, isStarred};
+
+    this.documentService.updateStarredDocument(this.userService.user.getValue()?.id, this.item?.id, relationship)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackbarService.openSaveSuccessAnnouncement('Document starred updated successfully');
+          this.documentService.change.next();
+        },
+        error: (error) => this.handleErrorResponse(error)
+      });
   }
 
   handleErrorResponse(error: any) {
@@ -158,11 +181,11 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
         break;
       }
       case CardActionMenuEnum.ADD_TO_STARRED: {
-        console.log('add to starred');
+        this.onDocumentStarredUpdate(true);
         break;
       }
       case CardActionMenuEnum.REMOVE_FROM_STARRED: {
-        console.log('remove from starred');
+        this.onDocumentStarredUpdate(false);
         break;
       }
       case CardActionMenuEnum.RENAME: {

@@ -17,7 +17,7 @@
     </button>
     <button mat-menu-item
             (click)="item?.relationship?.isStarred
-            ? menuActionEmitted.emit(CardActionMenuEnum.REMOVE)
+            ? menuActionEmitted.emit(CardActionMenuEnum.REMOVE_FROM_STARRED)
             : menuActionEmitted.emit(CardActionMenuEnum.ADD_TO_STARRED)"
     >
       <mat-icon>star</mat-icon>
