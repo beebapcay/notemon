@@ -2,7 +2,40 @@
   <button class="star-btn" disableRipple mat-icon-button>
     <mat-icon>star</mat-icon>
   </button>
-  <button class="more-btn" mat-icon-button>
+  <button class="more-btn" mat-icon-button [matMenuTriggerFor]="optionMenu">
     <mat-icon>more_vert</mat-icon>
   </button>
+
+  <mat-menu class="card-option-menu" #optionMenu='matMenu' yPosition="below" xPosition="after">
+    <button mat-menu-item>
+      <mat-icon>person_add</mat-icon>
+      <span>Share</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>link</mat-icon>
+      <span>Get link</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>star</mat-icon>
+      <span>Add to Starred</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>edit</mat-icon>
+      <span>Rename</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>
+      <mat-icon>info</mat-icon>
+      <span>View detail</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>cloud_download</mat-icon>
+      <span>Download</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      <span>Remove</span>
+    </button>
+  </mat-menu>
 </div>

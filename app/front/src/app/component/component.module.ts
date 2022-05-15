@@ -27,6 +27,7 @@ import { DirectoryCardComponent } from './notemon-card/directory-card/directory-
 import { NoteCardComponent } from './notemon-card/note-card/note-card.component';
 import { NotemonCardEmptyComponent } from './notemon-card/notemon-card-empty/notemon-card-empty.component';
 import { NotemonCardVariantComponent } from './notemon-card/notemon-card-variant/notemon-card-variant.component';
+import { OptionMenuCardComponent } from './notemon-card/option-menu-card/option-menu-card.component';
 import { NotemonEditorComponent } from './notemon-editor/notemon-editor.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { ThemeToggleButtonComponent } from './theme-toggle-button/theme-toggle-button.component';
@@ -72,6 +73,7 @@ import { TopNavbarMainComponent } from "./top-navbar/top-navbar-main/top-navbar-
     SnackbarComponent,
     FormFieldComponent,
     HomePageComponent,
+    OptionMenuCardComponent,
   ],
   exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })
