@@ -49,7 +49,7 @@
         <app-directory-card-main
           *ngFor="let directory of directories; let i = index"
           [item]="directory"
-          [isUpdating]="directory?.id === null"
+          [isCreating]="directory?.id === null"
         ></app-directory-card-main>
       </ng-template>
     </div>
@@ -67,7 +67,7 @@
         <app-note-card-main
           *ngFor="let note of notes; let i = index"
           [item]="note"
-          [isUpdating]="note?.id === null"
+          [isCreating]="note?.id === null"
         ></app-note-card-main>
       </ng-template>
     </div>

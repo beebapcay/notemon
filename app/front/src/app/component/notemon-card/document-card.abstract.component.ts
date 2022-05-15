@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -20,14 +21,18 @@ import { UserService } from '../../service/user.service';
 @Component({
   template: ''
 })
-export abstract class DocumentCardAbstractComponent<T extends DocumentModel> implements OnInit, AfterViewInit, OnChanges {
-  @Input() item: T = null;
-  @Input() isUpdating: boolean = false;
-  readonly DEFAULT_NAME = 'New Directory';
-  name: string = this.DEFAULT_NAME;
-  ignoreFirstClickOutside: boolean = true;
-  @ViewChild('nameInput') nameInput: ElementRef;
+export abstract class DocumentCardAbstractComponent<T extends DocumentModel> implements OnInit, AfterViewInit, OnChanges, AfterViewChecked {
   readonly NotemonCardTypeEnum = NotemonTypeEnum;
+  readonly DEFAULT_NAME = 'New Directory';
+
+  @Input() item: T = null;
+  @Input() isCreating: boolean = false;
+
+  name: string = this.DEFAULT_NAME;
+  isUpdating: boolean = false;
+  ignoreFirstClickOutside: boolean = true;
+
+  @ViewChild('nameInput') nameInput: ElementRef;
 
   protected constructor(
     protected userService: UserService,
@@ -45,13 +50,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
   }
 
   ngAfterViewInit(): void {
-    if (this.isUpdating) {
-      this.nameInputElement.focus();
-    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes['isUpdating']?.currentValue === true && changes['isUpdating']?.previousValue === false) {
+    if (changes['isCreating']?.currentValue === true && changes['isCreating']?.previousValue === false) {
       this.name = this.item?.name ?? this.DEFAULT_NAME;
       this.nameInputElement.focus();
     }
@@ -61,6 +63,19 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     }
   }
 
+  ngAfterViewChecked(): void {
+    if ((this.isCreating || this.isUpdating) && this.nameInputElement) {
+      this.nameInputElement.focus();
+    }
+  }
+
+  commitNameUpdate() {
+    this.isCreating = false;
+    this.isUpdating = false;
+    this.nameInputElement.blur();
+    this.onDocumentNameUpdated();
+  }
+
   @HostListener('document:click', ['$event'])
   onClickedOutsideNameInput(event: MouseEvent) {
     if (this.ignoreFirstClickOutside) {
@@ -68,29 +83,23 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
       return;
     }
 
-    if (this.isUpdating && !this.nameInputElement.contains(event.target as Node)) {
+    if ((this.isCreating || this.isUpdating) && !this.nameInputElement.contains(event.target as Node)) {
       console.log('clicked outside');
-      this.isUpdating = false;
-      this.nameInputElement.blur();
-      this.onDocumentNameUpdated();
+      this.commitNameUpdate();
     }
   }
 
   @HostListener('document:keydown.enter', ['$event'])
   onEnterPressedNameInput(event: KeyboardEvent) {
-    if (this.isUpdating && event.target === this.nameInputElement) {
-      this.isUpdating = false;
-      this.nameInputElement.blur();
-      this.onDocumentNameUpdated();
+    if ((this.isCreating || this.isUpdating) && event.target === this.nameInputElement) {
+      this.commitNameUpdate();
     }
   }
 
   @HostListener('document:keydown.escape', ['$event'])
   onEscapePressedNameInput(event: KeyboardEvent) {
-    if (this.isUpdating && event.target === this.nameInputElement) {
-      this.isUpdating = false;
-      this.nameInputElement.blur();
-      this.onDocumentNameUpdated();
+    if ((this.isCreating || this.isUpdating) && event.target === this.nameInputElement) {
+      this.commitNameUpdate();
     }
   }
 
@@ -99,9 +108,9 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
 
     if (this.item?.id === null) {
       this.name = this.name ?? this.DEFAULT_NAME;
-      const document: DocumentModel = {...this.item, name: this.name};
+      this.item = {...this.item, name: this.name};
 
-      this.userService.createNewDocument(document?.author?.id, document)
+      this.userService.createNewDocument(this.item?.author?.id, this.item)
         .pipe(take(1))
         .subscribe({
           next: () => {
@@ -110,6 +119,8 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
           },
           error: (error) => this.snackbarService.openRequestErrorAnnouncement(error)
         });
+    } else {
+      // rename
     }
   }
 
@@ -142,7 +153,9 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
         break;
       }
       case CardActionMenuEnum.RENAME: {
+        console.log('rename');
         this.isUpdating = true;
+        this.ignoreFirstClickOutside = true;
         break;
       }
       case CardActionMenuEnum.VIEW_DETAIL: {

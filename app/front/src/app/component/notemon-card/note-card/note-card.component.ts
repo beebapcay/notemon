@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { SizeEnum } from '../../../enum/size.enum';
 import { NoteModel } from '../../../model/note.model';
 import { DocumentService } from '../../../service/document.service';
@@ -11,7 +20,8 @@ import { DocumentCardAbstractComponent } from '../document-card.abstract.compone
   templateUrl: './note-card.component.html',
   styleUrls: ['./note-card.component.scss']
 })
-export class NoteCardComponent extends DocumentCardAbstractComponent<NoteModel> implements OnInit, AfterViewInit, OnChanges {
+export class NoteCardComponent extends DocumentCardAbstractComponent<NoteModel> implements OnInit, AfterViewInit, OnChanges, AfterViewChecked {
+  @ViewChild('nameInput') override nameInput: ElementRef;
 
   readonly SizeEnum = SizeEnum;
 
@@ -33,5 +43,13 @@ export class NoteCardComponent extends DocumentCardAbstractComponent<NoteModel> 
 
   override ngOnChanges(changes: SimpleChanges) {
     super.ngOnChanges(changes);
+  }
+
+  override onMenuItemClicked(actionOption: any) {
+    super.onMenuItemClicked(actionOption);
+  }
+
+  override ngAfterViewChecked() {
+    super.ngAfterViewChecked();
   }
 }

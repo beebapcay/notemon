@@ -1,4 +1,13 @@
-import { AfterViewInit, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import { DirectoryModel } from '../../../model/directory.model';
 import { DocumentService } from '../../../service/document.service';
 import { SnackbarService } from '../../../service/snackbar.service';
@@ -10,7 +19,9 @@ import { DocumentCardAbstractComponent } from '../document-card.abstract.compone
   templateUrl: './directory-card.component.html',
   styleUrls: ['./directory-card.component.scss']
 })
-export class DirectoryCardComponent extends DocumentCardAbstractComponent<DirectoryModel> implements OnInit, OnChanges, AfterViewInit {
+export class DirectoryCardComponent extends DocumentCardAbstractComponent<DirectoryModel> implements OnInit, OnChanges, AfterViewInit, AfterViewChecked {
+  @ViewChild('nameInput') override nameInput: ElementRef;
+
   constructor(
     userService: UserService,
     snackbarService: SnackbarService,
@@ -28,6 +39,14 @@ export class DirectoryCardComponent extends DocumentCardAbstractComponent<Direct
 
   override ngAfterViewInit() {
     super.ngAfterViewInit();
+  }
+
+  override onMenuItemClicked(actionOption: any) {
+    super.onMenuItemClicked(actionOption);
+  }
+
+  override ngAfterViewChecked() {
+    super.ngAfterViewChecked();
   }
 }
 
