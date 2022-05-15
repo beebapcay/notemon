@@ -88,7 +88,7 @@ public class DocumentService {
     }
 
     @Transactional
-    public MessageResponseDto updateNameDocument(UUID userId, UUID documentId, DocumentDto documentDto)
+    public MessageResponseDto updateNameDocument(UUID documentId, UUID userId, DocumentDto documentDto)
             throws
             EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException,

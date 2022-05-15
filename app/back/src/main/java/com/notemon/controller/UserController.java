@@ -7,7 +7,6 @@ import com.notemon.dto.UserDto;
 import com.notemon.exception.EntityWithFieldNotFoundException;
 import com.notemon.exception.EntityWithIdNotFoundException;
 import com.notemon.exception.NotPermissionToAccessDocumentException;
-import com.notemon.exception.NotPermissionToEditDocumentException;
 import com.notemon.service.DocumentService;
 import com.notemon.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -41,13 +40,5 @@ public class UserController {
                                              @RequestParam(value = "isDirectory", required = false) Boolean isDirectory)
             throws EntityWithIdNotFoundException, NotPermissionToAccessDocumentException {
         return documentService.getAllDocuments(id, parentId, isDirectory);
-    }
-
-    @PatchMapping("{id}/document/{documentId}")
-    public MessageResponseDto updateNameDocument(@PathVariable("id") UUID id, @PathVariable("documentId") UUID documentId, @RequestBody DocumentDto documentDto)
-            throws EntityWithIdNotFoundException,
-            NotPermissionToAccessDocumentException,
-            NotPermissionToEditDocumentException {
-        return documentService.updateNameDocument(id, documentId, documentDto);
     }
 }

@@ -106,10 +106,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
   onDocumentNameUpdated() {
     if (!this.preProcessAction()) return;
 
-    if (this.item?.id === null) {
-      this.name = this.name ?? this.DEFAULT_NAME;
-      this.item = {...this.item, name: this.name};
+    this.name = this.name ?? this.DEFAULT_NAME;
+    this.item = {...this.item, name: this.name};
 
+    if (this.item?.id === null) {
       this.userService.createNewDocument(this.item?.author?.id, this.item)
         .pipe(take(1))
         .subscribe({
@@ -117,16 +117,29 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
             this.snackbarService.openSaveSuccessAnnouncement('Document created successfully');
             this.documentService.change.next();
           },
-          error: (error) => this.snackbarService.openRequestErrorAnnouncement(error)
+          error: (error) => this.handleErrorResponse(error)
         });
     } else {
-      // rename
+      this.documentService.updateNameDocument(this.userService.user.getValue()?.id, this.item?.id, this.item)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.snackbarService.openSaveSuccessAnnouncement('Document updated successfully');
+            this.documentService.change.next();
+          },
+          error: (error) => this.handleErrorResponse(error)
+        });
     }
   }
 
+  handleErrorResponse(error: any) {
+    this.snackbarService.openRequestErrorAnnouncement(error);
+    this.documentService.change.next();
+  }
+
   preProcessAction(): boolean {
-    if (this.item?.author?.id === null) {
-      this.snackbarService.openErrorAnnouncement('You are not authorized to perform this action');
+    if (this.item?.author?.id === null || this.userService.user?.getValue().id === null) {
+      this.snackbarService.openErrorAnnouncement('Something was wrong or You are not authorized to perform this action');
       return false;
     }
     return true;

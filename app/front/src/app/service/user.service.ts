@@ -10,7 +10,7 @@ import { UserModel } from '../model/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  static readonly AUTH_URL = environment.backend.baseUrl + '/users/';
+  static readonly USER_URL = environment.backend.baseUrl + '/users/';
 
   user: BehaviorSubject<UserModel> = new BehaviorSubject<UserModel>(null);
 
@@ -18,17 +18,17 @@ export class UserService {
   }
 
   getUserById(id: string): Observable<UserModel> {
-    const getUserByIdUrl = UserService.AUTH_URL + id;
+    const getUserByIdUrl = UserService.USER_URL + id;
     return this.http.get<UserModel>(getUserByIdUrl);
   }
 
   createNewDocument(userId: string, document: DocumentModel): Observable<MessageResponseModel> {
-    const createNewDocumentUrl = UserService.AUTH_URL + userId + '/document';
+    const createNewDocumentUrl = UserService.USER_URL + userId + '/document';
     return this.http.post<MessageResponseModel>(createNewDocumentUrl, {...document});
   }
 
   getAllDocuments(userId: string, parentId: string, isDirectory: boolean | null): Observable<DocumentModel[]> {
-    const getAllDocumentsUrl = UserService.AUTH_URL + userId + '/documents';
+    const getAllDocumentsUrl = UserService.USER_URL + userId + '/documents';
     const queryParams = {
       parentId: parentId ?? '',
       isDirectory: isDirectory ?? ''
