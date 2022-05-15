@@ -2,17 +2,19 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
   HostListener,
   Input,
   OnChanges,
   OnInit,
-  Output,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
+import { take } from 'rxjs';
 import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
 import { DocumentModel } from '../../model/document.model';
+import { DocumentService } from '../../service/document.service';
+import { SnackbarService } from '../../service/snackbar.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
   template: ''
@@ -21,7 +23,12 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
   @Input() item: T = null;
   @Input() isUpdating: boolean = false;
 
-  @Output() nameChangedEmitted = new EventEmitter<string>();
+  protected constructor(
+    protected userService: UserService,
+    protected snackbarService: SnackbarService,
+    protected documentService: DocumentService
+  ) {
+  }
 
   readonly DEFAULT_NAME = 'New Directory';
 
@@ -68,7 +75,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
       console.log('clicked outside');
       this.isUpdating = false;
       this.nameInputElement.blur();
-      this.nameChangedEmitted.emit(this.name ?? this.DEFAULT_NAME);
+      this.onDocumentNameUpdated();
     }
   }
 
@@ -77,7 +84,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     if (this.isUpdating && event.target === this.nameInputElement) {
       this.isUpdating = false;
       this.nameInputElement.blur();
-      this.nameChangedEmitted.emit(this.name ?? this.DEFAULT_NAME);
+      this.onDocumentNameUpdated();
     }
   }
 
@@ -86,9 +93,34 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     if (this.isUpdating && event.target === this.nameInputElement) {
       this.isUpdating = false;
       this.nameInputElement.blur();
-      this.nameChangedEmitted.emit(this.item?.name ?? this.DEFAULT_NAME);
+      this.onDocumentNameUpdated();
     }
   }
 
+  onDocumentNameUpdated() {
+    if (!this.preProcessAction()) return;
 
+    if (this.item?.id === null) {
+      this.name = this.name ?? this.DEFAULT_NAME;
+      const document: DocumentModel = {...this.item, name: this.name};
+
+      this.userService.createNewDocument(document?.author?.id, document)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.snackbarService.openSaveSuccessAnnouncement('Document created successfully');
+            this.documentService.change.next();
+          },
+          error: (error) => this.snackbarService.openRequestErrorAnnouncement(error)
+        });
+    }
+  }
+
+  preProcessAction(): boolean {
+    if (this.item?.author?.id === null) {
+      this.snackbarService.openErrorAnnouncement('You are not authorized to perform this action');
+      return false;
+    }
+    return true;
+  }
 }

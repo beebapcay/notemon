@@ -27,9 +27,6 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
   directories: DirectoryModel[] = [];
   notes: NoteModel[] = [];
 
-  isUpdateDocument: boolean = false;
-  isCreatingDocument: boolean = false;
-
   readonly NotemonCardTypeEnum = NotemonTypeEnum;
   readonly NotemonTypeEnum = NotemonTypeEnum;
   readonly SizeEnum = SizeEnum;
@@ -70,9 +67,9 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
           next: (documents) => {
             if (documents === null || documents.length === 0) return;
 
-            documents = documents.sort(
-              (a, b) => new Date(a?.lastModifiedAt).getTime() - new Date(b?.lastModifiedAt).getTime()
-            );
+            documents = documents
+              .sort((a, b) => (new Date(a?.lastModifiedAt)).getTime() - (new Date(b?.lastModifiedAt)).getTime())
+              .reverse();
 
             this.starred = documents
               .filter(document => document?.relationship?.isStarred);
@@ -97,7 +94,6 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
       return;
     }
 
-    this.isCreatingDocument = true;
     let document: DocumentModel = null;
     if (type === NotemonTypeEnum.DIRECTORY) {
       document = DirectoryModel.create();
@@ -112,22 +108,4 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
 
     document.author = this.userService.user.getValue();
   }
-
-  onDocumentNameUpdated(name: string, document: DocumentModel) {
-    if (this.isCreatingDocument) {
-      this.isCreatingDocument = false;
-      document.name = name;
-      this.userService.createNewDocument(this.user.id, document)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.snackbarService.openSaveSuccessAnnouncement('Document created successfully');
-            this.documentService.change.next();
-          },
-          error: (error) => this.snackbarService.openErrorAnnouncement(error)
-        });
-    }
-  }
-
-
 }
