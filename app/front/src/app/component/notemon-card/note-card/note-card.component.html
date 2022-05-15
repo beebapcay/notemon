@@ -7,8 +7,11 @@
         <app-hashtag [size]="SizeEnum.SMALL" class="hashtag-item" hashtag="hashtag"></app-hashtag>
       </ng-container>
     </div>
-    <h3 class="name">Notemon Document</h3>
-    <p class="author">Author: beebapcay</p>
-    <p class="last-updated">Last updated: 17/04/2021</p>
+    <input *ngIf="isUpdating; else notUpdating" type="text" class="name" [(ngModel)]="name" #nameInput>
+    <ng-template #notUpdating>
+      <p class="name">{{item?.name ?? DEFAULT_NAME}}</p>
+    </ng-template>
+    <p class="author">Author: {{item?.author?.name ?? 'Unknown'}}</p>
+    <p class="last-updated">Last updated: {{item?.lastModifiedAt | date: 'dd MMM, yyyy'}}</p>
   </div>
 </div>

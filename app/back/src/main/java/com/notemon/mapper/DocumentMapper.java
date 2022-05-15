@@ -25,6 +25,8 @@ public interface DocumentMapper {
 
     @Mapping(source = "parent", target = "parent", qualifiedByName = ENTITY_TO_UUID_MAPPING)
     @Mapping(source = "children", target = "children", qualifiedByName = SET_ENTITY_TO_SET_UUID_MAPPING)
+    @Mapping(source = "dateLogInserted", target = "createdAt")
+    @Mapping(source = "dateLogUpdated", target = "lastModifiedAt")
     @Mapping(target = "relationship", ignore = true)
     DocumentDto entityToDto(DocumentEntity document);
 

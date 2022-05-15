@@ -47,8 +47,15 @@
       font-family: $font-family-mono;
       font-weight: 700;
       font-size: 16px;
+      border-radius: 5px;
+      border: 0;
       margin-bottom: 7.5px;
       color: $color-on-background-variant-dark;
+
+      &:focus {
+        outline: 1px solid $color-border-gray-focus;
+        background-color: rgba(97, 197, 174, 0.05);
+      }
     }
 
     .author {

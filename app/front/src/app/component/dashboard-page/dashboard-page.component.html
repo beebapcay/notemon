@@ -48,6 +48,9 @@
       <ng-template #hasDirectories>
         <app-directory-card-main
           *ngFor="let directory of directories; let i = index"
+          [item]="directory"
+          [isUpdating]="directory?.id === null && isCreatingDocument"
+          (nameChangedEmitted)="onDocumentNameUpdated($event, directory)"
         ></app-directory-card-main>
       </ng-template>
     </div>
@@ -63,7 +66,10 @@
       </app-notemon-card-empty>
       <ng-template #hasNotes>
         <app-note-card-main
-          *ngFor="let directory of notes; let i = index"
+          *ngFor="let note of notes; let i = index"
+          [item]="note"
+          [isUpdating]="note?.id === null && isCreatingDocument"
+          (nameChangedEmitted)="onDocumentNameUpdated($event, note)"
         ></app-note-card-main>
       </ng-template>
     </div>

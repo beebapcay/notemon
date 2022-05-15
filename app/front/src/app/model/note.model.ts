@@ -9,10 +9,10 @@ export class NoteModel extends DocumentModel {
     description: string | null,
     isDirectory: boolean | null,
     parent: DocumentModel | string | null,
-    author: UserModel | string | null,
+    author: UserModel | null,
     permission: UserDocumentModel | null,
     public content: string | null = null,
-    partner: UserModel[] | string[] | null,
+    partner: UserModel[] | null,
     createdAt: Date | null,
     lastModifiedAt: Date | null,
     version: number | 0

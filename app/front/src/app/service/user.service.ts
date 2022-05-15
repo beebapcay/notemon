@@ -24,7 +24,6 @@ export class UserService {
 
   createNewDocument(userId: string, document: DocumentModel): Observable<MessageResponseModel> {
     const createNewDocumentUrl = UserService.AUTH_URL + userId + '/document';
-    console.log("commit new document: " + JSON.stringify(document));
     return this.http.post<MessageResponseModel>(createNewDocumentUrl, {...document});
   }
 

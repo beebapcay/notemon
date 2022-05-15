@@ -27,6 +27,9 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
   directories: DirectoryModel[] = [];
   notes: NoteModel[] = [];
 
+  isUpdateDocument: boolean = false;
+  isCreatingDocument: boolean = false;
+
   readonly NotemonCardTypeEnum = NotemonTypeEnum;
   readonly NotemonTypeEnum = NotemonTypeEnum;
   readonly SizeEnum = SizeEnum;
@@ -65,11 +68,22 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
         .pipe(take(1))
         .subscribe({
           next: (documents) => {
-            console.log(documents);
+            if (documents === null || documents.length === 0) return;
 
-            this.starred = documents.filter(document => document?.relationship?.isStarred);
-            this.directories = documents.filter(document => document?.isDirectory).map(document => document as DirectoryModel);
-            this.notes = documents.filter(document => !document?.isDirectory).map(document => document as NoteModel);
+            documents = documents.sort(
+              (a, b) => new Date(a?.lastModifiedAt).getTime() - new Date(b?.lastModifiedAt).getTime()
+            );
+
+            this.starred = documents
+              .filter(document => document?.relationship?.isStarred);
+
+            this.directories = documents
+              .filter(document => document?.isDirectory)
+              .map(document => document as DirectoryModel);
+
+            this.notes = documents
+              .filter(document => !document?.isDirectory)
+              .map(document => document as NoteModel);
           },
           error: error => this.snackbarService.openRequestErrorAnnouncement(error)
         })
@@ -83,27 +97,37 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
       return;
     }
 
+    this.isCreatingDocument = true;
     let document: DocumentModel = null;
     if (type === NotemonTypeEnum.DIRECTORY) {
       document = DirectoryModel.create();
+      this.directories = [document as DirectoryModel, ...this.directories];
     } else if (type === NotemonTypeEnum.NOTE) {
       document = NoteModel.create();
+      this.notes = [document as NoteModel, ...this.notes];
     } else {
       this.snackbarService.openErrorAnnouncement('Something was wrong. Unknown document type');
       return;
     }
 
-    document.author = new UserModel();
-    document.author.id = this.userService.user.getValue().id;
-
-    this.userService.createNewDocument(this.user.id, document)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.snackbarService.openSaveSuccessAnnouncement('Document created successfully');
-          this.documentService.change.next();
-        },
-        error: (error) => this.snackbarService.openErrorAnnouncement(error)
-      });
+    document.author = this.userService.user.getValue();
   }
+
+  onDocumentNameUpdated(name: string, document: DocumentModel) {
+    if (this.isCreatingDocument) {
+      this.isCreatingDocument = false;
+      document.name = name;
+      this.userService.createNewDocument(this.user.id, document)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.snackbarService.openSaveSuccessAnnouncement('Document created successfully');
+            this.documentService.change.next();
+          },
+          error: (error) => this.snackbarService.openErrorAnnouncement(error)
+        });
+    }
+  }
+
+
 }
