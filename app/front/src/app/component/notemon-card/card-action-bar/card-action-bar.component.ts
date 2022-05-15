@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CardActionMenuEnum } from '../../../enum/card-action-nemu.enum';
+import { NotemonTypeEnum } from '../../../enum/notemon-type.enum';
+import { DocumentModel } from '../../../model/document.model';
 
 @Component({
   selector: 'card-action-bar',
@@ -7,7 +9,12 @@ import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
   styleUrls: ['./card-action-bar.component.scss']
 })
 export class CardActionBarComponent implements OnInit {
+  @Input() item: DocumentModel = null;
   @Input() type: NotemonTypeEnum = NotemonTypeEnum.DEFAULT;
+
+  @Output() menuActionEmitted = new EventEmitter<CardActionMenuEnum>(null);
+
+  readonly CardActionMenuEnum = CardActionMenuEnum;
 
   constructor() {
   }

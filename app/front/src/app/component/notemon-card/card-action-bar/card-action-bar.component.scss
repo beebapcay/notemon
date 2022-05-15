@@ -28,6 +28,7 @@
   }
 
   .more-btn {
+    margin-left: auto;
     @extend .action-btn-style;
     background-color: $color-bg-btn-gray;
     color: $color-on-background-gray;
