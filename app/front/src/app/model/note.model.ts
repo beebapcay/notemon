@@ -1,5 +1,5 @@
 import { DocumentModel } from './document.model';
-import { PermissionModel } from './permission.model';
+import { UserDocumentModel } from './user-document.model';
 import { UserModel } from './user.model';
 
 export class NoteModel extends DocumentModel {
@@ -10,7 +10,7 @@ export class NoteModel extends DocumentModel {
     isDirectory: boolean | null,
     parent: DocumentModel | string | null,
     author: UserModel | string | null,
-    permission: PermissionModel | null,
+    permission: UserDocumentModel | null,
     public content: string | null = null,
     partner: UserModel[] | string[] | null,
     createdAt: Date | null,

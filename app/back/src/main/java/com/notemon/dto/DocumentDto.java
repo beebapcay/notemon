@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,7 +18,7 @@ public class DocumentDto extends BaseDto {
     private String description;
 
     private UUID parent;
-    private Set<UUID> children;
+    private List<UUID> children;
 
     private boolean isDirectory;
     private String content;

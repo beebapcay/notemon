@@ -12,8 +12,10 @@
   </section>
 
   <div class="action-buttons">
-    <app-new-notemon-button [type]="NotemonCardTypeEnum.DIRECTORY"></app-new-notemon-button>
-    <app-new-notemon-button [type]="NotemonCardTypeEnum.DOCUMENT"></app-new-notemon-button>
+    <app-new-notemon-button [type]="NotemonCardTypeEnum.DIRECTORY"
+                            (click)="onNewDocumentClicked(NotemonTypeEnum.DIRECTORY)"></app-new-notemon-button>
+    <app-new-notemon-button [type]="NotemonCardTypeEnum.DOCUMENT"
+                            (click)="onNewDocumentClicked(NotemonTypeEnum.NOTE)"></app-new-notemon-button>
   </div>
 
   <p class="summary">100 Directories - 20 Document</p>

@@ -1,5 +1,5 @@
 import { DocumentModel } from './document.model';
-import { PermissionModel } from './permission.model';
+import { UserDocumentModel } from './user-document.model';
 import { UserModel } from './user.model';
 
 export class DirectoryModel extends DocumentModel {
@@ -11,7 +11,7 @@ export class DirectoryModel extends DocumentModel {
     parent: DocumentModel | string | null = null,
     public children: DocumentModel[] | string[] | null = null,
     author: UserModel | string | null = null,
-    permission: PermissionModel | null = null,
+    permission: UserDocumentModel | null = null,
     partner: UserModel[] | string[] | null = null,
     createdAt: Date | null = null,
     lastModifiedAt: Date | null = null,

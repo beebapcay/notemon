@@ -26,12 +26,14 @@
     ],
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "strictNullChecks": false,
     "allowJs": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
+    "strictNullChecks": false,
     "strictTemplates": true
   }
 }

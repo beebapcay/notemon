@@ -2,17 +2,17 @@ package com.notemon.mapper.decorator;
 
 import com.notemon.dto.DocumentDto;
 import com.notemon.entity.DocumentEntity;
+import com.notemon.entity.UserEntity;
 import com.notemon.mapper.DocumentMapper;
 import com.notemon.repository.DocumentRepository;
-import org.apache.commons.lang3.StringUtils;
+import com.notemon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public abstract class DocumentMapperDecorator implements DocumentMapper {
 
@@ -22,6 +22,9 @@ public abstract class DocumentMapperDecorator implements DocumentMapper {
 
     @Autowired
     private DocumentRepository documentRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public DocumentEntity dtoToEntity(DocumentDto document) {
@@ -37,12 +40,13 @@ public abstract class DocumentMapperDecorator implements DocumentMapper {
     }
 
     private void mapRelationsFromDocumentDto(DocumentEntity entity, DocumentDto dto) {
-        Set<UUID> documentDtoIds = Stream.of(dto.getParent(), dto.getChildren())
-                .filter(Objects::nonNull)
-                .map(Objects::toString)
-                .filter(StringUtils::isNotEmpty)
-                .map(UUID::fromString)
-                .collect(Collectors.toSet());
+        Set<UUID> documentDtoIds = new HashSet<>();
+        if (dto.getParent() != null) {
+            documentDtoIds.add(dto.getParent());
+        }
+        if (dto.getChildren() != null) {
+            documentDtoIds.addAll(dto.getChildren());
+        }
 
         Set<DocumentEntity> documentEntities = documentRepository.findAllByIdIsIn(documentDtoIds);
 
@@ -58,6 +62,11 @@ public abstract class DocumentMapperDecorator implements DocumentMapper {
                 .filter(documentEntity -> dto.getChildren().contains(documentEntity.getId()))
                 .collect(Collectors.toSet())
         );
+
+        if (dto.getAuthor() != null) {
+            UserEntity authorEntity = userRepository.findById(dto.getAuthor().getId()).orElse(null);
+            entity.setAuthor(authorEntity);
+        }
     }
 
 }

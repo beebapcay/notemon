@@ -1,12 +1,14 @@
 package com.notemon.service;
 
 import com.notemon.dto.DocumentDto;
+import com.notemon.dto.MessageResponseDto;
 import com.notemon.entity.DocumentEntity;
 import com.notemon.entity.PermissionEntity;
 import com.notemon.entity.UserDocumentEntity;
 import com.notemon.entity.UserEntity;
-import com.notemon.exception.AppBusinessException;
-import com.notemon.exception.EntityNotFoundException;
+import com.notemon.enums.PermissionEnum;
+import com.notemon.exception.EntityWithFieldNotFoundException;
+import com.notemon.exception.EntityWithIdNotFoundException;
 import com.notemon.mapper.DocumentMapper;
 import com.notemon.repository.DocumentRepository;
 import com.notemon.repository.PermissionRepository;
@@ -30,15 +32,16 @@ public class DocumentService {
     private final DocumentMapper documentMapper;
 
     @Transactional
-    public DocumentDto createNewDocument(UUID userId, DocumentDto documentDto) throws EntityNotFoundException, AppBusinessException {
+    public MessageResponseDto createNewDocument(UUID userId, DocumentDto documentDto)
+            throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException {
         UserEntity userEntity = userRepository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException(UserEntity.class, userId));
+                .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
 
         DocumentEntity documentEntity = documentMapper.dtoToEntity(documentDto);
         documentEntity = documentRepository.save(documentEntity);
 
-        PermissionEntity permissionEntity = permissionRepository.findById(UUID.fromString("a1a6046d-3593-4e67-8b82-6ec30d47591a"))
-                .orElseThrow(() -> new AppBusinessException("Internal: Permission not found"));
+        PermissionEntity permissionEntity = permissionRepository.findByCode(PermissionEnum.EDITOR)
+                .orElseThrow(() -> new EntityWithFieldNotFoundException(PermissionEntity.class, "code", PermissionEnum.EDITOR.toString()));
 
         UserDocumentEntity userDocumentEntity = new UserDocumentEntity(
                 userEntity,
@@ -48,6 +51,6 @@ public class DocumentService {
 
         userDocumentRepository.save(userDocumentEntity);
 
-        return documentMapper.entityToDto(documentEntity);
+        return new MessageResponseDto("Document created successfully");
     }
 }

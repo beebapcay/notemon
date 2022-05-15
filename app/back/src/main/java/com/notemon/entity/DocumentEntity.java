@@ -46,6 +46,11 @@ public class DocumentEntity extends BaseEntity {
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
     private Set<DocumentEntity> children;
 
+    @OneToOne
+    @JoinColumn(name = "USER_ID", nullable = false)
+    @NotNull
+    private UserEntity author;
+
     @Column(name = "CONTENT", nullable = true)
     private String content;
 
