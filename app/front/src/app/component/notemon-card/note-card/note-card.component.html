@@ -1,7 +1,7 @@
 <div class="document-card-main-container">
   <card-action-bar [type]="NotemonCardTypeEnum.DEFAULT"></card-action-bar>
   <div class="content-container">
-    <img [src]="NotemonCardTypeEnum.DOCUMENT | notemonCardImg" alt="" class="illus-img">
+    <img [src]="NotemonCardTypeEnum.NOTE | notemonCardImg" alt="" class="illus-img">
     <div class="hashtag-list-container">
       <ng-container *ngFor="let number of [1,2,3]">
         <app-hashtag [size]="SizeEnum.SMALL" class="hashtag-item" hashtag="hashtag"></app-hashtag>

@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
+import { Component, Input, OnInit } from '@angular/core';
+import { NotemonTypeEnum } from '../../../enum/notemon-type.enum';
 
 @Component({
   selector: 'app-notemon-card-variant',
@@ -7,7 +7,7 @@ import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
   styleUrls: ['./notemon-card-variant.component.scss']
 })
 export class NotemonCardVariantComponent implements OnInit {
-  @Input() type: NotemonTypeEnum = NotemonTypeEnum.DOCUMENT;
+  @Input() type: NotemonTypeEnum = NotemonTypeEnum.NOTE;
 
   readonly NotemonCardTypeEnum = NotemonTypeEnum;
 

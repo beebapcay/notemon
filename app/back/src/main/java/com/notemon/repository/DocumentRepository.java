@@ -9,7 +9,16 @@ import java.util.Set;
 import java.util.UUID;
 
 @Repository
+@SuppressWarnings("SpringDataMethodInconsistencyInspection")
 public interface DocumentRepository
         extends JpaRepository<DocumentEntity, UUID> {
     Set<DocumentEntity> findAllByIdIsIn(Collection<UUID> ids);
+
+    Set<DocumentEntity> findAllByParentIdAndIsDirectory(UUID parentId, boolean isDirectory);
+
+    Set<DocumentEntity> findAllByParentId(UUID parentId);
+
+    Set<DocumentEntity> findAllByParentIdAndIsDirectoryFalse(UUID parentId);
+
+    Set<DocumentEntity> findAllByParentIdAndIsDirectoryIsTrue(UUID parentId);
 }

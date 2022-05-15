@@ -24,7 +24,7 @@ export class AssetsSrcConstant {
 
   // resource for notemon card
   public static DIRECTORY = 'assets/images/directory.png';
-  public static DOCUMENT = 'assets/images/document.svg';
+  public static NOTE = 'assets/images/document.svg';
   public static CARD_EMPTY = 'assets/images/card_empty.png';
 
 }

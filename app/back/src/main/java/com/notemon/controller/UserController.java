@@ -6,11 +6,13 @@ import com.notemon.dto.MessageResponseDto;
 import com.notemon.dto.UserDto;
 import com.notemon.exception.EntityWithFieldNotFoundException;
 import com.notemon.exception.EntityWithIdNotFoundException;
+import com.notemon.exception.NotPermissionToAccessDocumentException;
 import com.notemon.service.DocumentService;
 import com.notemon.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -30,5 +32,13 @@ public class UserController {
     public MessageResponseDto createNewDocument(@PathVariable("id") UUID id, @RequestBody DocumentDto documentDto)
             throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException {
         return documentService.createNewDocument(id, documentDto);
+    }
+
+    @GetMapping("{id}/documents")
+    public Set<DocumentDto> getUserDocuments(@PathVariable("id") UUID id,
+                                             @RequestParam(value = "parentId", required = false) UUID parentId,
+                                             @RequestParam(value = "isDirectory", required = false) Boolean isDirectory)
+            throws EntityWithIdNotFoundException, NotPermissionToAccessDocumentException {
+        return documentService.getAllDocuments(id, parentId, isDirectory);
     }
 }

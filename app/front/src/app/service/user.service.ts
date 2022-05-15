@@ -27,4 +27,14 @@ export class UserService {
     console.log("commit new document: " + JSON.stringify(document));
     return this.http.post<MessageResponseModel>(createNewDocumentUrl, {...document});
   }
+
+  getAllDocuments(userId: string, parentId: string, isDirectory: boolean | null): Observable<DocumentModel[]> {
+    const getAllDocumentsUrl = UserService.AUTH_URL + userId + '/documents';
+    const queryParams = {
+      parentId: parentId ?? '',
+      isDirectory: isDirectory ?? ''
+    }
+    return this.http.get<DocumentModel[]>(getAllDocumentsUrl, {params: queryParams});
+  }
 }
+

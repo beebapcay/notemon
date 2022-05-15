@@ -33,4 +33,8 @@ export class DocumentModel extends BaseModel {
       new Date(),
       0);
   }
+
+  public hello() {
+    console.log("Hello");
+  }
 }
