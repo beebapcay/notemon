@@ -41,6 +41,8 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
   }
 
   ngOnInit(): void {
+    SnackbarService.DEFAULT_CONFIG.verticalPosition = 'bottom';
+
     this.registerSubscription(
       this.userService.user.subscribe(user => {
         this.user = user;
