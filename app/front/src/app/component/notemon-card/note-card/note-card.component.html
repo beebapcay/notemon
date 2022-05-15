@@ -1,5 +1,9 @@
 <div class="document-card-main-container">
-  <card-action-bar [type]="NotemonCardTypeEnum.DEFAULT"></card-action-bar>
+  <card-action-bar
+    [type]="NotemonCardTypeEnum.DEFAULT"
+    (menuActionEmitted)="onMenuItemClicked($event)"
+    [item]="item"
+  ></card-action-bar>
   <div class="content-container">
     <img [src]="NotemonCardTypeEnum.NOTE | notemonCardImg" alt="" class="illus-img">
     <div class="hashtag-list-container">

@@ -1,5 +1,9 @@
 <div class="directory-card-main-container">
-  <card-action-bar [type]="NotemonCardTypeEnum.DEFAULT" [item]="item"></card-action-bar>
+  <card-action-bar
+    [type]="NotemonCardTypeEnum.DEFAULT"
+    [item]="item"
+    (menuActionEmitted)="onMenuItemClicked($event)"
+  ></card-action-bar>
   <div class="content-container">
     <div class="main-content">
       <img [src]="NotemonCardTypeEnum.DIRECTORY | notemonCardImg" alt="" class="illus-img">

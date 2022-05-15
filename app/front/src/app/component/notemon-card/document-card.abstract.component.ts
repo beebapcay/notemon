@@ -10,6 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { take } from 'rxjs';
+import { CardActionMenuEnum } from '../../enum/card-action-nemu.enum';
 import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
 import { DocumentModel } from '../../model/document.model';
 import { DocumentService } from '../../service/document.service';
@@ -22,6 +23,11 @@ import { UserService } from '../../service/user.service';
 export abstract class DocumentCardAbstractComponent<T extends DocumentModel> implements OnInit, AfterViewInit, OnChanges {
   @Input() item: T = null;
   @Input() isUpdating: boolean = false;
+  readonly DEFAULT_NAME = 'New Directory';
+  name: string = this.DEFAULT_NAME;
+  ignoreFirstClickOutside: boolean = true;
+  @ViewChild('nameInput') nameInput: ElementRef;
+  readonly NotemonCardTypeEnum = NotemonTypeEnum;
 
   protected constructor(
     protected userService: UserService,
@@ -29,15 +35,6 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     protected documentService: DocumentService
   ) {
   }
-
-  readonly DEFAULT_NAME = 'New Directory';
-
-  name: string = this.DEFAULT_NAME;
-  ignoreFirstClickOutside: boolean = true;
-
-  @ViewChild('nameInput') nameInput: ElementRef;
-
-  readonly NotemonCardTypeEnum = NotemonTypeEnum;
 
   get nameInputElement(): HTMLInputElement {
     return this.nameInput.nativeElement;
@@ -122,5 +119,47 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
       return false;
     }
     return true;
+  }
+
+  onMenuItemClicked(actionOption: any) {
+    actionOption = actionOption as CardActionMenuEnum;
+
+    switch (actionOption) {
+      case CardActionMenuEnum.SHARE: {
+        console.log('share');
+        break;
+      }
+      case CardActionMenuEnum.GET_LINK: {
+        console.log('get_link');
+        break;
+      }
+      case CardActionMenuEnum.ADD_TO_STARRED: {
+        console.log('add to starred');
+        break;
+      }
+      case CardActionMenuEnum.REMOVE_FROM_STARRED: {
+        console.log('remove from starred');
+        break;
+      }
+      case CardActionMenuEnum.RENAME: {
+        this.isUpdating = true;
+        break;
+      }
+      case CardActionMenuEnum.VIEW_DETAIL: {
+        console.log('view detail');
+        break;
+      }
+      case CardActionMenuEnum.DOWNLOAD: {
+        console.log('download');
+        break;
+      }
+      case CardActionMenuEnum.REMOVE: {
+        console.log('remove');
+        break;
+      }
+      default: {
+        this.snackbarService.openErrorAnnouncement('Unknown action option');
+      }
+    }
   }
 }
