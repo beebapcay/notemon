@@ -60,6 +60,8 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
     this.showMessage = true;
     this.authForm.markAllAsTouched();
 
+    console.log(this.authForm.value);
+
     if (this.authForm.invalid) {
       this.showErrorMessage('Form is invalid. Please check your input');
       return;

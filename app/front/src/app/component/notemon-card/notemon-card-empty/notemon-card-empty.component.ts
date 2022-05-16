@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { AssetsSrcConstant } from '../../../common/assets-src.constant';
 import { NotemonTypeEnum } from '../../../enum/notemon-type.enum';
 
@@ -9,6 +9,8 @@ import { NotemonTypeEnum } from '../../../enum/notemon-type.enum';
 })
 export class NotemonCardEmptyComponent implements OnInit {
   @Input() type: NotemonTypeEnum = NotemonTypeEnum.NOTE;
+
+  @Output() click: EventEmitter<any> = new EventEmitter();
 
   readonly NotemonTypeEnum = NotemonTypeEnum;
   readonly AssetsSrcConstant = AssetsSrcConstant;

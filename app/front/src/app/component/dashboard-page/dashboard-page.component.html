@@ -25,13 +25,13 @@
     <div class="started-list-container">
       <app-notemon-card-empty
         [type]="NotemonCardTypeEnum.STARTED"
-        *ngIf="ArrayUtil.isEmpty(starred); else hasStarred"
+        *ngIf="ArrayUtil.isEmpty(starreds); else hasStarred"
       >
       </app-notemon-card-empty>
       <ng-template #hasStarred>
         <app-notemon-card-variant
-          *ngFor="let document of starred; let i = index"
-          [item]="document"
+          *ngFor="let starred of starreds; let i = index"
+          [item]="starred"
         ></app-notemon-card-variant>
       </ng-template>
     </div>
@@ -43,6 +43,7 @@
       <app-notemon-card-empty
         [type]="NotemonCardTypeEnum.DIRECTORY"
         *ngIf="ArrayUtil.isEmpty(directories); else hasDirectories"
+        (click)="onNewDocumentClicked(NotemonTypeEnum.DIRECTORY)"
       >
       </app-notemon-card-empty>
       <ng-template #hasDirectories>
@@ -61,6 +62,7 @@
       <app-notemon-card-empty
         [type]="NotemonCardTypeEnum.NOTE"
         *ngIf="ArrayUtil.isEmpty(notes); else hasNotes"
+        (click)="onNewDocumentClicked(NotemonTypeEnum.NOTE)"
       >
       </app-notemon-card-empty>
       <ng-template #hasNotes>
