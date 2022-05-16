@@ -89,8 +89,6 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
   onDocumentNameUpdated() {
     if (!this.preProcessAction()) return;
 
-    this.isUpdating = true;
-
     if (this.item?.name === this.name && this.item?.id !== null) return;
 
     const initName = this.item?.name;
@@ -104,7 +102,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
           .pipe(take(1))
           .subscribe({
             next: () => {
-              this.snackbarService.openSaveSuccessAnnouncement(`Document <b>${this.item?.name}</b> was created successfully.`);
+              this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was created successfully.`);
               this.documentService.change.next();
             },
             error: (error) => this.handleErrorResponse(error)
