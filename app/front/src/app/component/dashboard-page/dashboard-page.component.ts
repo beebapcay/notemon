@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
-import { AppRouteConstant } from '../../common/app-route.constant';
-import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
-import { SizeEnum } from '../../enum/size.enum';
-import { DirectoryModel } from '../../model/directory.model';
-import { DocumentModel } from '../../model/document.model';
-import { NoteModel } from '../../model/note.model';
-import { UserModel } from '../../model/user.model';
-import { DocumentService } from '../../service/document.service';
-import { SnackbarService } from '../../service/snackbar.service';
-import { UserService } from '../../service/user.service';
-import { ArrayUtil } from '../../utils/array.util';
-import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {take} from 'rxjs';
+import {AppRouteConstant} from '../../common/app-route.constant';
+import {NotemonTypeEnum} from '../../enum/notemon-type.enum';
+import {SizeEnum} from '../../enum/size.enum';
+import {DirectoryModel} from '../../model/directory.model';
+import {DocumentModel} from '../../model/document.model';
+import {NoteModel} from '../../model/note.model';
+import {UserModel} from '../../model/user.model';
+import {DocumentService} from '../../service/document.service';
+import {SnackbarService} from '../../service/snackbar.service';
+import {UserService} from '../../service/user.service';
+import {ArrayUtil} from '../../utils/array.util';
+import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -68,7 +68,7 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
             if (documents === null || documents.length === 0) return;
 
             documents = documents
-              .sort((a, b) => (new Date(a?.lastModifiedAt)).getTime() - (new Date(b?.lastModifiedAt)).getTime())
+              .sort((a, b) => (new Date(a?.createdAt)).getTime() - (new Date(b?.createdAt)).getTime())
               .reverse();
 
             this.starreds = documents
