@@ -1,6 +1,5 @@
 import {
   AfterViewChecked,
-  AfterViewInit,
   Component,
   ElementRef,
   HostListener,
@@ -10,25 +9,31 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { take } from 'rxjs';
-import { CardActionMenuEnum } from '../../enum/card-action-nemu.enum';
-import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
-import { DocumentModel } from '../../model/document.model';
-import { UserDocumentModel } from '../../model/user-document.model';
-import { DocumentService } from '../../service/document.service';
-import { SnackbarService } from '../../service/snackbar.service';
-import { UserService } from '../../service/user.service';
+import {take} from 'rxjs';
+import {CardActionMenuEnum} from '../../enum/card-action-nemu.enum';
+import {NotemonTypeEnum} from '../../enum/notemon-type.enum';
+import {DocumentModel} from '../../model/document.model';
+import {UserDocumentModel} from '../../model/user-document.model';
+import {DocumentService} from '../../service/document.service';
+import {SnackbarService} from '../../service/snackbar.service';
+import {UserService} from '../../service/user.service';
+import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
+import {UserModel} from '../../model/user.model';
 
 @Component({
   template: ''
 })
-export abstract class DocumentCardAbstractComponent<T extends DocumentModel> implements OnInit, AfterViewInit, OnChanges, AfterViewChecked {
+export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
+  extends SubscriptionAwareAbstractComponent
+  implements OnInit, OnChanges, AfterViewChecked {
+
   readonly NotemonCardTypeEnum = NotemonTypeEnum;
   readonly DEFAULT_NAME = 'New Directory';
 
   @Input() item: T = null;
   @Input() isCreating: boolean = false;
 
+  user: UserModel;
   name: string = this.DEFAULT_NAME;
   isUpdating: boolean = false;
   ignoreFirstClickOutside: boolean = true;
@@ -40,6 +45,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     protected snackbarService: SnackbarService,
     protected documentService: DocumentService
   ) {
+    super();
   }
 
   get nameInputElement(): HTMLInputElement {
@@ -48,9 +54,12 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
 
   ngOnInit(): void {
     this.name = this.item?.name ?? this.DEFAULT_NAME;
-  }
 
-  ngAfterViewInit(): void {
+    this.registerSubscription(
+      this.userService.user.subscribe(user => {
+        this.user = user;
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -75,6 +84,94 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     this.isUpdating = false;
     this.nameInputElement.blur();
     this.onDocumentNameUpdated();
+  }
+
+  onDocumentNameUpdated() {
+    if (!this.preProcessAction()) return;
+
+    this.isUpdating = true;
+
+    if (this.item?.name === this.name && this.item?.id !== null) return;
+
+    const initName = this.item?.name;
+    this.name = this.name ?? this.DEFAULT_NAME;
+    this.item = {...this.item, name: this.name};
+
+    if (this.item?.id === null) {
+      this.item.author = this.user;
+      this.registerSubscription(
+        this.userService.createNewDocument(this.user?.id, this.item)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.snackbarService.openSaveSuccessAnnouncement(`Document ${this.item?.name} was created successfully.`);
+              this.documentService.change.next();
+            },
+            error: (error) => this.handleErrorResponse(error)
+          })
+      );
+    } else {
+      this.registerSubscription(
+        this.documentService.updateNameDocument(this.user?.id, this.item?.id, this.item)
+          .pipe(take(1))
+          .subscribe({
+            next: () => {
+              this.snackbarService.openSaveSuccessAnnouncement(`Document ${initName} was renamed to ${this.item?.name} successfully.`);
+              this.documentService.change.next();
+            },
+            error: (error) => this.handleErrorResponse(error)
+          })
+      )
+    }
+  }
+
+  onDocumentStarredUpdate(isStarred: boolean) {
+    if (!this.preProcessAction()) return;
+
+    if (this.item?.relationship.isStarred === isStarred) return;
+
+    const relationship: UserDocumentModel = {...this.item?.relationship, isStarred};
+
+    this.registerSubscription(
+      this.documentService.updateStarredDocument(this.user?.id, this.item?.id, relationship)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.snackbarService.openSaveSuccessAnnouncement(`Document ${this.item?.name} was ${isStarred ? 'added to' : 'removed from'} Starred successfully.`);
+            this.documentService.change.next();
+          },
+          error: (error) => this.handleErrorResponse(error)
+        })
+    );
+  }
+
+  onDocumentDelete() {
+    if (!this.preProcessAction()) return;
+
+    this.registerSubscription(
+      this.documentService.deleteDocument(this.user?.id, this.item?.id)
+        .pipe(take(1))
+        .subscribe({
+          next: () => {
+            this.snackbarService.openWarningAnnouncement(`Document ${this.item?.name} was deleted successfully.`);
+            this.documentService.change.next();
+          },
+          error: (error) => this.handleErrorResponse(error)
+        })
+    )
+  }
+
+  handleErrorResponse(error: any) {
+    this.snackbarService.openRequestErrorAnnouncement(error);
+    this.documentService.change.next();
+  }
+
+  preProcessAction(): boolean {
+    if (this.item?.author?.id === null || this.user === null) {
+      this.snackbarService.openErrorAnnouncement('Something was wrong or You are not authorized to perform this action');
+      return false;
+    }
+    return true;
   }
 
   @HostListener('document:click', ['$event'])
@@ -103,88 +200,8 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     }
   }
 
-  onDocumentNameUpdated() {
-    if (!this.preProcessAction()) return;
-
-    this.isUpdating = true;
-
-    if (this.item?.name === this.name && this.item?.id !== null) return;
-
-    this.name = this.name ?? this.DEFAULT_NAME;
-    this.item = {...this.item, name: this.name};
-
-    if (this.item?.id === null) {
-      this.userService.createNewDocument(this.item?.author?.id, this.item)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.snackbarService.openSaveSuccessAnnouncement('Document created successfully');
-            this.documentService.change.next();
-          },
-          error: (error) => this.handleErrorResponse(error)
-        });
-    } else {
-      this.documentService.updateNameDocument(this.userService.user.getValue()?.id, this.item?.id, this.item)
-        .pipe(take(1))
-        .subscribe({
-          next: () => {
-            this.snackbarService.openSaveSuccessAnnouncement('Document updated successfully');
-            this.documentService.change.next();
-          },
-          error: (error) => this.handleErrorResponse(error)
-        });
-    }
-  }
-
-  onDocumentStarredUpdate(isStarred: boolean) {
-    if (!this.preProcessAction()) return;
-
-    if (this.item?.relationship.isStarred === isStarred) return;
-
-    const relationship: UserDocumentModel = {...this.item?.relationship, isStarred};
-
-    this.documentService.updateStarredDocument(this.userService.user.getValue()?.id, this.item?.id, relationship)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.snackbarService.openSaveSuccessAnnouncement('Document starred updated successfully');
-          this.documentService.change.next();
-        },
-        error: (error) => this.handleErrorResponse(error)
-      });
-  }
-
-  onDocumentDelete() {
-    if (!this.preProcessAction()) return;
-
-    this.documentService.deleteDocument(this.userService.user.getValue()?.id, this.item?.id)
-      .pipe(take(1))
-      .subscribe({
-        next: () => {
-          this.snackbarService.openWarningAnnouncement('Document deleted successfully');
-          this.documentService.change.next();
-        },
-        error: (error) => this.handleErrorResponse(error)
-      });
-  }
-
-  handleErrorResponse(error: any) {
-    this.snackbarService.openRequestErrorAnnouncement(error);
-    this.documentService.change.next();
-  }
-
-  preProcessAction(): boolean {
-    if (this.item?.author?.id === null || this.userService.user?.getValue().id === null) {
-      this.snackbarService.openErrorAnnouncement('Something was wrong or You are not authorized to perform this action');
-      return false;
-    }
-    return true;
-  }
-
   onMenuItemClicked(actionOption: any) {
-    actionOption = actionOption as CardActionMenuEnum;
-
-    switch (actionOption) {
+    switch (actionOption as CardActionMenuEnum) {
       case CardActionMenuEnum.SHARE: {
         console.log('share');
         break;
@@ -202,7 +219,6 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
         break;
       }
       case CardActionMenuEnum.RENAME: {
-        console.log('rename');
         this.isUpdating = true;
         this.ignoreFirstClickOutside = true;
         break;
