@@ -20,9 +20,13 @@ import {DirectoryPageComponent} from './component/directory-page/directory-page.
       {path: AppRouteConstant.SIGNUP, component: AuthPageComponent},
       {path: AppRouteConstant.FEATURE, component: FeaturePageComponent},
       {path: AppRouteConstant.DASHBOARD, component: DashboardPageComponent},
-      {path: `${AppRouteConstant.DIRECTORY}/:directoryId`, component: DirectoryPageComponent},
+      {
+        path: `${AppRouteConstant.DIRECTORY}/:directoryId`,
+        component: DirectoryPageComponent,
+        runGuardsAndResolvers: 'always'
+      },
       {path: AppRouteConstant.OTHER, component: ErrorPageComponent, data: PageNotFoundErrorModel.create()}
-    ])
+    ], {onSameUrlNavigation: 'reload'})
   ],
   exports: [CommonModule, RouterModule],
   declarations: [],

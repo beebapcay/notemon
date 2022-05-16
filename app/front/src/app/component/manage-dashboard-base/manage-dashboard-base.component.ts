@@ -65,13 +65,14 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
   }
 
   fetchDocuments() {
+    console.log('fetchDocuments');
     if (this.user === null) return;
     this.registerSubscription(
       this.userService.getAllDocuments(this.user?.id, this.insideParent, null)
         .pipe(take(1))
         .subscribe({
           next: (documents) => {
-            if (documents === null || documents.length === 0) return;
+            documents = documents ?? [];
 
             documents = documents
               .sort((a, b) => (new Date(a?.createdAt)).getTime() - (new Date(b?.createdAt)).getTime())

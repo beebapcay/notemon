@@ -12,6 +12,7 @@
       <ng-template #notUpdating>
         <a class="name"
            [routerLink]="item?.id ? ['/', AppRouteConstant.DIRECTORY, item?.id] : null">{{item?.name ?? DEFAULT_NAME}}</a>
+<!--        <a class="name">{{item?.name ?? DEFAULT_NAME}}</a>-->
       </ng-template>
       <p class="author">Author: {{item?.author?.name ?? 'Unknown'}}</p>
     </div>
