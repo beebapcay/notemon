@@ -33,6 +33,7 @@ import {ThemeToggleButtonComponent} from './theme-toggle-button/theme-toggle-but
 import {TopNavbarEditorComponent} from './top-navbar/top-navbar-editor/top-navbar-editor.component';
 
 import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-main.component';
+import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashboard-base.component';
 
 @NgModule({
   imports: [
@@ -72,6 +73,7 @@ import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-ma
     SnackbarComponent,
     FormFieldComponent,
     HomePageComponent,
+    ManageDashboardBaseComponent,
   ],
   exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })

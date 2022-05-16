@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { SnackbarComponent } from '../component/snackbar/snackbar.component';
-import { SnackbarStatusEnum } from '../enum/snackbar-status.enum';
+import {Injectable} from '@angular/core';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
+import {SnackbarComponent} from '../component/snackbar/snackbar.component';
+import {SnackbarStatusEnum} from '../enum/snackbar-status.enum';
 
 export interface ISnackbarConfig extends MatSnackBarConfig {
   message?: string,
@@ -13,8 +13,8 @@ export interface ISnackbarConfig extends MatSnackBarConfig {
 @Injectable({providedIn: 'root'})
 export class SnackbarService {
   static DEFAULT_CONFIG: ISnackbarConfig = {
-    duration: 5000,
-    verticalPosition: 'top',
+    duration: 10000,
+    verticalPosition: 'bottom',
     horizontalPosition: 'right',
     status: SnackbarStatusEnum.info
   }

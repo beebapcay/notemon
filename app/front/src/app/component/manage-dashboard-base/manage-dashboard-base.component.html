@@ -1,0 +1,77 @@
+<div class="manage-dashboard-base-container">
+  <section class="hashtag-section">
+    <h3 class="section-header">Your hashtag</h3>
+    <div class="hashtag-list-container">
+      <app-hashtag
+        *ngFor="let hashtag of [1,2,3,4,5,6,7,8,9,10]; let i = index"
+        [animated]="true"
+        [hashtag]="'hashtag: ' + i"
+        [size]="SizeEnum.MEDIUM"
+      ></app-hashtag>
+    </div>
+  </section>
+
+  <div class="action-buttons">
+    <app-new-notemon-button [type]="NotemonCardTypeEnum.DIRECTORY"
+                            (click)="onNewDocumentClicked(NotemonTypeEnum.DIRECTORY)"></app-new-notemon-button>
+    <app-new-notemon-button [type]="NotemonCardTypeEnum.DOCUMENT"
+                            (click)="onNewDocumentClicked(NotemonTypeEnum.NOTE)"></app-new-notemon-button>
+  </div>
+
+  <p class="summary">{{directories?.length ?? 0}} Directories - {{notes?.length ?? 0}} Notes</p>
+
+  <section class="started-section">
+    <h3 class="section-header">Started</h3>
+    <div class="started-list-container">
+      <app-notemon-card-empty
+        [type]="NotemonCardTypeEnum.STARTED"
+        *ngIf="ArrayUtil.isEmpty(starreds); else hasStarred"
+      >
+      </app-notemon-card-empty>
+      <ng-template #hasStarred>
+        <app-notemon-card-variant
+          *ngFor="let starred of starreds; let i = index"
+          [item]="starred"
+        ></app-notemon-card-variant>
+      </ng-template>
+    </div>
+  </section>
+
+  <section class="directory-section">
+    <h3 class="section-header">Directories</h3>
+    <div class="directory-list-container">
+      <app-notemon-card-empty
+        [type]="NotemonCardTypeEnum.DIRECTORY"
+        *ngIf="ArrayUtil.isEmpty(directories); else hasDirectories"
+        (click)="onNewDocumentClicked(NotemonTypeEnum.DIRECTORY)"
+      >
+      </app-notemon-card-empty>
+      <ng-template #hasDirectories>
+        <app-directory-card-main
+          *ngFor="let directory of directories; let i = index"
+          [item]="directory"
+          [isCreating]="directory?.id === null"
+        ></app-directory-card-main>
+      </ng-template>
+    </div>
+  </section>
+
+  <section class="document-section">
+    <h3 class="section-header">Documents</h3>
+    <div class="document-list-container">
+      <app-notemon-card-empty
+        [type]="NotemonCardTypeEnum.NOTE"
+        *ngIf="ArrayUtil.isEmpty(notes); else hasNotes"
+        (click)="onNewDocumentClicked(NotemonTypeEnum.NOTE)"
+      >
+      </app-notemon-card-empty>
+      <ng-template #hasNotes>
+        <app-note-card-main
+          *ngFor="let note of notes; let i = index"
+          [item]="note"
+          [isCreating]="note?.id === null"
+        ></app-note-card-main>
+      </ng-template>
+    </div>
+  </section>
+</div>
