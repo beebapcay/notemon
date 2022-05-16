@@ -34,6 +34,7 @@ import {TopNavbarEditorComponent} from './top-navbar/top-navbar-editor/top-navba
 
 import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-main.component';
 import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashboard-base.component';
+import {DirectoryPageComponent} from './directory-page/directory-page.component';
 
 @NgModule({
   imports: [
@@ -74,6 +75,7 @@ import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashb
     FormFieldComponent,
     HomePageComponent,
     ManageDashboardBaseComponent,
+    DirectoryPageComponent,
   ],
   exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })

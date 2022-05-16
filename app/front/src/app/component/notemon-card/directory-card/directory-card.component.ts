@@ -4,6 +4,7 @@ import {DocumentService} from '../../../service/document.service';
 import {SnackbarService} from '../../../service/snackbar.service';
 import {UserService} from '../../../service/user.service';
 import {DocumentCardAbstractComponent} from '../document-card.abstract.component';
+import {AppRouteConstant} from '../../../common/app-route.constant';
 
 @Component({
   selector: 'app-directory-card-main',
@@ -12,6 +13,8 @@ import {DocumentCardAbstractComponent} from '../document-card.abstract.component
 })
 export class DirectoryCardComponent extends DocumentCardAbstractComponent<DirectoryModel> {
   @ViewChild('nameInput') override nameInput: ElementRef;
+
+  readonly AppRouteConstant = AppRouteConstant;
 
   constructor(
     userService: UserService,

@@ -43,11 +43,11 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
 
   ngOnInit(): void {
     this.registerSubscription(
-      this.route.parent.params.subscribe(params => {
+      this.route.params.subscribe(params => {
         this.insideParent = params['directoryId'];
+        this.fetchDocuments();
       })
     );
-
 
     this.registerSubscription(
       this.userService.user.subscribe(user => {
