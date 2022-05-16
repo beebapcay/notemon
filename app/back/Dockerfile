@@ -17,5 +17,3 @@ COPY --from=build ${DEPENDENCY}/BOOT-INF/lib /app/lib
 COPY --from=build ${DEPENDENCY}/META-INF /app/META-INF
 COPY --from=build ${DEPENDENCY}/BOOT-INF/classes /app
 ENTRYPOINT ["java","-cp","app:app/lib/*","com.notemon.NotemonApplication"]
-
-az container create --resource-group Notemon --name notemon-backend --image notemonregistry.azurecr.io/notemon-backend --dns-name-label notemon-backend --ports 80 8081
