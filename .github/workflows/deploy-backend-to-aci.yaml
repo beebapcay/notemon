@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: Deploy to ACI
+name: Deploy to Backend ACI
 
 jobs:
   backend-job:

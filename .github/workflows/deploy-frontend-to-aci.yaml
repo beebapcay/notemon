@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main
-name: Deploy to ACI
+name: Deploy to Frontend ACI
 
 jobs:
   frontend-job:
@@ -11,6 +11,7 @@ jobs:
       # checkout the repo
       - name: 'Checkout GitHub Action'
         uses: actions/checkout@main
+
       - name: 'Login via Azure CLI'
         uses: azure/login@v1
         with:
