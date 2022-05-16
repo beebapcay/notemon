@@ -88,6 +88,8 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
   }
 
   onNewDocumentClicked(type: NotemonTypeEnum) {
+    console.log(this.user);
+
     if (this.user === null) {
       this.snackbarService.openErrorAnnouncement('You must be logged in to create a new document.');
       this.router.navigate(['/', AppRouteConstant.LOGIN]).then();

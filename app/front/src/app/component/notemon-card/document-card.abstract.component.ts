@@ -155,6 +155,20 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
       });
   }
 
+  onDocumentDelete() {
+    if (!this.preProcessAction()) return;
+
+    this.documentService.deleteDocument(this.userService.user.getValue()?.id, this.item?.id)
+      .pipe(take(1))
+      .subscribe({
+        next: () => {
+          this.snackbarService.openWarningAnnouncement('Document deleted successfully');
+          this.documentService.change.next();
+        },
+        error: (error) => this.handleErrorResponse(error)
+      });
+  }
+
   handleErrorResponse(error: any) {
     this.snackbarService.openRequestErrorAnnouncement(error);
     this.documentService.change.next();
@@ -203,7 +217,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
         break;
       }
       case CardActionMenuEnum.REMOVE: {
-        console.log('remove');
+        this.onDocumentDelete();
         break;
       }
       default: {

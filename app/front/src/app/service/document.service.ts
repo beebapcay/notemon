@@ -26,4 +26,9 @@ export class DocumentService {
     const updateStarredDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/starred';
     return this.http.patch<MessageResponseModel>(updateStarredDocumentUrl, {...relationship});
   }
+
+  deleteDocument(userId: string, documentId: string): Observable<MessageResponseModel> {
+    const deleteDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId;
+    return this.http.delete<MessageResponseModel>(deleteDocumentUrl);
+  }
 }
