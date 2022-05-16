@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker build ./app/back -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/notemon-frontend:${{ github.run_number }}
+          docker build ./app/front -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/notemon-frontend:${{ github.run_number }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/notemon-frontend:${{ github.run_number }}
 
       - name: 'Deploy to Azure Container Instances'
