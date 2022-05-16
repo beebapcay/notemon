@@ -1,0 +1,22 @@
+<div class="document-card-main-container">
+  <card-action-bar
+    [type]="NotemonCardTypeEnum.DEFAULT"
+    (menuActionEmitted)="onMenuItemClicked($event)"
+    [item]="item"
+  ></card-action-bar>
+  <div class="content-container">
+    <img [src]="NotemonCardTypeEnum.NOTE | notemonCardImg" alt="" class="illus-img">
+    <div class="hashtag-list-container">
+      <ng-container *ngFor="let number of [1,2,3]">
+        <app-hashtag [size]="SizeEnum.SMALL" class="hashtag-item" hashtag="hashtag"></app-hashtag>
+      </ng-container>
+    </div>
+    <input [maxLength]="30" *ngIf="isCreating || isUpdating; else notUpdating" type="text" class="name"
+           [(ngModel)]="name" #nameInput>
+    <ng-template #notUpdating>
+      <p class="name">{{item?.name ?? DEFAULT_NAME}}</p>
+    </ng-template>
+    <p class="author">Author: {{item?.author?.name ?? 'Unknown'}}</p>
+    <p class="last-updated">Last updated: {{item?.lastModifiedAt | date: 'dd MMM, yyyy'}}</p>
+  </div>
+</div>

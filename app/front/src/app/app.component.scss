@@ -1,0 +1,48 @@
+@import "~src/variables";
+
+.application-container {
+  width: 100%;
+  height: 100%;
+
+  .supported-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    app-top-navbar-main {
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.has-top-navbar {
+        margin-top: $app-top-navbar-height;
+      }
+    }
+  }
+
+  .unsupported-container {
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+}
+
+@media screen and (max-width: map-get($container-max-widths, md)) {
+  .application-container {
+    .supported-container {
+      display: none;
+    }
+
+    .unsupported-container {
+      display: block;
+    }
+  }
+}

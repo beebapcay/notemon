@@ -1,0 +1,45 @@
+<div [class]="getClass()">
+  <button *ngIf="item?.relationship?.isStarred" class="star-btn" disableRipple mat-icon-button>
+    <mat-icon>star</mat-icon>
+  </button>
+  <button class="more-btn" mat-icon-button [matMenuTriggerFor]="optionMenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu class="card-option-menu" #optionMenu='matMenu' yPosition="below" xPosition="after">
+    <button mat-menu-item (click)="menuActionEmitted.emit(CardActionMenuEnum.SHARE)">
+      <mat-icon>person_add</mat-icon>
+      <span>Share</span>
+    </button>
+    <button mat-menu-item (click)="menuActionEmitted.emit(CardActionMenuEnum.GET_LINK)">
+      <mat-icon>link</mat-icon>
+      <span>Get link</span>
+    </button>
+    <button mat-menu-item
+            (click)="item?.relationship?.isStarred
+            ? menuActionEmitted.emit(CardActionMenuEnum.REMOVE_FROM_STARRED)
+            : menuActionEmitted.emit(CardActionMenuEnum.ADD_TO_STARRED)"
+    >
+      <mat-icon>star</mat-icon>
+      <span>{{item?.relationship?.isStarred ? 'Remove from Starred' : 'Add to Starred'}}</span>
+    </button>
+    <button mat-menu-item (click)="menuActionEmitted.emit(CardActionMenuEnum.RENAME)">
+      <mat-icon>edit</mat-icon>
+      <span>Rename</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="menuActionEmitted.emit(CardActionMenuEnum.VIEW_DETAIL)">
+      <mat-icon>info</mat-icon>
+      <span>View detail</span>
+    </button>
+    <button mat-menu-item (click)="menuActionEmitted.emit(CardActionMenuEnum.DOWNLOAD)">
+      <mat-icon>cloud_download</mat-icon>
+      <span>Download</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-menu-item (click)="menuActionEmitted.emit(CardActionMenuEnum.REMOVE)">
+      <mat-icon>delete</mat-icon>
+      <span>Remove</span>
+    </button>
+  </mat-menu>
+</div>

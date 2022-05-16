@@ -1,0 +1,14 @@
+<div class="auth-input" [formGroup]="formGroup">
+  <mat-label>{{label}}</mat-label>
+  <mat-form-field appearance="legacy" floatLabel="never">
+    <input
+      [name]="name"
+      [formControlName]="control"
+      [placeholder]="placeholder"
+      [required]="required"
+      [type]="type"
+      [value]="value"
+      matInput
+    >
+  </mat-form-field>
+</div>

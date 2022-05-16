@@ -1,0 +1,22 @@
+<div class="directory-card-main-container">
+  <card-action-bar
+    [type]="NotemonCardTypeEnum.DEFAULT"
+    [item]="item"
+    (menuActionEmitted)="onMenuItemClicked($event)"
+  ></card-action-bar>
+  <div class="content-container">
+    <div class="main-content">
+      <img [src]="NotemonCardTypeEnum.DIRECTORY | notemonCardImg" alt="" class="illus-img">
+      <input [maxLength]="30" *ngIf="isCreating || isUpdating; else notUpdating" type="text" class="name"
+             [(ngModel)]="name" #nameInput>
+      <ng-template #notUpdating>
+        <p class="name">{{item?.name ?? DEFAULT_NAME}}</p>
+      </ng-template>
+      <p class="author">Author: {{item?.author?.name ?? 'Unknown'}}</p>
+    </div>
+    <div class="sub-content">
+      <p class="created-date">Created date: {{item?.createdAt | date: 'dd MMM, yyyy'}}</p>
+      <p class="number-of-items">Number of items: {{item?.children?.length ?? 0}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+:host {
+  margin-top: 15px;
+}
+
+:host ::ng-deep auth-input {
+  + auth-input .auth-input {
+    margin-top: 25px;
+  }
+}
+
+

@@ -1,0 +1,23 @@
+<nav class="navbar top-navbar-main-container navbar-expand-md">
+  <a [routerLink]="AppRouteConstant.HOME" class="navbar-brand">
+    <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo">
+  </a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a [routerLink]="AppRouteConstant.FEATURE" class="nav-link" mat-button>Features</a>
+    </li>
+    <li class="nav-item">
+      <a [routerLink]="AppRouteConstant.CONTACT_US" class="nav-link" mat-button>Contact us</a>
+    </li>
+  </ul>
+  <theme-toggle-button class="theme-toggle-button"></theme-toggle-button>
+  <ng-container *ngIf="!isLoggedIn; else loggedIn">
+    <a [routerLink]="AppRouteConstant.LOGIN" class="login-btn" mat-button>Login</a>
+    <a [routerLink]="AppRouteConstant.SIGNUP" class="signup-btn" disableRipple mat-button>Signup</a>
+  </ng-container>
+  <ng-template #loggedIn>
+    <button class="account-btn">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </ng-template>
+</nav>

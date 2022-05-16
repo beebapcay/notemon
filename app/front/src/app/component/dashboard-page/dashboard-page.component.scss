@@ -1,0 +1,73 @@
+@import "~src/variables.scss";
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: $color-background-gray;
+}
+
+.dashboard-page-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 35px 75px 65px;
+
+  section {
+    margin-bottom: 50px;
+    width: 100%;
+
+    .section-header {
+      font-family: $font-family-tertiary;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: $color-on-background-gray-light;
+    }
+  }
+
+  .hashtag-section {
+    .hashtag-list-container {
+      width: 80%;
+      display: flex;
+      flex-wrap: wrap;
+
+      > app-hashtag {
+        margin-bottom: 10px;
+        margin-right: 15px;
+      }
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: flex-end;
+
+    app-new-notemon-button {
+      margin-left: 15px;
+    }
+  }
+
+  .summary {
+    font-family: $font-family-mono;
+    color: $color-on-background-gray-light;
+    font-size: 12.5px;
+    text-align: right;
+    margin-bottom: 65px;
+  }
+
+  .directory-section, .document-section, .started-section {
+    .directory-list-container, .document-list-container, .started-list-container {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+
+      app-directory-card-main, app-note-card-main, app-notemon-card-variant {
+        margin-bottom: 15px;
+        margin-right: 15px;
+      }
+    }
+  }
+}

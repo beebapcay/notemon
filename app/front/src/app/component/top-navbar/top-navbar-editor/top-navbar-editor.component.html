@@ -1,0 +1,28 @@
+<nav class="navbar top-navbar-editor-container navbar-expand-md">
+  <a [routerLink]="AppRouteConstant.HOME" class="navbar-brand">
+    <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo">
+  </a>
+  <div class="navbar-editor">
+    <img [src]="AssetsSrcConstant.NOTE" alt="" class="illus-img">
+    <div class="document-info">
+      <input class="name" spellcheck="false" type="text" value="Notemon Note Name">
+      <p class="last-edited">Last edited was 7 days ago</p>
+    </div>
+  </div>
+  <button class="star-btn" mat-icon-button>
+    <mat-icon>star_border</mat-icon>
+  </button>
+  <button class="share-btn" disableRipple mat-button>
+    <mat-icon>link</mat-icon>
+    Share
+  </button>
+  <ng-container *ngIf="!isLoggedIn">
+    <a [routerLink]="['/', AppRouteConstant.LOGIN]" class="login-btn" mat-button>Login</a>
+  </ng-container>
+  <ng-container *ngIf="isLoggedIn">
+    <button class="account-btn">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </ng-container>
+</nav>
+

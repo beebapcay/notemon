@@ -1,0 +1,98 @@
+@import "src/variables";
+
+:host {
+  width: 100%;
+  z-index: 999;
+}
+
+.top-navbar-main-container {
+  height: $app-top-navbar-height;
+  padding: 0 75px;
+  background-color: $color-background;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+
+  .navbar-brand {
+    margin: 0;
+
+    .logo {
+      width: auto;
+      height: 35px;
+    }
+  }
+
+  .navbar-nav {
+    margin-left: 40px;
+
+    .nav-item {
+      & + .nav-item {
+        margin-left: 25px;
+      }
+
+      .nav-link {
+        color: $color-on-background-variant;
+        font-family: $font-family-primary;
+        font-weight: 500;
+        font-size: 16.5px;
+        transition: all 0.25s ease;
+
+        &:hover {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+
+  theme-toggle-button {
+    margin-left: auto;
+    margin-right: 27.5px;
+  }
+
+  .auth-btn {
+    font-family: $font-family-primary;
+    font-weight: 500;
+    font-size: 17.5px;
+    border-radius: 5px;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .login-btn {
+    @extend .auth-btn;
+    color: $color-primary;
+    padding: 0 30px;
+    margin-right: 25px;
+
+    &:active {
+      @include outline-focus($color-focus-gray-light, 2px);
+      color: $color-primary-overlay;
+    }
+  }
+
+  .signup-btn {
+    @extend .auth-btn;
+    background-color: $color-variant;
+    color: $color-on-variant;
+    padding: 0 40px;
+
+    &:hover {
+      background-color: $color-primary;
+      color: $color-on-primary;
+      transition: none;
+    }
+
+    &:active {
+      @include outline-focus($color-focus-gray, 2px);
+      background-color: $color-primary-overlay;
+    }
+  }
+
+  .account-btn {
+    @include reset-button();
+    @include set-icon-button-size($btn-size: 40px, $icon-size: 36px);
+    border-radius: 50%;
+    background-color: rgba(217, 217, 217, 0.9);
+    border: 2px solid #C1C1C1 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

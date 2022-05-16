@@ -1,0 +1,76 @@
+@import "~src/variables";
+
+.input-base-style {
+  font-family: $font-family-tertiary;
+  font-size: 14px;
+
+  margin: 0;
+}
+
+:host ::ng-deep .mat-form-field {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-flex {
+    background-color: $color-input-bg-light-blue;
+    border-radius: 8.5px;
+    padding: 0 15px;
+    height: 45px;
+    align-items: center;
+
+    .mat-form-field-label-wrapper {
+      padding: 0;
+      top: 0;
+      left: 0;
+
+      .mat-form-field-label {
+        @extend .input-base-style;
+        top: 0;
+        left: 0;
+        transform: translateY(7.5px);
+        color: $color-on-background-gray-light;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 1px $color-focus-primary-light, 0 0 0 3.5px rgba(97, 197, 174, 0.15);
+    }
+
+    .mat-form-field-infix, .mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+      border: 0;
+    }
+  }
+
+  .mat-form-field-underline {
+    display: none;
+  }
+
+  &.mat-focused .mat-form-field-flex {
+    box-shadow: 0 0 0 1px $color-primary-light, 0 0 0 3.5px rgba(97, 197, 174, 0.25);
+
+    .mat-form-field-label {
+      color: $color-on-background-gray;
+    }
+  }
+}
+
+.auth-input {
+  mat-label {
+    font-family: $font-family-tertiary;
+    font-weight: 700;
+    font-size: 16px;
+    display: block;
+    color: $color-on-background-variant;
+    margin-bottom: 10px;
+  }
+
+  mat-form-field {
+    width: 385px;
+
+    .mat-input-element {
+      @extend .input-base-style;
+      color: $color-on-background;
+    }
+  }
+}

@@ -1,0 +1,196 @@
+@import "~src/variables";
+
+:host {
+  width: 100%;
+  height: 100%;
+}
+
+.msg-base {
+  margin-top: 10px;
+  font-family: $font-family-tertiary;
+  font-size: 12px;
+}
+
+.auth-page-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+
+  .left-side-image-bg {
+    flex: 4.5;
+    padding: 35px 50px;
+    display: flex;
+    flex-direction: column;
+
+    .logo-img {
+      width: 135px;
+      height: auto;
+      opacity: 0.85;
+    }
+
+    .slogan {
+      font-family: $font-family-mono;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 35px;
+      text-align: right;
+      color: #fff;
+      opacity: 0.8;
+      margin-top: 45px;
+    }
+
+    .center-img-bg {
+      align-self: center;
+      width: 100%;
+      height: auto;
+      margin-top: 25px;
+    }
+  }
+
+  .right-side-auth-form {
+    flex: 7.5;
+    padding: 0 65px 85px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+
+    .logo-img {
+      width: 100px;
+      height: auto;
+    }
+
+    .auth-title {
+      font-family: $font-family-secondary;
+      font-weight: 700;
+      font-size: 28px;
+      color: $color-on-background-variant;
+      margin-top: 15px;
+    }
+
+    .auth-form {
+      margin-top: 25px;
+
+      .msg {
+        &-error {
+          @extend .msg-base;
+          color: $color-error;
+        }
+
+        &-success {
+          @extend .msg-base;
+          color: $color-success;
+        }
+      }
+
+      .forgot-password {
+        display: block;
+        margin-top: 7.5px;
+        text-align: right;
+        font-family: $font-family-primary;
+        font-size: 15.5px;
+        color: $color-primary;
+        text-decoration: none;
+      }
+
+      .auth-action-buttons {
+        margin-top: 45px;
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+
+        .button-base-style {
+          border-radius: 5px;
+          outline: none !important;
+          font-family: $font-family-tertiary;
+          font-size: 15px;
+        }
+
+        .local-auth-btn {
+          @extend .button-base-style;
+          flex: 2;
+          background-color: $color-primary;
+          color: $color-on-primary;
+
+          &:hover {
+            background-color: $color-primary-overlay;
+          }
+        }
+
+        .or-divider {
+          align-self: center;
+          display: inline-block;
+          margin: 0 25px;
+          font-family: $font-family-primary;
+          color: $color-on-background-gray-light;
+          font-size: 16px;
+        }
+
+        .google-auth-btn {
+          @include reset-button();
+          @extend .button-base-style;
+          background-color: $color-input-primary;
+          color: $color-on-primary;
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          padding: 0 5px;
+          flex: 1.5;
+
+          &:hover {
+            background-color: $color-input-primary-overlay;
+          }
+
+          .google-logo {
+            background-color: #fff;
+            border-radius: 3.5px;
+            padding: 5px;
+            width: 27.5px;
+            height: auto;
+            margin-left: 25px;
+          }
+        }
+      }
+
+      .go-navigate {
+        text-align: right;
+        margin-top: 35px;
+        font-family: $font-family-secondary;
+        font-size: 15px;
+        color: $color-on-background-gray;
+
+        a {
+          text-decoration: none;
+          color: #4876F9;
+          font-weight: 500;
+
+          &:hover {
+            color: #3a64da;
+          }
+        }
+      }
+    }
+  }
+}
+
+.login-page-container {
+  .left-side-image-bg {
+    background-color: #F5D38C;
+
+    .logo-img {
+      filter: invert(57%) sepia(4%) saturate(4637%) hue-rotate(3deg) brightness(104%);
+    }
+  }
+}
+
+.signup-page-container {
+  .left-side-image-bg {
+    background-color: #D6E1E6;
+
+    .logo-img {
+      filter: invert(66%) sepia(18%) saturate(486%) hue-rotate(153deg) brightness(88%);
+    }
+  }
+}

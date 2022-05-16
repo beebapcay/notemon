@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/notemon.iml" filepath="$PROJECT_DIR$/.idea/notemon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/back/notemon_backend.iml" filepath="$PROJECT_DIR$/app/back/notemon_backend.iml" />
     </modules>
   </component>
 </project>

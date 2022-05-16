@@ -1,0 +1,16 @@
+<div class="notemon-card-variant-container">
+  <img [src]="getType() | notemonCardImg" alt="" class="illus-img">
+  <div class="content-container">
+    <input [maxLength]="30" *ngIf="isCreating || isUpdating; else notUpdating" type="text" class="name"
+           [(ngModel)]="name" #nameInput>
+    <ng-template #notUpdating>
+      <p class="name">{{item?.name ?? DEFAULT_NAME}}</p>
+    </ng-template>
+    <p class="author">Author: {{item?.author?.name ?? 'Unknown'}}</p>
+  </div>
+  <card-action-bar
+    [type]="NotemonCardTypeEnum.VARIANT"
+    [item]="item"
+    (menuActionEmitted)="onMenuItemClicked($event)"
+  ></card-action-bar>
+</div>

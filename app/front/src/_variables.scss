@@ -1,0 +1,138 @@
+//import typo font
+@import 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700';
+@import 'https://fonts.googleapis.com/css?family=Roboto+Mono:100,300,400,500,600,700';
+@import 'https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,600,700';
+@import 'https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500,700';
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:100,300,400,500,600,700';
+
+// setup breakpoint
+$grid-breakpoints: (
+  xs: 0,
+  sm: 414px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1440px,
+  xxl: 1920px
+);
+
+$container-max-widths: (
+  xs: map-get($grid-breakpoints, sm),
+  sm: map-get($grid-breakpoints, md),
+  md: map-get($grid-breakpoints, lg),
+  lg: map-get($grid-breakpoints, xl),
+  xl: map-get($grid-breakpoints, xxl),
+  xxl: 2560px
+);
+
+// setup size
+$app-top-navbar-height: 65px;
+
+// setup color
+$color-primary: #29947F;
+$color-primary-overlay: #218574;
+$color-primary-light: #61c5ae;
+$color-primary-dark: #006553;
+$color-on-primary: #fff;
+
+$color-secondary: #2836a0;
+$color-secondary-overlay: #222d86;
+$color-secondary-light: #6260d2;
+$color-secondary-dark: #001170;
+$color-on-secondary: #fff;
+
+$color-variant: #113930;
+$color-variant-light: #4c6d5a;
+$color-variant-dark: #0e2d1e;
+$color-on-variant: #fff;
+
+
+$color-background: #fff;
+$color-background-gray: #F8F8F8;
+$color-on-background: #000;
+$color-on-background-gray: #435358;
+$color-on-background-gray-light: #7C8183;
+$color-on-background-gray-dark: #4C5C6B;
+$color-on-background-gray-dark-overlay: #394550;
+$color-on-background-variant: #04263D;
+$color-on-background-variant-dark: #212121;
+
+$color-focus-primary: #00a0e9;
+$color-focus-primary-light: #d0d8e4;
+$color-focus-gray: #c0c8ce;
+$color-focus-gray-light: #C0C8CE0C;
+
+$color-error: #f44336;
+$color-success: #4caf50;
+
+$color-green-light-background: #F6FCFB;
+$color-yellow-light-background: #FDFAF5;
+$color-blue-light-background: #F1F4FA;
+
+$color-nav-bot-light-bg: #374043;
+$color-nav-bot-dark-bg: #2E3639;
+$color-on-nav-bot: #ffffff;
+
+$color-input-primary: #1A73E8;
+$color-input-primary-overlay: #1976D2;
+$color-input-bg-light-blue: #E1F5FE;
+
+$color-border-gray: #e5e5e5;
+$color-border-gray-light: #e6e6e6;
+$color-border-gray-dark: #c0c0c0;
+$color-border-gray-focus: #5e5e5e;
+$color-border-gray-focus-light: rgba(210, 210, 210, 0.75);
+$color-bg-btn-gray: rgba(196, 196, 196, 0.185);
+
+$color-started-icon: #FF4081;
+
+$color-on-button: #fff;
+$color-bg-blue-button: #007bff;
+$color-bg-blue-button-overlay: #0069d9;
+
+// setup font
+$font-family-primary: 'Roboto', sans-serif;
+$font-family-secondary: 'Montserrat', sans-serif;
+$font-family-tertiary: 'Poppins', sans-serif;
+$font-family-quaternary: 'Open Sans', sans-serif;
+
+$font-family-mono: 'Roboto Mono', monospace;
+
+
+// mixin function
+@mixin outline-focus($color: $color-focus-primary, $width: 2px) {
+  outline: $width solid $color;
+}
+
+@mixin reset-button() {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@mixin set-icon-size($size: 24px) {
+  width: $size;
+  height: $size;
+  font-size: $size;
+  line-height: $size;
+}
+
+@mixin set-icon-button-size($btn-size: 24px, $icon-size: 16px) {
+  width: $btn-size;
+  height: $btn-size;
+  font-size: initial;
+  line-height: initial;
+  padding: 0;
+  margin: 0;
+
+  .icon, .mat-icon {
+    @include set-icon-size($icon-size);
+  }
+}

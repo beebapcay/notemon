@@ -1,1 +1,15 @@
-Notemon Frontend
+<div class="application-container">
+  <div class="supported-container">
+    <app-top-navbar-main *ngIf="!isFull" [isLoggedIn]="isLoggedIn"></app-top-navbar-main>
+    <div
+      [ngClass]="{'has-top-navbar': !isFull}"
+      class="main-container"
+    >
+      <router-outlet></router-outlet>
+    </div>
+    <app-bottom-navbar *ngIf="!isFull"></app-bottom-navbar>
+  </div>
+  <div class="unsupported-container">
+    <app-error-page [error]="NotSupportedErrorModel.create()"></app-error-page>
+  </div>
+</div>

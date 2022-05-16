@@ -1,0 +1,39 @@
+@import "~src/variables";
+
+.new-notemon-button-container {
+  border: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-primary;
+  font-family: $font-family-primary;
+  font-size: 14px;
+  color: $color-on-button;
+  line-height: initial;
+  padding: 10px 35px;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
+
+
+  &:hover {
+    background-color: $color-primary-overlay;
+    @include outline-focus($color-focus-gray);
+  }
+
+  &.directory {
+    background-color: $color-bg-blue-button;
+
+    &:hover {
+      background-color: $color-bg-blue-button-overlay;
+    }
+  }
+
+  &.document {
+    background-color: $color-primary;
+    padding: 10px 45px;
+
+    &:hover {
+      background-color: $color-primary-overlay;
+    }
+  }
+}
