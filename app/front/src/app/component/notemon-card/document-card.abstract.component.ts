@@ -85,7 +85,6 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
     }
 
     if ((this.isCreating || this.isUpdating) && !this.nameInputElement.contains(event.target as Node)) {
-      console.log('clicked outside');
       this.commitNameUpdate();
     }
   }
@@ -107,7 +106,9 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
   onDocumentNameUpdated() {
     if (!this.preProcessAction()) return;
 
-    if (this.item?.name === this.name) return;
+    this.isUpdating = true;
+
+    if (this.item?.name === this.name && this.item?.id !== null) return;
 
     this.name = this.name ?? this.DEFAULT_NAME;
     this.item = {...this.item, name: this.name};
@@ -137,8 +138,6 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel> imp
 
   onDocumentStarredUpdate(isStarred: boolean) {
     if (!this.preProcessAction()) return;
-
-    console.log('onDocumentStarredUpdate', isStarred);
 
     if (this.item?.relationship.isStarred === isStarred) return;
 
