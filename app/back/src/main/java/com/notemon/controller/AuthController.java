@@ -26,7 +26,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -91,10 +90,6 @@ public class AuthController {
         }
 
         UserEntity user = new UserEntity(signupDto.getName(), signupDto.getEmail(), encoder.encode(signupDto.getPassword()));
-        user.setUserLogInserted(signupDto.getName());
-        user.setDateLogInserted(LocalDateTime.now());
-        user.setUserLogUpdated(signupDto.getName());
-        user.setDateLogUpdated(LocalDateTime.now());
 
         RoleEnum role = signupDto.getRoles();
         RoleEntity roleEntity;

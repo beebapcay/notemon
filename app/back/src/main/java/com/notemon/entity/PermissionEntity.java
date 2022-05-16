@@ -1,6 +1,8 @@
 package com.notemon.entity;
 
 import com.notemon.entity.annotation.AppUUIDGenerator;
+import com.notemon.enums.PermissionEnum;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,12 +13,13 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Entity
-@Table(name = "NOTEMON_DOCUMENT")
+@Table(name = "PERMISSION")
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @SuppressWarnings("ALL")
-public class NotemonDocumentEntity extends BaseEntity {
+public class PermissionEntity extends BaseEntity {
     @Id
     @Type(type = "uuid-char")
     @GeneratedValue(generator = "UUID")
@@ -25,9 +28,10 @@ public class NotemonDocumentEntity extends BaseEntity {
     @NotNull
     private UUID id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "CODE", nullable = false, columnDefinition = "VARCHAR(255) DEFAULT 'VIEWER'")
     @NotNull
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private PermissionEnum code = PermissionEnum.VIEWER;
 
     @Column(name = "DESCRIPTION", nullable = true)
     private String description;

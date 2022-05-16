@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment'
 import { AuthModel } from '../model/auth.model';
+import { MessageResponseModel } from '../model/message-response.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -23,9 +24,9 @@ export class AuthService {
     return this.http.post<AuthModel>(loginGoogleUrl, {email, googleToken});
   }
 
-  signup(name: string, email: string, password: string): Observable<AuthModel> {
+  signup(name: string, email: string, password: string): Observable<MessageResponseModel> {
     const signupLocalUrl = AuthService.AUTH_URL + '/signup';
-    return this.http.post<AuthModel>(signupLocalUrl, {name, email, password});
+    return this.http.post<MessageResponseModel>(signupLocalUrl, {name, email, password});
   }
 }
 

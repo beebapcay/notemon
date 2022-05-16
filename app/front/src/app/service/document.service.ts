@@ -1,0 +1,34 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { DocumentModel } from '../model/document.model';
+import { MessageResponseModel } from '../model/message-response.model';
+import { UserDocumentModel } from '../model/user-document.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DocumentService {
+  static readonly DOCUMENT_URL = environment.backend.baseUrl + '/documents/';
+
+  change: BehaviorSubject<void> = new BehaviorSubject<void>(null);
+
+  constructor(private http: HttpClient) {
+  }
+
+  updateNameDocument(userId: string, documentId: string, document: DocumentModel): Observable<MessageResponseModel> {
+    const updateNameDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/name';
+    return this.http.patch<MessageResponseModel>(updateNameDocumentUrl, {...document});
+  }
+
+  updateStarredDocument(userId: string, documentId: string, relationship: UserDocumentModel): Observable<MessageResponseModel> {
+    const updateStarredDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/starred';
+    return this.http.patch<MessageResponseModel>(updateStarredDocumentUrl, {...relationship});
+  }
+
+  deleteDocument(userId: string, documentId: string): Observable<MessageResponseModel> {
+    const deleteDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId;
+    return this.http.delete<MessageResponseModel>(deleteDocumentUrl);
+  }
+}

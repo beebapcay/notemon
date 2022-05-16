@@ -24,9 +24,10 @@ import { NewNotemonButtonComponent } from './new-notemon-button/new-notemon-butt
 import { NotePageComponent } from './note-page/note-page.component';
 import { CardActionBarComponent } from './notemon-card/card-action-bar/card-action-bar.component';
 import { DirectoryCardComponent } from './notemon-card/directory-card/directory-card.component';
-import { DocumentCardComponent } from './notemon-card/document-card/document-card.component';
+import { NoteCardComponent } from './notemon-card/note-card/note-card.component';
 import { NotemonCardEmptyComponent } from './notemon-card/notemon-card-empty/notemon-card-empty.component';
 import { NotemonCardVariantComponent } from './notemon-card/notemon-card-variant/notemon-card-variant.component';
+import { OptionMenuCardComponent } from './notemon-card/option-menu-card/option-menu-card.component';
 import { NotemonEditorComponent } from './notemon-editor/notemon-editor.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { ThemeToggleButtonComponent } from './theme-toggle-button/theme-toggle-button.component';
@@ -64,7 +65,7 @@ import { TopNavbarMainComponent } from "./top-navbar/top-navbar-main/top-navbar-
     HashtagComponent,
     CardActionBarComponent,
     DirectoryCardComponent,
-    DocumentCardComponent,
+    NoteCardComponent,
     NotemonCardVariantComponent,
     NewNotemonButtonComponent,
     NotemonCardEmptyComponent,
@@ -72,6 +73,7 @@ import { TopNavbarMainComponent } from "./top-navbar/top-navbar-main/top-navbar-
     SnackbarComponent,
     FormFieldComponent,
     HomePageComponent,
+    OptionMenuCardComponent,
   ],
   exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
 })

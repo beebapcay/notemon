@@ -21,12 +21,10 @@ export class SnackbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.data);
 
     if (this.data?.duration) {
       this.duration = this.data.duration;
       this.displayDuration = this.duration / 1000 - this.time;
-      console.log('duration', this.displayDuration);
       this.startTimer();
     }
 

@@ -52,10 +52,10 @@ export class AppComponent extends SubscriptionAwareAbstractComponent implements 
   }
 
   ngOnInit(): void {
-    this.fetchLoggedIn();
+    this.fetchUser();
   }
 
-  fetchLoggedIn() {
+  fetchUser() {
     const userId = this.persistenceService.get('id');
     const jwtToken = this.persistenceService.get('token');
 
@@ -67,8 +67,14 @@ export class AppComponent extends SubscriptionAwareAbstractComponent implements 
       this.userService.getUserById(userId)
         .pipe(take(1))
         .subscribe({
-            next: user => this.authService.isLoggedIn.next(true),
-            error: () => this.authService.isLoggedIn.next(false)
+            next: user => {
+              this.authService.isLoggedIn.next(true);
+              this.userService.user.next(user);
+            },
+            error: () => {
+              this.authService.isLoggedIn.next(false);
+              this.userService.user.next(null);
+            }
           }
         )
     );
