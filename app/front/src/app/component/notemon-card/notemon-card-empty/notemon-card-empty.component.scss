@@ -51,6 +51,7 @@
     }
 
     p.action {
+      margin-top: 5px;
       @extend .action-base-style;
       color: $color-on-background-gray-light;
     }

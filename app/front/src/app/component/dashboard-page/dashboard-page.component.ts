@@ -23,7 +23,7 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
 
   user: UserModel = null;
 
-  starred: DocumentModel[] = [];
+  starreds: DocumentModel[] = [];
   directories: DirectoryModel[] = [];
   notes: NoteModel[] = [];
 
@@ -71,7 +71,7 @@ export class DashboardPageComponent extends SubscriptionAwareAbstractComponent i
               .sort((a, b) => (new Date(a?.lastModifiedAt)).getTime() - (new Date(b?.lastModifiedAt)).getTime())
               .reverse();
 
-            this.starred = documents
+            this.starreds = documents
               .filter(document => document?.relationship?.isStarred);
 
             this.directories = documents
