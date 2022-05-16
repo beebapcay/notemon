@@ -104,7 +104,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
           .pipe(take(1))
           .subscribe({
             next: () => {
-              this.snackbarService.openSaveSuccessAnnouncement(`Document ${this.item?.name} was created successfully.`);
+              this.snackbarService.openSaveSuccessAnnouncement(`Document <b>${this.item?.name}</b> was created successfully.`);
               this.documentService.change.next();
             },
             error: (error) => this.handleErrorResponse(error)
@@ -116,7 +116,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
           .pipe(take(1))
           .subscribe({
             next: () => {
-              this.snackbarService.openSaveSuccessAnnouncement(`Document ${initName} was renamed to ${this.item?.name} successfully.`);
+              this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${initName}</strong> was renamed to <strong>${this.item?.name}</strong> successfully.`);
               this.documentService.change.next();
             },
             error: (error) => this.handleErrorResponse(error)
@@ -137,7 +137,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         .pipe(take(1))
         .subscribe({
           next: () => {
-            this.snackbarService.openSaveSuccessAnnouncement(`Document ${this.item?.name} was ${isStarred ? 'added to' : 'removed from'} Starred successfully.`);
+            this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was ${isStarred ? 'added to' : 'removed from'} Starred successfully.`);
             this.documentService.change.next();
           },
           error: (error) => this.handleErrorResponse(error)
@@ -153,7 +153,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         .pipe(take(1))
         .subscribe({
           next: () => {
-            this.snackbarService.openWarningAnnouncement(`Document ${this.item?.name} was deleted successfully.`);
+            this.snackbarService.openWarningAnnouncement(`Document <strong>${this.item?.name}</strong> was deleted successfully.`);
             this.documentService.change.next();
           },
           error: (error) => this.handleErrorResponse(error)
