@@ -91,6 +91,11 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
 
     if (this.item?.name === this.name && this.item?.id !== null) return;
 
+    if (!this.name && this.item?.name) {
+      this.name = this.item?.name;
+      return;
+    }
+
     const initName = this.item?.name;
     this.name = this.name ?? this.DEFAULT_NAME;
     this.item = {...this.item, name: this.name};
