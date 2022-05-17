@@ -9,7 +9,6 @@ import {ErrorPageComponent} from './component/error-page/error-page.component';
 import {FeaturePageComponent} from './component/feature-page/feature-page.component';
 import {HomePageComponent} from './component/home-page/home-page.component';
 import {PageNotFoundErrorModel} from './model/error.model';
-import {DirectoryPageComponent} from './component/directory-page/directory-page.component';
 
 @NgModule({
   imports: [
@@ -20,13 +19,9 @@ import {DirectoryPageComponent} from './component/directory-page/directory-page.
       {path: AppRouteConstant.SIGNUP, component: AuthPageComponent},
       {path: AppRouteConstant.FEATURE, component: FeaturePageComponent},
       {path: AppRouteConstant.DASHBOARD, component: DashboardPageComponent},
-      {
-        path: `${AppRouteConstant.DIRECTORY}/:directoryId`,
-        component: DirectoryPageComponent,
-        runGuardsAndResolvers: 'always'
-      },
+      {path: `${AppRouteConstant.DASHBOARD}/:directoryId`, component: DashboardPageComponent},
       {path: AppRouteConstant.OTHER, component: ErrorPageComponent, data: PageNotFoundErrorModel.create()}
-    ], {onSameUrlNavigation: 'reload'})
+    ])
   ],
   exports: [CommonModule, RouterModule],
   declarations: [],
