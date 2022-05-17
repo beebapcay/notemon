@@ -8,6 +8,7 @@ export class AppRouteConstant {
   static readonly DASHBOARD = 'dashboard';
   static readonly DIRECTORY = 'directory';
   static readonly NOTE = 'note';
+  static readonly SHARE = 'share';
   static readonly CONTACT_US = 'contact-us';
   static readonly OTHER = '**';
 

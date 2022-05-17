@@ -17,6 +17,12 @@ import java.util.UUID;
 public class DocumentController {
     private final DocumentService documentService;
 
+    @GetMapping("/shareCode/{shareCode}")
+    public DocumentDto getDocumentByShareCode(@PathVariable String shareCode)
+            throws EntityWithFieldNotFoundException {
+        return documentService.getDocumentByShareCode(shareCode);
+    }
+
     @PatchMapping("{id}/users/{userId}/name")
     public DocumentDto updateNameDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId, @RequestBody DocumentDto documentDto)
             throws EntityWithIdNotFoundException,

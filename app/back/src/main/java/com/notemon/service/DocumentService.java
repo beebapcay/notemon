@@ -38,6 +38,15 @@ public class DocumentService {
     private final UserDocumentMapper userDocumentMapper;
 
     @Transactional
+    public DocumentDto getDocumentByShareCode(String shareCode)
+            throws EntityWithFieldNotFoundException {
+        DocumentEntity documentEntity = documentRepository.findByShareCode(shareCode)
+                .orElseThrow(() -> new EntityWithFieldNotFoundException(DocumentEntity.class, "ShareCode", shareCode));
+
+        return documentMapper.entityToDto(documentEntity);
+    }
+
+    @Transactional
     public DocumentDto createNewDocument(UUID userId, DocumentDto documentDto)
             throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException {
         UserEntity userEntity = userRepository.findById(userId)

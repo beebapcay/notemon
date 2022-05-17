@@ -36,6 +36,7 @@ import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-ma
 import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashboard-base.component';
 import {LoadingProgressBarComponent} from './loading/loading-progress-bar/loading-progress-bar.component';
 import {LoadingProgressSpinnerComponent} from './loading/loading-progress-spinner/loading-progress-spinner.component';
+import {SharePageComponent} from './share-page/share-page.component';
 
 @NgModule({
   imports: [
@@ -78,6 +79,7 @@ import {LoadingProgressSpinnerComponent} from './loading/loading-progress-spinne
     ManageDashboardBaseComponent,
     LoadingProgressBarComponent,
     LoadingProgressSpinnerComponent,
+    SharePageComponent,
   ],
   exports: [
     CommonModule,
