@@ -4,11 +4,13 @@ import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import _ from 'lodash';
 import {finalize, take} from 'rxjs';
+import { AppComponent } from '../../app.component';
 import {AppRouteConstant} from '../../common/app-route.constant';
 import {AssetsSrcConstant} from '../../common/assets-src.constant';
 import {AuthService} from '../../service/auth.service';
 import {PersistenceService} from '../../service/persistence.service';
 import {SnackbarService} from '../../service/snackbar.service';
+import { UserService } from '../../service/user.service';
 import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
 import {LoginFormComponent} from './login-form/login-form.component';
 import {SignupFormComponent} from './signup-form/signup-form.component';
@@ -38,6 +40,7 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
               private authService: AuthService,
               private snackbarService: SnackbarService,
               private persistenceService: PersistenceService,
+              private userService: UserService,
               private loadingService: LoadingService) {
     super();
 
@@ -68,8 +71,6 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
     this.showMessage = true;
     this.authForm.markAllAsTouched();
 
-    console.log(this.authForm.value);
-
     if (this.authForm.invalid) {
       this.showErrorMessage('Form is invalid. Please check your input');
       return;
@@ -96,6 +97,7 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
           next: (authData) => {
             this.persistenceService.write(authData);
             this.authService.isLoggedIn.next(true);
+            this.userService.fetchUser();
             this.router.navigate([AppRouteConstant.DASHBOARD]).then();
           },
           error: (error) => {
