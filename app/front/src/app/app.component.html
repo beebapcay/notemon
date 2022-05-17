@@ -5,6 +5,7 @@
       [ngClass]="{'has-top-navbar': !isFull}"
       class="main-container"
     >
+      <app-loading-progress-bar></app-loading-progress-bar>
       <router-outlet></router-outlet>
     </div>
     <app-bottom-navbar *ngIf="!isFull"></app-bottom-navbar>

@@ -35,6 +35,8 @@ import {TopNavbarEditorComponent} from './top-navbar/top-navbar-editor/top-navba
 import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-main.component';
 import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashboard-base.component';
 import {DirectoryPageComponent} from './directory-page/directory-page.component';
+import {LoadingProgressBarComponent} from './loading/loading-progress-bar/loading-progress-bar.component';
+import {LoadingProgressSpinnerComponent} from './loading/loading-progress-spinner/loading-progress-spinner.component';
 
 @NgModule({
   imports: [
@@ -76,8 +78,17 @@ import {DirectoryPageComponent} from './directory-page/directory-page.component'
     HomePageComponent,
     ManageDashboardBaseComponent,
     DirectoryPageComponent,
+    LoadingProgressBarComponent,
+    LoadingProgressSpinnerComponent,
   ],
-  exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
+  exports: [
+    CommonModule,
+    TopNavbarMainComponent,
+    FeaturePageComponent,
+    BottomNavbarComponent,
+    ErrorPageComponent,
+    LoadingProgressBarComponent,
+    LoadingProgressSpinnerComponent],
 })
 export class ComponentModule {
 }
