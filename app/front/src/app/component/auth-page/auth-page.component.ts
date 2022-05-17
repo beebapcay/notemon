@@ -1,17 +1,17 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
 import _ from 'lodash';
-import { take } from 'rxjs';
-import { AppRouteConstant } from '../../common/app-route.constant';
-import { AssetsSrcConstant } from '../../common/assets-src.constant';
-import { AuthService } from '../../service/auth.service';
-import { PersistenceService } from '../../service/persistence.service';
-import { SnackbarService } from '../../service/snackbar.service';
-import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
+import {take} from 'rxjs';
+import {AppRouteConstant} from '../../common/app-route.constant';
+import {AssetsSrcConstant} from '../../common/assets-src.constant';
+import {AuthService} from '../../service/auth.service';
+import {PersistenceService} from '../../service/persistence.service';
+import {SnackbarService} from '../../service/snackbar.service';
+import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
+import {LoginFormComponent} from './login-form/login-form.component';
+import {SignupFormComponent} from './signup-form/signup-form.component';
 
 @Component({
   selector: 'app-auth-page',
@@ -54,6 +54,12 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
     this.authForm = this.isLoginPage
       ? this.loginForm.buildForm()
       : this.signupForm.buildForm();
+  }
+
+  onEnterKeyPressed(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
   }
 
   onAuthSubmit() {
