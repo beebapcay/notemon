@@ -19,6 +19,14 @@ export class DocumentService {
   constructor(private http: HttpClient) {
   }
 
+  getDocumentByShareCode(shareCode: string): Observable<DocumentModel> {
+    return this.http.get<DocumentModel>(DocumentService.DOCUMENT_URL + 'shareCode/' + shareCode);
+  }
+
+  addPartnerToDocument(documentId: string, relationship: UserDocumentModel): Observable<UserDocumentModel> {
+    return this.http.post<UserDocumentModel>(DocumentService.DOCUMENT_URL + documentId + '/partner/', {...relationship});
+  }
+
   updateNameDocument(userId: string, documentId: string, document: DocumentModel): Observable<DocumentModel> {
     const updateNameDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/name';
     return this.http.patch<DocumentModel>(updateNameDocumentUrl, {...document});

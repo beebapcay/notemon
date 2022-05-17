@@ -8,20 +8,19 @@ import com.notemon.entity.PermissionEntity;
 import com.notemon.entity.UserDocumentEntity;
 import com.notemon.entity.UserEntity;
 import com.notemon.enums.PermissionEnum;
-import com.notemon.exception.EntityWithFieldNotFoundException;
-import com.notemon.exception.EntityWithIdNotFoundException;
-import com.notemon.exception.NotPermissionToAccessDocumentException;
-import com.notemon.exception.NotPermissionToEditDocumentException;
+import com.notemon.exception.*;
 import com.notemon.mapper.DocumentMapper;
 import com.notemon.mapper.UserDocumentMapper;
 import com.notemon.repository.DocumentRepository;
 import com.notemon.repository.PermissionRepository;
 import com.notemon.repository.UserDocumentRepository;
 import com.notemon.repository.UserRepository;
+import com.notemon.utils.RandomCodeUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -39,12 +38,22 @@ public class DocumentService {
     private final UserDocumentMapper userDocumentMapper;
 
     @Transactional
+    public DocumentDto getDocumentByShareCode(String shareCode)
+            throws EntityWithFieldNotFoundException {
+        DocumentEntity documentEntity = documentRepository.findByShareCode(shareCode)
+                .orElseThrow(() -> new EntityWithFieldNotFoundException(DocumentEntity.class, "ShareCode", shareCode));
+
+        return documentMapper.entityToDto(documentEntity);
+    }
+
+    @Transactional
     public DocumentDto createNewDocument(UUID userId, DocumentDto documentDto)
             throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException {
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
 
         DocumentEntity documentEntity = documentMapper.dtoToEntity(documentDto);
+        documentEntity.setShareCode(RandomCodeUtils.generateShareCode());
         documentEntity = documentRepository.save(documentEntity);
 
         PermissionEntity permissionEntity = permissionRepository.findByCode(PermissionEnum.EDITOR)
@@ -125,6 +134,38 @@ public class DocumentService {
     }
 
     @Transactional
+    public UserDocumentDto addPartnerToDocument(UUID documentId, UserDocumentDto relationship)
+            throws
+            EntityWithIdNotFoundException,
+            EntityWithFieldNotFoundException,
+            UserAlreadyInRelationshipWithDocumentException {
+        DocumentEntity documentEntity = documentRepository.findById(relationship.getDocument().getId())
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        UUID partnerId = relationship.getUser().getId();
+        UserEntity partnerEntity = userRepository.findById(partnerId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, partnerId));
+
+        Optional<UserDocumentEntity> userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(partnerId, documentEntity.getId());
+        if (userDocumentEntity.isPresent()) {
+            throw new UserAlreadyInRelationshipWithDocumentException(documentEntity.getId(), partnerId);
+        } else {
+            UserDocumentEntity userDocument = new UserDocumentEntity();
+            userDocument.setDocument(documentEntity);
+            userDocument.setUser(partnerEntity);
+
+            PermissionEntity permission = permissionRepository.findByCode(PermissionEnum.EDITOR)
+                    .orElseThrow(() -> new EntityWithFieldNotFoundException(PermissionEntity.class, "Code", PermissionEnum.EDITOR.toString()));
+
+            userDocument.setPermission(permission);
+
+            UserDocumentEntity savedRelationshipEntity = userDocumentRepository.save(userDocument);
+
+            return userDocumentMapper.entityToDto(savedRelationshipEntity);
+        }
+    }
+
+    @Transactional
     public MessageResponseDto deleteDocument(UUID documentId, UUID userId)
             throws EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException {
@@ -142,5 +183,4 @@ public class DocumentService {
 
         return new MessageResponseDto("Document deleted successfully");
     }
-
 }

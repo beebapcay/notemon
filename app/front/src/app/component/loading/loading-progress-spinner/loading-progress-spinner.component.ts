@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { SizeEnum } from '../../../enum/size.enum';
 import {SubscriptionAwareAbstractComponent} from '../../subscription-aware.abstract.component';
 import {LoadingService} from '../../../service/loading.service';
 
@@ -8,6 +9,8 @@ import {LoadingService} from '../../../service/loading.service';
   styleUrls: ['./loading-progress-spinner.component.scss']
 })
 export class LoadingProgressSpinnerComponent extends SubscriptionAwareAbstractComponent implements OnInit {
+  @Input() size: SizeEnum = SizeEnum.MEDIUM;
+
   loading: boolean = false;
 
   constructor(private loadingService: LoadingService) {

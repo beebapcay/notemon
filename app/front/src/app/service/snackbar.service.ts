@@ -64,7 +64,7 @@ export class SnackbarService {
 
   openRequestErrorAnnouncement(error: any): void {
     this.open({
-      message: error?.error?.message ?? error?.message ?? error?.statusText ?? error ?? 'Request error',
+      message: error?.error?.error?.message ?? error?.error?.message ?? error?.message ?? error?.statusText ?? error ?? 'Request error',
       status: SnackbarStatusEnum.error
     });
   }

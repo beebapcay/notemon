@@ -27,7 +27,7 @@ public class DocumentDto extends BaseDto {
     private UserDocumentDto relationship;
 
     private String content;
-    private String shareLink;
+    private String shareCode;
 
     private UserDto author;
     private LocalDateTime createdAt;

@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {DirectoryModel} from '../../../model/directory.model';
 import {DocumentService} from '../../../service/document.service';
@@ -19,8 +20,9 @@ export class DirectoryCardComponent extends DocumentCardAbstractComponent<Direct
   constructor(
     userService: UserService,
     snackbarService: SnackbarService,
-    documentService: DocumentService) {
-    super(userService, snackbarService, documentService);
+    documentService: DocumentService,
+    clipboardService: Clipboard) {
+    super(userService, snackbarService, documentService, clipboardService);
   }
 }
 

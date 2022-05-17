@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {SizeEnum} from '../../../enum/size.enum';
 import {NoteModel} from '../../../model/note.model';
@@ -19,8 +20,9 @@ export class NoteCardComponent extends DocumentCardAbstractComponent<NoteModel> 
   constructor(
     userService: UserService,
     snackbarService: SnackbarService,
-    documentService: DocumentService
+    documentService: DocumentService,
+    clipboardService: Clipboard
   ) {
-    super(userService, snackbarService, documentService);
+    super(userService, snackbarService, documentService, clipboardService);
   }
 }

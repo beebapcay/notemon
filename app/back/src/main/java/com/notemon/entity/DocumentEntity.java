@@ -54,6 +54,6 @@ public class DocumentEntity extends BaseEntity {
     @Column(name = "CONTENT", nullable = true)
     private String content;
 
-    @Column(name = "SHARE_LINK", nullable = true)
-    private String shareLink;
+    @Column(name = "SHARE_CODE", nullable = true)
+    private String shareCode;
 }

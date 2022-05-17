@@ -1,0 +1,63 @@
+@import "src/variables";
+
+// setup color
+$color-primary: #103b33;
+$color-primary-mask: #306e60;
+$color-primary-overlay: #0d352e;
+$color-primary-light: #205649;
+$color-primary-dark: #002821;
+$color-on-primary: #666666;
+
+$color-secondary: #101640;
+$color-secondary-overlay: #0e1236;
+$color-secondary-light: #1c1b5f;
+$color-secondary-dark: #00072d;
+$color-on-secondary: #666666;
+
+$color-variant: #071713;
+$color-variant-light: #1e2c24;
+$color-variant-dark: #06120c;
+$color-on-variant: #666666;
+
+$color-background: #666666;
+$color-background-gray: #636363;
+$color-on-background: #000;
+$color-on-background-gray: #1b2123;
+$color-on-background-gray-light: #323434;
+$color-on-background-gray-dark: #1e252b;
+$color-on-background-gray-dark-overlay: #171c20;
+$color-on-background-variant: #020f18;
+$color-on-background-variant-dark: #0d0d0d;
+
+$color-focus-primary: #00405d;
+$color-focus-primary-light: #40526f;
+$color-focus-gray: #46515a;
+$color-focus-gray-light: #46515A0C;
+
+$color-error: #710d06;
+$color-success: #1e4620;
+
+$color-green-light-background: #329585;
+$color-yellow-light-background: #a67421;
+$color-blue-light-background: #345391;
+
+$color-nav-bot-light-bg: #161a1b;
+$color-nav-bot-dark-bg: #121617;
+$color-on-nav-bot: #666666;
+
+$color-input-primary: #092e5e;
+$color-input-primary-overlay: #0a2f54;
+$color-input-bg-light-blue: #0682b9;
+
+$color-border-gray: #5c5c5c;
+$color-border-gray-light: #5c5c5c;
+$color-border-gray-dark: #4d4d4d;
+$color-border-gray-focus: #262626;
+$color-border-gray-focus-light: rgba(84, 84, 84, 0.75);
+$color-bg-btn-gray: rgba(78, 78, 78, 0.19);
+
+$color-started-icon: #80002b;
+
+$color-on-button: #666666;
+$color-bg-blue-button: #003166;
+$color-bg-blue-button-overlay: #002a57;

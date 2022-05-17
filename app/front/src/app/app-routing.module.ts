@@ -9,6 +9,7 @@ import {ErrorPageComponent} from './component/error-page/error-page.component';
 import {FeaturePageComponent} from './component/feature-page/feature-page.component';
 import {HomePageComponent} from './component/home-page/home-page.component';
 import {PageNotFoundErrorModel} from './model/error.model';
+import {SharePageComponent} from './component/share-page/share-page.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {PageNotFoundErrorModel} from './model/error.model';
       {path: AppRouteConstant.FEATURE, component: FeaturePageComponent},
       {path: AppRouteConstant.DASHBOARD, component: DashboardPageComponent},
       {path: `${AppRouteConstant.DASHBOARD}/:directoryId`, component: DashboardPageComponent},
+      {path: `${AppRouteConstant.SHARE}/:shareCode`, component: SharePageComponent},
       {path: AppRouteConstant.OTHER, component: ErrorPageComponent, data: PageNotFoundErrorModel.create()}
     ])
   ],

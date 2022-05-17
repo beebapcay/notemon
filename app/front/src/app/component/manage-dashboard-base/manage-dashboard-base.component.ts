@@ -82,10 +82,14 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
 
   fetchDocuments() {
     this.loadingService.showLoadingSpinner();
+    this.loadingService.showLoadingBar();
     if (this.user === null) return;
     this.registerSubscription(
       this.userService.getAllDocuments(this.user?.id, this.insideParent, null)
-        .pipe(take(1), finalize(() => this.loadingService.hideLoadingSpinner()))
+        .pipe(take(1), finalize(() => {
+          this.loadingService.hideLoadingBar();
+          this.loadingService.hideLoadingSpinner();
+        }))
         .subscribe({
           next: (documents) => {
             this.documentService.source.next(documents ?? []);
@@ -93,6 +97,7 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
           error: error => this.snackbarService.openRequestErrorAnnouncement(error)
         })
     );
+
   }
 
 

@@ -4,14 +4,44 @@
   width: 55px !important;
   height: 55px !important;
 
-  svg {
-    width: 55px !important;
-    height: 55px !important;
-  }
-
   circle {
     stroke: $color-primary;
-    stroke-width: 8.5px !important;
+  }
+
+  &.large {
+    svg {
+      width: 55px !important;
+      height: 55px !important;
+    }
+
+    circle {
+      stroke: $color-primary;
+      stroke-width: 8.5px !important;
+    }
+  }
+
+  &.medium {
+    svg {
+      width: 45px !important;
+      height: 45px !important;
+    }
+
+    circle {
+      stroke: $color-primary;
+      stroke-width: 8px !important;
+    }
+  }
+
+  &.small {
+    svg {
+      width: 30px !important;
+      height: 30px !important;
+    }
+
+    circle {
+      stroke: $color-primary;
+      stroke-width: 7.5px !important;
+    }
   }
 }
 
