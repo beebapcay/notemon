@@ -30,5 +30,11 @@ export class ThemeToggleButtonComponent implements OnInit {
     this.isDarkTheme = !this.isDarkTheme;
     this.themeChangeEmitter.emit(this.isDarkTheme ? ThemeEnum.DARK : ThemeEnum.LIGHT);
     this.snackbarService.openWarningAnnouncement('Now, we don\'t support dark theme, sorry.');
+
+    if (this.isDarkTheme) {
+      setTimeout(() => {
+        this.isDarkTheme = false;
+      }, 1000);
+    }
   }
 }

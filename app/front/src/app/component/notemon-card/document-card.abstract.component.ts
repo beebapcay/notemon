@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import {
   AfterViewChecked,
   Component,
@@ -43,7 +44,8 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
   protected constructor(
     protected userService: UserService,
     protected snackbarService: SnackbarService,
-    protected documentService: DocumentService
+    protected documentService: DocumentService,
+    protected clipboardService: Clipboard,
   ) {
     super();
   }
@@ -233,11 +235,17 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
   onMenuItemClicked(actionOption: any) {
     switch (actionOption as CardActionMenuEnum) {
       case CardActionMenuEnum.SHARE: {
-        console.log('share');
+        const origin = window.location.origin;
+        this.clipboardService.copy(`${origin}/share/${this.item?.id}`);
+
+        this.snackbarService.openSuccessAnnouncement('Link for sharing was copied to clipboard.');
         break;
       }
       case CardActionMenuEnum.GET_LINK: {
-        console.log('get_link');
+        const origin = window.location.origin;
+        this.clipboardService.copy(`${origin}/dashboard/${this.item?.id}`);
+
+        this.snackbarService.openSuccessAnnouncement('Link of document address was copied to clipboard.');
         break;
       }
       case CardActionMenuEnum.ADD_TO_STARRED: {
