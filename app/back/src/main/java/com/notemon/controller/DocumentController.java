@@ -4,9 +4,7 @@ import com.notemon.constant.EndpointConstant;
 import com.notemon.dto.DocumentDto;
 import com.notemon.dto.MessageResponseDto;
 import com.notemon.dto.UserDocumentDto;
-import com.notemon.exception.EntityWithIdNotFoundException;
-import com.notemon.exception.NotPermissionToAccessDocumentException;
-import com.notemon.exception.NotPermissionToEditDocumentException;
+import com.notemon.exception.*;
 import com.notemon.service.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +30,15 @@ public class DocumentController {
             throws EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException {
         return documentService.updateStarredDocument(id, userId, userDocumentDto);
+    }
+
+    @PostMapping("{id}/partner")
+    public UserDocumentDto addPartnerToDocument(@PathVariable("id") UUID id, @RequestBody UserDocumentDto userDocumentDto)
+            throws
+            EntityWithIdNotFoundException,
+            EntityWithFieldNotFoundException,
+            UserAlreadyInRelationshipWithDocumentException {
+        return documentService.addPartnerToDocument(id, userDocumentDto);
     }
 
     @DeleteMapping("{id}/users/{userId}")
