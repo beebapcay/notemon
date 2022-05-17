@@ -37,7 +37,9 @@ public class DocumentController {
     @DeleteMapping("{id}/users/{userId}")
     public MessageResponseDto deleteDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId)
             throws EntityWithIdNotFoundException,
-            NotPermissionToAccessDocumentException {
+            NotPermissionToAccessDocumentException,
+            InterruptedException {
+        Thread.sleep(10000);
         return documentService.deleteDocument(id, userId);
     }
 }

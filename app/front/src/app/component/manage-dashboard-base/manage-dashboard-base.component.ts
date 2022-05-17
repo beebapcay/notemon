@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {take} from 'rxjs';
+import {finalize, take} from 'rxjs';
 import {AppRouteConstant} from '../../common/app-route.constant';
 import {NotemonTypeEnum} from '../../enum/notemon-type.enum';
 import {SizeEnum} from '../../enum/size.enum';
@@ -13,6 +13,7 @@ import {SnackbarService} from '../../service/snackbar.service';
 import {UserService} from '../../service/user.service';
 import {ArrayUtil} from '../../utils/array.util';
 import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
+import {LoadingService} from '../../service/loading.service';
 
 @Component({
   selector: 'app-manage-dashboard-base',
@@ -28,6 +29,8 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
   directories: DirectoryModel[] = [];
   notes: NoteModel[] = [];
 
+  loading: boolean = true;
+
   readonly NotemonCardTypeEnum = NotemonTypeEnum;
   readonly NotemonTypeEnum = NotemonTypeEnum;
   readonly SizeEnum = SizeEnum;
@@ -37,7 +40,8 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
               private router: Router,
               private userService: UserService,
               private documentService: DocumentService,
-              private snackbarService: SnackbarService) {
+              private snackbarService: SnackbarService,
+              private loadingService: LoadingService) {
     super();
   }
 
@@ -62,14 +66,20 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
         this.fetchDocuments();
       })
     );
+
+    this.registerSubscription(
+      this.loadingService.loadingSpinner.subscribe(loading => {
+        this.loading = loading;
+      })
+    );
   }
 
   fetchDocuments() {
-    console.log('fetchDocuments');
+    this.loadingService.showLoadingSpinner();
     if (this.user === null) return;
     this.registerSubscription(
       this.userService.getAllDocuments(this.user?.id, this.insideParent, null)
-        .pipe(take(1))
+        .pipe(take(1), finalize(() => this.loadingService.hideLoadingSpinner()))
         .subscribe({
           next: (documents) => {
             documents = documents ?? [];
