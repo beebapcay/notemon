@@ -18,6 +18,7 @@ import com.notemon.repository.DocumentRepository;
 import com.notemon.repository.PermissionRepository;
 import com.notemon.repository.UserDocumentRepository;
 import com.notemon.repository.UserRepository;
+import com.notemon.utils.RandomCodeUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,6 +46,7 @@ public class DocumentService {
                 .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
 
         DocumentEntity documentEntity = documentMapper.dtoToEntity(documentDto);
+        documentEntity.setShareCode(RandomCodeUtils.generateShareCode());
         documentEntity = documentRepository.save(documentEntity);
 
         PermissionEntity permissionEntity = permissionRepository.findByCode(PermissionEnum.EDITOR)
