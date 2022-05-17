@@ -68,6 +68,12 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
     );
 
     this.registerSubscription(
+      this.documentService.source.subscribe(() => {
+        this.sourceDataFilter();
+      })
+    )
+
+    this.registerSubscription(
       this.loadingService.loadingSpinner.subscribe(loading => {
         this.loading = loading;
       })
@@ -82,26 +88,31 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
         .pipe(take(1), finalize(() => this.loadingService.hideLoadingSpinner()))
         .subscribe({
           next: (documents) => {
-            documents = documents ?? [];
-
-            documents = documents
-              .sort((a, b) => (new Date(a?.createdAt)).getTime() - (new Date(b?.createdAt)).getTime())
-              .reverse();
-
-            this.starreds = documents
-              .filter(document => document?.relationship?.isStarred);
-
-            this.directories = documents
-              .filter(document => document?.isDirectory)
-              .map(document => document as DirectoryModel);
-
-            this.notes = documents
-              .filter(document => !document?.isDirectory)
-              .map(document => document as NoteModel);
+            this.documentService.source.next(documents ?? []);
           },
           error: error => this.snackbarService.openRequestErrorAnnouncement(error)
         })
     );
+  }
+
+
+  sourceDataFilter() {
+    let documents: DocumentModel[] = this.documentService.source.getValue();
+
+    documents = documents
+      .sort((a, b) => (new Date(a?.createdAt)).getTime() - (new Date(b?.createdAt)).getTime())
+      .reverse();
+
+    this.starreds = documents
+      .filter(document => document?.relationship?.isStarred);
+
+    this.directories = documents
+      .filter(document => document?.isDirectory)
+      .map(document => document as DirectoryModel);
+
+    this.notes = documents
+      .filter(document => !document?.isDirectory)
+      .map(document => document as NoteModel);
   }
 
   onNewDocumentClicked(type: NotemonTypeEnum) {

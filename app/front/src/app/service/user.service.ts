@@ -1,10 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { DocumentModel } from '../model/document.model';
-import { MessageResponseModel } from '../model/message-response.model';
-import { UserModel } from '../model/user.model';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {DocumentModel} from '../model/document.model';
+import {UserModel} from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +21,9 @@ export class UserService {
     return this.http.get<UserModel>(getUserByIdUrl);
   }
 
-  createNewDocument(userId: string, document: DocumentModel): Observable<MessageResponseModel> {
+  createNewDocument(userId: string, document: DocumentModel): Observable<DocumentModel> {
     const createNewDocumentUrl = UserService.USER_URL + userId + '/document';
-    return this.http.post<MessageResponseModel>(createNewDocumentUrl, {...document});
+    return this.http.post<DocumentModel>(createNewDocumentUrl, {...document});
   }
 
   getAllDocuments(userId: string, parentId: string, isDirectory: boolean | null): Observable<DocumentModel[]> {

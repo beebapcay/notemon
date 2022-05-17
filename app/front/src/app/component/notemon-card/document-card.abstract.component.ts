@@ -106,9 +106,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         this.userService.createNewDocument(this.user?.id, this.item)
           .pipe(take(1))
           .subscribe({
-            next: () => {
+            next: (document) => {
               this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was created successfully.`);
-              this.documentService.change.next();
+
+              this.addNewDocumentToServiceSource(document);
             },
             error: (error) => this.handleErrorResponse(error)
           })
@@ -118,9 +119,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         this.documentService.updateNameDocument(this.user?.id, this.item?.id, this.item)
           .pipe(take(1))
           .subscribe({
-            next: () => {
+            next: (document) => {
               this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${initName}</strong> was renamed to <strong>${this.item?.name}</strong> successfully.`);
-              this.documentService.change.next();
+
+              this.replaceExistingDocumentInServiceSource(document);
             },
             error: (error) => this.handleErrorResponse(error)
           })
@@ -139,9 +141,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
       this.documentService.updateStarredDocument(this.user?.id, this.item?.id, relationship)
         .pipe(take(1))
         .subscribe({
-          next: () => {
+          next: (document) => {
             this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was ${isStarred ? 'added to' : 'removed from'} Starred successfully.`);
-            this.documentService.change.next();
+
+            this.replaceExistingDocumentInServiceSource(document);
           },
           error: (error) => this.handleErrorResponse(error)
         })
@@ -157,7 +160,8 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         .subscribe({
           next: () => {
             this.snackbarService.openWarningAnnouncement(`Document <strong>${this.item?.name}</strong> was deleted successfully.`);
-            this.documentService.change.next();
+
+            this.deleteExistingDocumentInServiceSource(this.item);
           },
           error: (error) => this.handleErrorResponse(error)
         })
@@ -200,6 +204,29 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
   onEscapePressedNameInput(event: KeyboardEvent) {
     if ((this.isCreating || this.isUpdating) && event.target === this.nameInputElement) {
       this.commitNameUpdate();
+    }
+  }
+
+  addNewDocumentToServiceSource(document: DocumentModel) {
+    const sourceDocuments: DocumentModel[] = this.documentService.source.getValue();
+    this.documentService.source.next([document, ...sourceDocuments]);
+  }
+
+  replaceExistingDocumentInServiceSource(document: DocumentModel) {
+    const sourceDocuments: DocumentModel[] = this.documentService.source.getValue();
+    const index: number = sourceDocuments.findIndex(item => item.id === document.id);
+    if (index !== -1) {
+      sourceDocuments[index] = document;
+      this.documentService.source.next(sourceDocuments);
+    }
+  }
+
+  deleteExistingDocumentInServiceSource(document: DocumentModel) {
+    const sourceDocuments: DocumentModel[] = this.documentService.source.getValue();
+    const index: number = sourceDocuments.findIndex(item => item.id === document.id);
+    if (index !== -1) {
+      sourceDocuments.splice(index, 1);
+      this.documentService.source.next(sourceDocuments);
     }
   }
 

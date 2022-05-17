@@ -39,7 +39,7 @@ public class DocumentService {
     private final UserDocumentMapper userDocumentMapper;
 
     @Transactional
-    public MessageResponseDto createNewDocument(UUID userId, DocumentDto documentDto)
+    public DocumentDto createNewDocument(UUID userId, DocumentDto documentDto)
             throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException {
         UserEntity userEntity = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityWithIdNotFoundException(UserEntity.class, userId));
@@ -58,7 +58,7 @@ public class DocumentService {
 
         userDocumentRepository.save(userDocumentEntity);
 
-        return new MessageResponseDto("Document created successfully");
+        return documentMapper.entityToDto(documentEntity);
     }
 
     @Transactional
@@ -86,7 +86,7 @@ public class DocumentService {
     }
 
     @Transactional
-    public MessageResponseDto updateNameDocument(UUID documentId, UUID userId, DocumentDto documentDto)
+    public DocumentDto updateNameDocument(UUID documentId, UUID userId, DocumentDto documentDto)
             throws
             EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException,
@@ -104,11 +104,11 @@ public class DocumentService {
             throw new NotPermissionToEditDocumentException(userId, documentId);
         }
 
-        return new MessageResponseDto("Document updated name successfully");
+        return documentMapper.entityToDto(documentEntity);
     }
 
     @Transactional
-    public MessageResponseDto updateStarredDocument(UUID documentId, UUID userId, UserDocumentDto userDocumentDto)
+    public DocumentDto updateStarredDocument(UUID documentId, UUID userId, UserDocumentDto userDocumentDto)
             throws
             EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException {
@@ -121,7 +121,7 @@ public class DocumentService {
         userDocumentEntity.setStarred(userDocumentDto.isStarred());
         documentRepository.save(documentEntity);
 
-        return new MessageResponseDto("Document updated starred successfully");
+        return documentMapper.entityToDto(documentEntity);
     }
 
     @Transactional
