@@ -41,9 +41,10 @@ export class SharePageComponent extends SubscriptionAwareAbstractComponent imple
     const userId = this.persistenceService.get('id');
     const jwtToken = this.persistenceService.get('token');
     if (!userId || !jwtToken) {
-      this.router.navigate([`/${AppRouteConstant.LOGIN}`]).then();
+      this.snackbarService.openErrorAnnouncement('You are not logged in. Please login to continue.');
+      this.navigate(() => this.router.navigate([`/${AppRouteConstant.LOGIN}`]).then());
+      return;
     }
-
 
     this.registerSubscription(
       this.userService.getUserById(userId)
@@ -59,8 +60,6 @@ export class SharePageComponent extends SubscriptionAwareAbstractComponent imple
                 .subscribe({
                   next: (document: DocumentModel) => {
                     this.document = document;
-
-
                     this.performAddPartnerToDocument();
                   },
                   error: (error) => this.snackbarService.openRequestErrorAnnouncement(error),
@@ -69,7 +68,8 @@ export class SharePageComponent extends SubscriptionAwareAbstractComponent imple
           },
           error: (error) => {
             this.snackbarService.openErrorAnnouncement('You are not logged in. Please login to continue.');
-            this.router.navigate([`/${AppRouteConstant.LOGIN}`]).then();
+
+            this.navigate(() => this.router.navigate([`/${AppRouteConstant.LOGIN}`]).then());
           }
         })
     )
@@ -87,13 +87,21 @@ export class SharePageComponent extends SubscriptionAwareAbstractComponent imple
         .subscribe({
           next: () => {
             this.snackbarService.openSaveSuccessAnnouncement('You have successfully shared this document.');
-            this.router.navigate([`/${AppRouteConstant.DASHBOARD}/${this.document.id}`]).then();
+
+            this.navigate(() => this.router.navigate([`/${AppRouteConstant.DASHBOARD}/${this.document.id}`]).then());
           },
           error: (error) => {
             this.snackbarService.openErrorAnnouncement('Error while sharing document or user already has access to this document.');
-            this.router.navigate([`/${AppRouteConstant.DASHBOARD}`]).then();
+
+            this.navigate(() => this.router.navigate([`/${AppRouteConstant.DASHBOARD}`]).then());
           }
         })
     )
+  }
+
+  navigate(action: () => void) {
+    setTimeout(() => {
+      action();
+    }, 5000);
   }
 }
