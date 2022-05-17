@@ -1,17 +1,18 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {FormGroup} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
 import _ from 'lodash';
-import { take } from 'rxjs';
-import { AppRouteConstant } from '../../common/app-route.constant';
-import { AssetsSrcConstant } from '../../common/assets-src.constant';
-import { AuthService } from '../../service/auth.service';
-import { PersistenceService } from '../../service/persistence.service';
-import { SnackbarService } from '../../service/snackbar.service';
-import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { SignupFormComponent } from './signup-form/signup-form.component';
+import {finalize, take} from 'rxjs';
+import {AppRouteConstant} from '../../common/app-route.constant';
+import {AssetsSrcConstant} from '../../common/assets-src.constant';
+import {AuthService} from '../../service/auth.service';
+import {PersistenceService} from '../../service/persistence.service';
+import {SnackbarService} from '../../service/snackbar.service';
+import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
+import {LoginFormComponent} from './login-form/login-form.component';
+import {SignupFormComponent} from './signup-form/signup-form.component';
+import {LoadingService} from '../../service/loading.service';
 
 @Component({
   selector: 'app-auth-page',
@@ -36,14 +37,15 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
               private titleService: Title,
               private authService: AuthService,
               private snackbarService: SnackbarService,
-              private persistenceService: PersistenceService) {
+              private persistenceService: PersistenceService,
+              private loadingService: LoadingService) {
     super();
 
     this.registerSubscription(
-        this.route.url.subscribe(url => {
-          this.page = url[0].path.toLocaleLowerCase();
-          this.titleService.setTitle(`${AppRouteConstant.APP_NAME} - ${_.startCase(this.page)}`);
-        })
+      this.route.url.subscribe(url => {
+        this.page = url[0].path.toLocaleLowerCase();
+        this.titleService.setTitle(`${AppRouteConstant.APP_NAME} - ${_.startCase(this.page)}`);
+      })
     )
   }
 
@@ -54,6 +56,12 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
     this.authForm = this.isLoginPage
       ? this.loginForm.buildForm()
       : this.signupForm.buildForm();
+  }
+
+  onEnterKeyPressed(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
   }
 
   onAuthSubmit() {
@@ -79,10 +87,11 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   }
 
   onSubmitLogin(data: { email: string, password: string }) {
+    this.loadingService.showLoadingBar();
     this.registerSubscription(
       this.authService
         .loginLocal(data.email, data.password)
-        .pipe(take(1))
+        .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
         .subscribe({
           next: (authData) => {
             this.persistenceService.write(authData);
@@ -99,10 +108,11 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   }
 
   onSubmitSignup(data: { name: string, email: string, password: string }) {
+    this.loadingService.showLoadingBar();
     this.registerSubscription(
       this.authService
         .signup(data.name, data.email, data.password)
-        .pipe(take(1))
+        .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
         .subscribe({
           next: (authData) => {
             const signupSuccessMessage = 'You have successfully signed up';

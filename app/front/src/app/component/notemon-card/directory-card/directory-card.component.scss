@@ -41,14 +41,22 @@
         border: 0;
         font-weight: 700;
         font-size: 16px;
+        text-decoration: none;
         margin-bottom: 7.5px;
         padding: 1.5px 1.5px;
         color: $color-on-background-variant-dark;
+      }
 
-        &:focus {
-          outline: 1px solid $color-border-gray-focus;
-          background-color: rgba(97, 197, 174, 0.05);
-        }
+      a.name:hover {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-decoration-thickness: 1px;
+        text-decoration-color: $color-on-background-gray-dark;
+      }
+
+      input.name:focus {
+        outline: 1px solid $color-border-gray-focus;
+        background-color: rgba(97, 197, 174, 0.05);
       }
 
       .author {

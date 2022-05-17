@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { DocumentModel } from '../model/document.model';
-import { MessageResponseModel } from '../model/message-response.model';
-import { UserDocumentModel } from '../model/user-document.model';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {environment} from 'src/environments/environment';
+import {DocumentModel} from '../model/document.model';
+import {MessageResponseModel} from '../model/message-response.model';
+import {UserDocumentModel} from '../model/user-document.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,17 +14,19 @@ export class DocumentService {
 
   change: BehaviorSubject<void> = new BehaviorSubject<void>(null);
 
+  source: BehaviorSubject<DocumentModel[]> = new BehaviorSubject<DocumentModel[]>([]);
+
   constructor(private http: HttpClient) {
   }
 
-  updateNameDocument(userId: string, documentId: string, document: DocumentModel): Observable<MessageResponseModel> {
+  updateNameDocument(userId: string, documentId: string, document: DocumentModel): Observable<DocumentModel> {
     const updateNameDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/name';
-    return this.http.patch<MessageResponseModel>(updateNameDocumentUrl, {...document});
+    return this.http.patch<DocumentModel>(updateNameDocumentUrl, {...document});
   }
 
-  updateStarredDocument(userId: string, documentId: string, relationship: UserDocumentModel): Observable<MessageResponseModel> {
+  updateStarredDocument(userId: string, documentId: string, relationship: UserDocumentModel): Observable<DocumentModel> {
     const updateStarredDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/starred';
-    return this.http.patch<MessageResponseModel>(updateStarredDocumentUrl, {...relationship});
+    return this.http.patch<DocumentModel>(updateStarredDocumentUrl, {...relationship});
   }
 
   deleteDocument(userId: string, documentId: string): Observable<MessageResponseModel> {

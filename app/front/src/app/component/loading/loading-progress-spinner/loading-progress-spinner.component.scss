@@ -1,0 +1,19 @@
+@import "~src/variables";
+
+:host ::ng-deep .mat-progress-spinner {
+  width: 55px !important;
+  height: 55px !important;
+
+  svg {
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  circle {
+    stroke: $color-primary;
+    stroke-width: 8.5px !important;
+  }
+}
+
+.loading-progress-spinner-container {
+}
