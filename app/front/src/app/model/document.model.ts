@@ -10,6 +10,7 @@ export class DocumentModel extends BaseModel {
     public isDirectory: boolean | null = null,
     public parent: DocumentModel | string | null = null,
     public author: UserModel | null = null,
+    public shareCode: string | null = null,
     public relationship: UserDocumentModel | null = null,
     public partner: UserModel[] | null = null,
     public createdAt: Date | null = null,
@@ -23,6 +24,7 @@ export class DocumentModel extends BaseModel {
     return new DocumentModel(
       null,
       "New Document",
+      null,
       null,
       null,
       null,

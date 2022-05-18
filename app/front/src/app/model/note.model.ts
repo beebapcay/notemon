@@ -10,6 +10,7 @@ export class NoteModel extends DocumentModel {
     isDirectory: boolean | null,
     parent: DocumentModel | string | null,
     author: UserModel | null,
+    shareCode: string | null = null,
     permission: UserDocumentModel | null,
     public content: string | null = null,
     partner: UserModel[] | null,
@@ -17,7 +18,7 @@ export class NoteModel extends DocumentModel {
     lastModifiedAt: Date | null,
     version: number | 0
   ) {
-    super(id, name, description, isDirectory, parent, author, permission, partner, createdAt, lastModifiedAt, version);
+    super(id, name, description, isDirectory, parent, author, shareCode, permission, partner, createdAt, lastModifiedAt, version);
   }
 
   public static override create(): DocumentModel {
@@ -26,6 +27,7 @@ export class NoteModel extends DocumentModel {
       "New Note",
       null,
       false,
+      null,
       null,
       null,
       null,

@@ -26,6 +26,8 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
 
   noteId: string;
 
+  isQuickNotePage: boolean = true;
+
   user: UserModel = null;
   note: NoteModel = null;
 
@@ -49,8 +51,6 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
   }
 
   ngOnInit(): void {
-    this.loadingService.showLoadingBar();
-
     this.registerSubscription(
       this.authService.isLoggedIn.subscribe(isLoggedIn => {
         this.isLoggedIn = isLoggedIn;
@@ -60,14 +60,19 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
     this.registerSubscription(
       this.route.params.subscribe(params => {
         this.noteId = params['noteId'];
-        this.fetchDocuments();
+        if (this.noteId) {
+          this.isQuickNotePage = false;
+          this.fetchDocuments();
+        } else {
+          this.isQuickNotePage = true;
+        }
       })
     );
 
     this.registerSubscription(
       this.userService.user.subscribe(user => {
         this.user = user;
-        if (this.user !== null) this.fetchDocuments();
+        if (this.user !== null && !this.isQuickNotePage) this.fetchDocuments();
       })
     );
 
@@ -79,6 +84,7 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
   }
 
   fetchDocuments() {
+    console.log('fetchDocuments');
     this.loadingService.showLoadingSpinner();
     this.loadingService.showLoadingBar();
     if (this.user === null) return;

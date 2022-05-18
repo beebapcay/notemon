@@ -12,7 +12,7 @@
   <button class="star-btn" [ngClass]="{'starred': this.item?.relationship?.isStarred}" mat-icon-button>
     <mat-icon>star_border</mat-icon>
   </button>
-  <button class="share-btn" disableRipple mat-button>
+  <button class="share-btn" disableRipple mat-button (click)="onShareClicked()">
     <mat-icon>link</mat-icon>
     Share
   </button>
