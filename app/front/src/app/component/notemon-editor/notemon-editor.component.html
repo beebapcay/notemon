@@ -2,6 +2,7 @@
   <ckeditor
     (ready)="onReady($event)"
     [editor]="Editor"
+    (change)="save($event)"
     data="<p>Hello, world!</p>">
   </ckeditor>
 </div>

@@ -14,7 +14,10 @@
     <input [maxLength]="30" *ngIf="isCreating || isUpdating; else notUpdating" type="text" class="name"
            [(ngModel)]="name" #nameInput>
     <ng-template #notUpdating>
-      <p class="name">{{item?.name ?? DEFAULT_NAME}}</p>
+      <a
+        class="name"
+        [routerLink]="item?.id ? ['/', AppRouteConstant.NOTE, item?.id] : null"
+      >{{item?.name ?? DEFAULT_NAME}}</a>
     </ng-template>
     <p class="author">Author: {{item?.author?.name ?? 'Unknown'}}</p>
     <p class="last-updated">Last updated: {{item?.lastModifiedAt | date: 'dd MMM, yyyy'}}</p>

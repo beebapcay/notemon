@@ -40,4 +40,10 @@ public class UserController {
             throws EntityWithIdNotFoundException, NotPermissionToAccessDocumentException {
         return documentService.getAllDocuments(id, parentId, isDirectory);
     }
+
+    @GetMapping("{id}/documents/{documentId}")
+    public DocumentDto getDocumentById(@PathVariable("id") UUID id, @PathVariable("documentId") UUID documentId)
+            throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException, NotPermissionToAccessDocumentException {
+        return documentService.getDocumentById(id, documentId);
+    }
 }

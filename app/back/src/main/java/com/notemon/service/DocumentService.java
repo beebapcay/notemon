@@ -38,6 +38,20 @@ public class DocumentService {
     private final UserDocumentMapper userDocumentMapper;
 
     @Transactional
+    public DocumentDto getDocumentById(UUID userId, UUID documentId)
+            throws EntityWithIdNotFoundException,
+            EntityWithFieldNotFoundException,
+            NotPermissionToAccessDocumentException {
+        UserDocumentEntity userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(userId, documentId)
+                .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
+
+        DocumentEntity documentEntity = documentRepository.findById(documentId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        return documentMapper.entityToDto(documentEntity);
+    }
+
+    @Transactional
     public DocumentDto getDocumentByShareCode(String shareCode)
             throws EntityWithFieldNotFoundException {
         DocumentEntity documentEntity = documentRepository.findByShareCode(shareCode)

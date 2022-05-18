@@ -5,11 +5,11 @@
   <div class="navbar-editor">
     <img [src]="AssetsSrcConstant.NOTE" alt="" class="illus-img">
     <div class="document-info">
-      <input class="name" spellcheck="false" type="text" value="Notemon Note Name">
-      <p class="last-edited">Last edited was 7 days ago</p>
+      <input class="name" spellcheck="false" type="text" [value]="item?.name ?? ''">
+      <p class="last-edited">Last edited was {{item?.lastModifiedAt | durationFromNow}}</p>
     </div>
   </div>
-  <button class="star-btn" mat-icon-button>
+  <button class="star-btn" [ngClass]="{'starred': this.item?.relationship?.isStarred}" mat-icon-button>
     <mat-icon>star_border</mat-icon>
   </button>
   <button class="share-btn" disableRipple mat-button>

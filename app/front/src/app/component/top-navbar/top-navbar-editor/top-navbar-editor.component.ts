@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AppRouteConstant} from '../../../common/app-route.constant';
 import {AssetsSrcConstant} from '../../../common/assets-src.constant';
+import {DocumentModel} from '../../../model/document.model';
 
 @Component({
   selector: 'app-top-navbar-editor',
@@ -9,6 +10,7 @@ import {AssetsSrcConstant} from '../../../common/assets-src.constant';
 })
 export class TopNavbarEditorComponent implements OnInit {
   @Input() isLoggedIn: boolean = false;
+  @Input() item: DocumentModel;
 
   readonly AppRouteConstant = AppRouteConstant;
   readonly AssetsSrcConstant = AssetsSrcConstant;

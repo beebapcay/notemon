@@ -75,6 +75,11 @@
     background-color: $color-bg-btn-gray;
     color: $color-on-background-gray-light;
 
+    &.starred {
+      background-color: $color-bg-btn-gray;
+      color: red;
+    }
+
     .mat-icon {
       width: 20.5px;
       height: 20.5px;

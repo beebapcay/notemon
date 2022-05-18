@@ -23,4 +23,8 @@ export class NotemonEditorComponent implements OnInit {
     );
   }
 
+  save(content: any) {
+    console.log(content);
+  }
+
 }
