@@ -25,6 +25,8 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
 
   user: UserModel = null;
 
+  isDashboardPage: boolean = false;
+
   starreds: DocumentModel[] = [];
   directories: DirectoryModel[] = [];
   notes: NoteModel[] = [];
@@ -49,6 +51,9 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
     this.registerSubscription(
       this.route.params.subscribe(params => {
         this.insideParent = params['directoryId'];
+        if (!this.insideParent) {
+          this.isDashboardPage = true;
+        }
         this.fetchDocuments();
       })
     );
