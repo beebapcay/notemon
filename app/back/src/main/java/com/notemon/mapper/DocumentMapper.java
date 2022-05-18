@@ -43,6 +43,7 @@ public interface DocumentMapper {
 
     @Named(DocumentMapper.SET_ENTITY_TO_SET_UUID_MAPPING)
     public static Set<UUID> setEntityToSetUuid(Set<DocumentEntity> documents) {
-        return documents.stream().map(DocumentMapper::entityToUuid).collect(Collectors.toSet());
+        return Optional.ofNullable(documents)
+                .map(set -> set.stream().map(DocumentEntity::getId).collect(Collectors.toSet())).orElse(null);
     }
 }
