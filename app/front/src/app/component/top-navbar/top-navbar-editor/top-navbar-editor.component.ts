@@ -46,7 +46,7 @@ export class TopNavbarEditorComponent extends SubscriptionAwareAbstractComponent
     this.snackbarService.openSuccessAnnouncement('Link for sharing was copied to clipboard.');
   }
 
-  toggleStarred() {
+  onToggleStarred() {
     if (!this.preProcessAction()) return;
 
     const relationship = this.item?.relationship;
@@ -63,6 +63,29 @@ export class TopNavbarEditorComponent extends SubscriptionAwareAbstractComponent
           error: (error) => this.handleErrorResponse(error)
         })
     );
+  }
+
+  onChangeName(changeEvent: any) {
+    const newName = changeEvent?.target?.value;
+
+    if (!this.preProcessAction()) return;
+
+    if (newName === this.item?.name) return;
+
+    this.item.name = newName ?? this.item?.name;
+
+    this.registerSubscription(
+      this.documentService.updateNameDocument(this.user?.id, this.item?.id, this.item)
+        .pipe(take(1))
+        .subscribe({
+          next: (document) => {
+            this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was renamed to <strong>${document?.name}</strong> successfully.`);
+            this.updatedDocumentEmitted.emit(document);
+          },
+          error: (error) => this.handleErrorResponse(error)
+        })
+    );
+
   }
 
   preProcessAction(): boolean {

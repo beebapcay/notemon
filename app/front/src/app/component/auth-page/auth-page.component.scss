@@ -51,7 +51,7 @@
 
   .right-side-auth-form {
     flex: 7.5;
-    padding: 0 65px 85px;
+    padding: 0 65px 4.5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -157,6 +157,7 @@
       .go-navigate {
         text-align: right;
         margin-top: 35px;
+        margin-bottom: 0;
         font-family: $font-family-secondary;
         font-size: 15px;
         color: $color-on-background-gray;
