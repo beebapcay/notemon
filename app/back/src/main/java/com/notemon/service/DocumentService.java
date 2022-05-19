@@ -125,7 +125,32 @@ public class DocumentService {
 
         if (userDocumentEntity.getPermission().getCode().equals(PermissionEnum.EDITOR)) {
             documentEntity.setName(documentDto.getName());
-            documentRepository.save(documentEntity);
+            documentEntity = documentRepository.save(documentEntity);
+        } else {
+            throw new NotPermissionToEditDocumentException(userId, documentId);
+        }
+
+        DocumentDto updatedDocumentDto = documentMapper.entityToDto(documentEntity);
+        updatedDocumentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return updatedDocumentDto;
+    }
+
+    @Transactional
+    public DocumentDto updateContentDocument(UUID documentId, UUID userId, DocumentDto documentDto)
+            throws
+            EntityWithIdNotFoundException,
+            NotPermissionToAccessDocumentException,
+            NotPermissionToEditDocumentException {
+        DocumentEntity documentEntity = documentRepository.findById(documentId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        UserDocumentEntity userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(userId, documentId)
+                .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
+
+        if (userDocumentEntity.getPermission().getCode().equals(PermissionEnum.EDITOR)) {
+            documentEntity.setContent(documentDto.getContent());
+            documentEntity = documentRepository.save(documentEntity);
         } else {
             throw new NotPermissionToEditDocumentException(userId, documentId);
         }
@@ -148,7 +173,7 @@ public class DocumentService {
                 .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
 
         userDocumentEntity.setStarred(userDocumentDto.isStarred());
-        documentRepository.save(documentEntity);
+        documentEntity = documentRepository.save(documentEntity);
 
         DocumentDto updatedDocumentDto = documentMapper.entityToDto(documentEntity);
         updatedDocumentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));

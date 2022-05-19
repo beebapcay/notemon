@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, take } from 'rxjs';
 import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
@@ -19,7 +19,7 @@ import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstra
   templateUrl: './note-page.component.html',
   styleUrls: ['./note-page.component.scss']
 })
-export class NotePageComponent extends SubscriptionAwareAbstractComponent implements OnInit {
+export class NotePageComponent extends SubscriptionAwareAbstractComponent implements OnInit, OnChanges {
 
   noteId: string;
 
@@ -80,8 +80,11 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
     );
   }
 
+  ngOnChanges(): void {
+
+  }
+
   fetchDocuments() {
-    console.log('fetchDocuments');
     this.loadingService.showLoadingSpinner();
     this.loadingService.showLoadingBar();
     if (this.user === null) return;

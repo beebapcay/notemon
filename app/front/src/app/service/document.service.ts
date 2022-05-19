@@ -1,10 +1,10 @@
-import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {environment} from 'src/environments/environment';
-import {DocumentModel} from '../model/document.model';
-import {MessageResponseModel} from '../model/message-response.model';
-import {UserDocumentModel} from '../model/user-document.model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { DocumentModel } from '../model/document.model';
+import { MessageResponseModel } from '../model/message-response.model';
+import { UserDocumentModel } from '../model/user-document.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +30,11 @@ export class DocumentService {
   updateNameDocument(userId: string, documentId: string, document: DocumentModel): Observable<DocumentModel> {
     const updateNameDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/name';
     return this.http.patch<DocumentModel>(updateNameDocumentUrl, {...document});
+  }
+
+  updateContentDocument(userId: string, documentId: string, document: DocumentModel): Observable<DocumentModel> {
+    const updateContentDocumentUrl = DocumentService.DOCUMENT_URL + documentId + '/users/' + userId + '/content';
+    return this.http.patch<DocumentModel>(updateContentDocumentUrl, {...document});
   }
 
   updateStarredDocument(userId: string, documentId: string, relationship: UserDocumentModel): Observable<DocumentModel> {
