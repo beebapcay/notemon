@@ -6,7 +6,7 @@
 }
 
 .top-navbar-editor-container {
-  height: 50px;
+  height: $app-top-navbar-editor-height;
   padding: 0 50px;
   background-color: $color-background;
   border-bottom: 1px solid $color-border-gray;
