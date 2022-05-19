@@ -31,7 +31,7 @@ jobs:
         uses: 'azure/aci-deploy@v1'
         with:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
-          dns-name-label: notemon-frontend
+          dns-name-label: notemon
           ports: >
             80
             443

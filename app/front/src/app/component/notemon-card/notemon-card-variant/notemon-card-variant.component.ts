@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
 import {DocumentModel} from '../../../model/document.model';
@@ -17,8 +18,9 @@ export class NotemonCardVariantComponent extends DocumentCardAbstractComponent<D
   constructor(
     userService: UserService,
     snackbarService: SnackbarService,
-    documentService: DocumentService) {
-    super(userService, snackbarService, documentService);
+    documentService: DocumentService,
+    clipboardService: Clipboard) {
+    super(userService, snackbarService, documentService, clipboardService);
   }
 
   public getType(): NotemonTypeEnum {

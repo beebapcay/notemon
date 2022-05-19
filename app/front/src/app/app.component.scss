@@ -22,8 +22,19 @@
       justify-content: center;
       align-items: center;
 
+
+      app-loading-progress-bar {
+        z-index: 9;
+        position: fixed;
+        top: 0;
+      }
+
       &.has-top-navbar {
-        margin-top: $app-top-navbar-height;
+        margin-top: $app-top-navbar-main-height;
+
+        app-loading-progress-bar {
+          top: $app-top-navbar-main-height;
+        }
       }
     }
   }

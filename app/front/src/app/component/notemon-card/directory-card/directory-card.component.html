@@ -7,10 +7,17 @@
   <div class="content-container">
     <div class="main-content">
       <img [src]="NotemonCardTypeEnum.DIRECTORY | notemonCardImg" alt="" class="illus-img">
-      <input [maxLength]="30" *ngIf="isCreating || isUpdating; else notUpdating" type="text" class="name"
-             [(ngModel)]="name" #nameInput>
+      <input [maxLength]="30" *ngIf="isCreating || isUpdating; else notUpdating"
+             type="text"
+             class="name"
+             [(ngModel)]="name" #nameInput
+      >
       <ng-template #notUpdating>
-        <p class="name">{{item?.name ?? DEFAULT_NAME}}</p>
+        <a class="name"
+           [routerLink]="item?.id ? ['/', AppRouteConstant.DASHBOARD, item?.id] : null"
+        >
+          {{item?.name ?? DEFAULT_NAME}}
+        </a>
       </ng-template>
       <p class="author">Author: {{item?.author?.name ?? 'Unknown'}}</p>
     </div>

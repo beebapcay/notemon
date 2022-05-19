@@ -36,7 +36,9 @@ export class AppComponent extends SubscriptionAwareAbstractComponent implements 
 
     this.translateService.setTranslation('en', defaultLanguage);
     translateService.setDefaultLang('en');
+  }
 
+  ngOnInit(): void {
     this.registerSubscription(
       this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
@@ -44,39 +46,14 @@ export class AppComponent extends SubscriptionAwareAbstractComponent implements 
           const url = (event as NavigationEnd).url;
           this.isFull = UrlMatcherUtil.match(url, AppRouteConstant.FULL_PAGE_ROUTE_PATTERN_LIST);
         })
-    )
-
-    this.registerSubscription(
-      this.authService.isLoggedIn.subscribe(isLoggedIn => this.isLoggedIn = isLoggedIn)
     );
-  }
 
-  ngOnInit(): void {
-    this.fetchUser();
-  }
-
-  fetchUser() {
-    const userId = this.persistenceService.get('id');
-    const jwtToken = this.persistenceService.get('token');
-
-    if (!userId && !jwtToken) {
-      this.authService.isLoggedIn.next(false);
-    }
+    this.userService.fetchUser();
 
     this.registerSubscription(
-      this.userService.getUserById(userId)
-        .pipe(take(1))
-        .subscribe({
-            next: user => {
-              this.authService.isLoggedIn.next(true);
-              this.userService.user.next(user);
-            },
-            error: () => {
-              this.authService.isLoggedIn.next(false);
-              this.userService.user.next(null);
-            }
-          }
-        )
+      this.authService.isLoggedIn.subscribe(isLoggedIn => {
+        this.isLoggedIn = isLoggedIn;
+      })
     );
   }
 }

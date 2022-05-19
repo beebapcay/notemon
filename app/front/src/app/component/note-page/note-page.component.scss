@@ -5,10 +5,12 @@
   height: 100%;
 }
 
-
 .note-page-container {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 
   app-top-navbar-editor {
     width: 100%;
@@ -16,7 +18,7 @@
 
   app-notemon-editor {
     width: 100%;
-    height: 100%;
+    height: calc(100vh - #{$app-top-navbar-editor-height});
   }
 
 }

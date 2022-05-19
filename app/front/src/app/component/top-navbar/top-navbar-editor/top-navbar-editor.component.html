@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <nav class="navbar top-navbar-editor-container navbar-expand-md">
   <a [routerLink]="AppRouteConstant.HOME" class="navbar-brand">
     <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo">
@@ -5,14 +6,16 @@
   <div class="navbar-editor">
     <img [src]="AssetsSrcConstant.NOTE" alt="" class="illus-img">
     <div class="document-info">
-      <input class="name" spellcheck="false" type="text" value="Notemon Note Name">
-      <p class="last-edited">Last edited was 7 days ago</p>
+      <input class="name" spellcheck="false" type="text" [value]="item?.name ?? ''" (change)="onChangeName($event)">
+      <p class="last-edited">Last edited was {{item?.lastModifiedAt | durationFromNow}}</p>
     </div>
   </div>
-  <button class="star-btn" mat-icon-button>
-    <mat-icon>star_border</mat-icon>
+  <button (click)="onToggleStarred()" class="star-btn" [ngClass]="{'starred': item?.relationship?.isStarred}"
+          mat-icon-button>
+    <mat-icon *ngIf="!item?.relationship?.isStarred">star_border</mat-icon>
+    <mat-icon *ngIf="item?.relationship?.isStarred">star</mat-icon>
   </button>
-  <button class="share-btn" disableRipple mat-button>
+  <button class="share-btn" disableRipple mat-button (click)="onShareClicked()">
     <mat-icon>link</mat-icon>
     Share
   </button>

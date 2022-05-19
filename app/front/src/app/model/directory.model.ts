@@ -11,13 +11,14 @@ export class DirectoryModel extends DocumentModel {
     parent: DocumentModel | string | null = null,
     public children: DocumentModel[] | string[] | null = null,
     author: UserModel | null = null,
+    shareCode: string | null = null,
     permission: UserDocumentModel | null = null,
     partner: UserModel[] | null = null,
     createdAt: Date | null = null,
     lastModifiedAt: Date | null = null,
     version: number | null = null,
   ) {
-    super(id, name, description, isDirectory, parent, author, permission, partner, createdAt, lastModifiedAt, version);
+    super(id, name, description, isDirectory, parent, author, shareCode, permission, partner, createdAt, lastModifiedAt, version);
   }
 
   public static override create(): DocumentModel {
@@ -28,6 +29,7 @@ export class DirectoryModel extends DocumentModel {
       true,
       null,
       [],
+      null,
       null,
       null,
       null,

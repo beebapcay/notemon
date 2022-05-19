@@ -2,7 +2,6 @@ package com.notemon.controller;
 
 import com.notemon.constant.EndpointConstant;
 import com.notemon.dto.DocumentDto;
-import com.notemon.dto.MessageResponseDto;
 import com.notemon.dto.UserDto;
 import com.notemon.exception.EntityWithFieldNotFoundException;
 import com.notemon.exception.EntityWithIdNotFoundException;
@@ -29,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("{id}/document")
-    public MessageResponseDto createNewDocument(@PathVariable("id") UUID id, @RequestBody DocumentDto documentDto)
+    public DocumentDto createNewDocument(@PathVariable("id") UUID id, @RequestBody DocumentDto documentDto)
             throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException {
         return documentService.createNewDocument(id, documentDto);
     }
@@ -40,5 +39,11 @@ public class UserController {
                                              @RequestParam(value = "isDirectory", required = false) Boolean isDirectory)
             throws EntityWithIdNotFoundException, NotPermissionToAccessDocumentException {
         return documentService.getAllDocuments(id, parentId, isDirectory);
+    }
+
+    @GetMapping("{id}/documents/{documentId}")
+    public DocumentDto getDocumentById(@PathVariable("id") UUID id, @PathVariable("documentId") UUID documentId)
+            throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException, NotPermissionToAccessDocumentException {
+        return documentService.getDocumentById(id, documentId);
     }
 }

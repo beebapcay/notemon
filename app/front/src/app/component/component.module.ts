@@ -33,6 +33,10 @@ import {ThemeToggleButtonComponent} from './theme-toggle-button/theme-toggle-but
 import {TopNavbarEditorComponent} from './top-navbar/top-navbar-editor/top-navbar-editor.component';
 
 import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-main.component';
+import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashboard-base.component';
+import {LoadingProgressBarComponent} from './loading/loading-progress-bar/loading-progress-bar.component';
+import {LoadingProgressSpinnerComponent} from './loading/loading-progress-spinner/loading-progress-spinner.component';
+import {SharePageComponent} from './share-page/share-page.component';
 
 @NgModule({
   imports: [
@@ -72,8 +76,19 @@ import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-ma
     SnackbarComponent,
     FormFieldComponent,
     HomePageComponent,
+    ManageDashboardBaseComponent,
+    LoadingProgressBarComponent,
+    LoadingProgressSpinnerComponent,
+    SharePageComponent,
   ],
-  exports: [CommonModule, TopNavbarMainComponent, FeaturePageComponent, BottomNavbarComponent, ErrorPageComponent],
+  exports: [
+    CommonModule,
+    TopNavbarMainComponent,
+    FeaturePageComponent,
+    BottomNavbarComponent,
+    ErrorPageComponent,
+    LoadingProgressBarComponent,
+    LoadingProgressSpinnerComponent],
 })
 export class ComponentModule {
 }

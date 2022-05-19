@@ -6,7 +6,7 @@
 }
 
 .top-navbar-main-container {
-  height: $app-top-navbar-height;
+  height: $app-top-navbar-main-height;
   padding: 0 75px;
   background-color: $color-background;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
@@ -87,7 +87,7 @@
 
   .account-btn {
     @include reset-button();
-    @include set-icon-button-size($btn-size: 40px, $icon-size: 36px);
+    @include set-icon-button-size($btn-size: 42px, $icon-size: 40px);
     border-radius: 50%;
     background-color: rgba(217, 217, 217, 0.9);
     border: 2px solid #C1C1C1 !important;

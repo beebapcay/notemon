@@ -11,7 +11,7 @@
     <div class="d-flex flex-column">
       <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo-img">
       <h1 class="auth-title">{{page | titlecase}} to Notemon</h1>
-      <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onAuthSubmit()">
+      <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onAuthSubmit()" (keydown)="onEnterKeyPressed($event)">
         <login-form *ngIf="isLoginPage"></login-form>
         <signup-form *ngIf="isSignupPage"></signup-form>
         <p class="msg-error">{{errorMessage}}</p>

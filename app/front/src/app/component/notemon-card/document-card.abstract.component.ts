@@ -1,3 +1,4 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import {
   AfterViewChecked,
   Component,
@@ -43,7 +44,8 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
   protected constructor(
     protected userService: UserService,
     protected snackbarService: SnackbarService,
-    protected documentService: DocumentService
+    protected documentService: DocumentService,
+    protected clipboardService: Clipboard,
   ) {
     super();
   }
@@ -106,9 +108,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         this.userService.createNewDocument(this.user?.id, this.item)
           .pipe(take(1))
           .subscribe({
-            next: () => {
+            next: (document) => {
               this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was created successfully.`);
-              this.documentService.change.next();
+
+              this.addNewDocumentToServiceSource(document);
             },
             error: (error) => this.handleErrorResponse(error)
           })
@@ -118,9 +121,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         this.documentService.updateNameDocument(this.user?.id, this.item?.id, this.item)
           .pipe(take(1))
           .subscribe({
-            next: () => {
+            next: (document) => {
               this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${initName}</strong> was renamed to <strong>${this.item?.name}</strong> successfully.`);
-              this.documentService.change.next();
+
+              this.replaceExistingDocumentInServiceSource(document);
             },
             error: (error) => this.handleErrorResponse(error)
           })
@@ -139,9 +143,10 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
       this.documentService.updateStarredDocument(this.user?.id, this.item?.id, relationship)
         .pipe(take(1))
         .subscribe({
-          next: () => {
+          next: (document) => {
             this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was ${isStarred ? 'added to' : 'removed from'} Starred successfully.`);
-            this.documentService.change.next();
+
+            this.replaceExistingDocumentInServiceSource(document);
           },
           error: (error) => this.handleErrorResponse(error)
         })
@@ -157,7 +162,8 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
         .subscribe({
           next: () => {
             this.snackbarService.openWarningAnnouncement(`Document <strong>${this.item?.name}</strong> was deleted successfully.`);
-            this.documentService.change.next();
+
+            this.deleteExistingDocumentInServiceSource(this.item);
           },
           error: (error) => this.handleErrorResponse(error)
         })
@@ -203,14 +209,43 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
     }
   }
 
+  addNewDocumentToServiceSource(document: DocumentModel) {
+    const sourceDocuments: DocumentModel[] = this.documentService.source.getValue();
+    this.documentService.source.next([document, ...sourceDocuments]);
+  }
+
+  replaceExistingDocumentInServiceSource(document: DocumentModel) {
+    const sourceDocuments: DocumentModel[] = this.documentService.source.getValue();
+    const index: number = sourceDocuments.findIndex(item => item.id === document.id);
+    if (index !== -1) {
+      sourceDocuments[index] = document;
+      this.documentService.source.next(sourceDocuments);
+    }
+  }
+
+  deleteExistingDocumentInServiceSource(document: DocumentModel) {
+    const sourceDocuments: DocumentModel[] = this.documentService.source.getValue();
+    const index: number = sourceDocuments.findIndex(item => item.id === document.id);
+    if (index !== -1) {
+      sourceDocuments.splice(index, 1);
+      this.documentService.source.next(sourceDocuments);
+    }
+  }
+
   onMenuItemClicked(actionOption: any) {
     switch (actionOption as CardActionMenuEnum) {
       case CardActionMenuEnum.SHARE: {
-        console.log('share');
+        const origin = window.location.origin;
+        this.clipboardService.copy(`${origin}/share/${this.item?.shareCode}`);
+
+        this.snackbarService.openSuccessAnnouncement('Link for sharing was copied to clipboard.');
         break;
       }
       case CardActionMenuEnum.GET_LINK: {
-        console.log('get_link');
+        const origin = window.location.origin;
+        this.clipboardService.copy(`${origin}/dashboard/${this.item?.id}`);
+
+        this.snackbarService.openSuccessAnnouncement('Link of document address was copied to clipboard.');
         break;
       }
       case CardActionMenuEnum.ADD_TO_STARRED: {

@@ -9,10 +9,7 @@ import com.notemon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 public abstract class DocumentMapperDecorator implements DocumentMapper {
 
@@ -40,33 +37,19 @@ public abstract class DocumentMapperDecorator implements DocumentMapper {
     }
 
     private void mapRelationsFromDocumentDto(DocumentEntity entity, DocumentDto dto) {
-        Set<UUID> documentDtoIds = new HashSet<>();
         if (dto.getParent() != null) {
-            documentDtoIds.add(dto.getParent());
+            DocumentEntity parent = documentRepository.findById(dto.getParent()).orElse(null);
+            entity.setParent(parent);
         }
+
         if (dto.getChildren() != null) {
-            documentDtoIds.addAll(dto.getChildren());
+            Set<DocumentEntity> children = documentRepository.findAllByIdIsIn(dto.getChildren());
+            entity.setChildren(children);
         }
-
-        Set<DocumentEntity> documentEntities = documentRepository.findAllByIdIsIn(documentDtoIds);
-
-        entity.setParent(documentEntities
-                .stream()
-                .filter(documentEntity -> documentEntity.getId().equals(dto.getParent()))
-                .findFirst()
-                .orElse(null)
-        );
-
-        entity.setChildren(documentEntities
-                .stream()
-                .filter(documentEntity -> dto.getChildren().contains(documentEntity.getId()))
-                .collect(Collectors.toSet())
-        );
 
         if (dto.getAuthor() != null) {
             UserEntity authorEntity = userRepository.findById(dto.getAuthor().getId()).orElse(null);
             entity.setAuthor(authorEntity);
         }
     }
-
 }
