@@ -9,7 +9,8 @@
       <p class="last-edited">Last edited was {{item?.lastModifiedAt | durationFromNow}}</p>
     </div>
   </div>
-  <button class="star-btn" [ngClass]="{'starred': this.item?.relationship?.isStarred}" mat-icon-button>
+  <button (click)="toggleStarred()" class="star-btn" [ngClass]="{'starred': this.item?.relationship?.isStarred}"
+          mat-icon-button>
     <mat-icon>star_border</mat-icon>
   </button>
   <button class="share-btn" disableRipple mat-button (click)="onShareClicked()">

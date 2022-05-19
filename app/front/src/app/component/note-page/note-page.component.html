@@ -1,4 +1,6 @@
 <div class="note-page-container">
-  <app-top-navbar-editor [isLoggedIn]="isLoggedIn" [item]="note" *ngIf="!isQuickNotePage"></app-top-navbar-editor>
+  <app-top-navbar-editor (updatedDocumentEmitted)="updateFromTopNav($event)" [isLoggedIn]="isLoggedIn" [item]="note"
+                         *ngIf="!isQuickNotePage"></app-top-navbar-editor>
   <app-notemon-editor></app-notemon-editor>
 </div>
+

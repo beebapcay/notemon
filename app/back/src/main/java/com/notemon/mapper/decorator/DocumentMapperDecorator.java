@@ -9,10 +9,7 @@ import com.notemon.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 public abstract class DocumentMapperDecorator implements DocumentMapper {
 
@@ -55,5 +52,4 @@ public abstract class DocumentMapperDecorator implements DocumentMapper {
             entity.setAuthor(authorEntity);
         }
     }
-
 }

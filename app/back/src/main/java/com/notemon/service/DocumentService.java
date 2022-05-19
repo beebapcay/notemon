@@ -130,7 +130,10 @@ public class DocumentService {
             throw new NotPermissionToEditDocumentException(userId, documentId);
         }
 
-        return documentMapper.entityToDto(documentEntity);
+        DocumentDto updatedDocumentDto = documentMapper.entityToDto(documentEntity);
+        updatedDocumentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return updatedDocumentDto;
     }
 
     @Transactional
@@ -147,7 +150,10 @@ public class DocumentService {
         userDocumentEntity.setStarred(userDocumentDto.isStarred());
         documentRepository.save(documentEntity);
 
-        return documentMapper.entityToDto(documentEntity);
+        DocumentDto updatedDocumentDto = documentMapper.entityToDto(documentEntity);
+        updatedDocumentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return updatedDocumentDto;
     }
 
     @Transactional

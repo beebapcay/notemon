@@ -1,17 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {finalize, take} from 'rxjs';
-import {NotemonTypeEnum} from '../../enum/notemon-type.enum';
-import {SizeEnum} from '../../enum/size.enum';
-import {NoteModel} from '../../model/note.model';
-import {UserModel} from '../../model/user.model';
-import {DocumentService} from '../../service/document.service';
-import {SnackbarService} from '../../service/snackbar.service';
-import {UserService} from '../../service/user.service';
-import {ArrayUtil} from '../../utils/array.util';
-import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
-import {LoadingService} from '../../service/loading.service';
-import {AuthService} from '../../service/auth.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { finalize, take } from 'rxjs';
+import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
+import { SizeEnum } from '../../enum/size.enum';
+import { DocumentModel } from '../../model/document.model';
+import { NoteModel } from '../../model/note.model';
+import { UserModel } from '../../model/user.model';
+import { AuthService } from '../../service/auth.service';
+import { DocumentService } from '../../service/document.service';
+import { LoadingService } from '../../service/loading.service';
+import { SnackbarService } from '../../service/snackbar.service';
+import { UserService } from '../../service/user.service';
+import { ArrayUtil } from '../../utils/array.util';
+import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
 
 @Component({
   selector: 'app-notemon-page',
@@ -84,8 +85,6 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
     this.loadingService.showLoadingSpinner();
     this.loadingService.showLoadingBar();
     if (this.user === null) return;
-    console.log('user', this.user);
-    console.log('noteId', this.noteId);
     this.registerSubscription(
       this.userService.getDocumentById(this.user?.id, this.noteId)
         .pipe(take(1), finalize(() => {
@@ -94,7 +93,6 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
         }))
         .subscribe({
           next: (documents) => {
-            console.log('document', documents);
             this.note = documents as NoteModel;
           },
           error: error => this.snackbarService.openRequestErrorAnnouncement(error)
@@ -132,4 +130,10 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
   handleErrorResponse(error: any) {
     this.snackbarService.openRequestErrorAnnouncement(error);
   }
+
+  updateFromTopNav(updatedDocument: DocumentModel) {
+    this.note.relationship = updatedDocument?.relationship ?? this.note.relationship;
+    this.note.name = updatedDocument?.name ?? this.note.name;
+  }
 }
+
