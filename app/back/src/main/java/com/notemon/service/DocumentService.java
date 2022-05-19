@@ -38,6 +38,23 @@ public class DocumentService {
     private final UserDocumentMapper userDocumentMapper;
 
     @Transactional
+    public DocumentDto getDocumentById(UUID userId, UUID documentId)
+            throws EntityWithIdNotFoundException,
+            EntityWithFieldNotFoundException,
+            NotPermissionToAccessDocumentException {
+        UserDocumentEntity userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(userId, documentId)
+                .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
+
+        DocumentEntity documentEntity = documentRepository.findById(documentId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        DocumentDto documentDto = documentMapper.entityToDto(documentEntity);
+        documentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return documentDto;
+    }
+
+    @Transactional
     public DocumentDto getDocumentByShareCode(String shareCode)
             throws EntityWithFieldNotFoundException {
         DocumentEntity documentEntity = documentRepository.findByShareCode(shareCode)
@@ -108,12 +125,40 @@ public class DocumentService {
 
         if (userDocumentEntity.getPermission().getCode().equals(PermissionEnum.EDITOR)) {
             documentEntity.setName(documentDto.getName());
-            documentRepository.save(documentEntity);
+            documentEntity = documentRepository.save(documentEntity);
         } else {
             throw new NotPermissionToEditDocumentException(userId, documentId);
         }
 
-        return documentMapper.entityToDto(documentEntity);
+        DocumentDto updatedDocumentDto = documentMapper.entityToDto(documentEntity);
+        updatedDocumentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return updatedDocumentDto;
+    }
+
+    @Transactional
+    public DocumentDto updateContentDocument(UUID documentId, UUID userId, DocumentDto documentDto)
+            throws
+            EntityWithIdNotFoundException,
+            NotPermissionToAccessDocumentException,
+            NotPermissionToEditDocumentException {
+        DocumentEntity documentEntity = documentRepository.findById(documentId)
+                .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
+
+        UserDocumentEntity userDocumentEntity = userDocumentRepository.findByUserIdAndDocumentId(userId, documentId)
+                .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
+
+        if (userDocumentEntity.getPermission().getCode().equals(PermissionEnum.EDITOR)) {
+            documentEntity.setContent(documentDto.getContent());
+            documentEntity = documentRepository.save(documentEntity);
+        } else {
+            throw new NotPermissionToEditDocumentException(userId, documentId);
+        }
+
+        DocumentDto updatedDocumentDto = documentMapper.entityToDto(documentEntity);
+        updatedDocumentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return updatedDocumentDto;
     }
 
     @Transactional
@@ -128,9 +173,12 @@ public class DocumentService {
                 .orElseThrow(() -> new NotPermissionToAccessDocumentException(userId, documentId));
 
         userDocumentEntity.setStarred(userDocumentDto.isStarred());
-        documentRepository.save(documentEntity);
+        documentEntity = documentRepository.save(documentEntity);
 
-        return documentMapper.entityToDto(documentEntity);
+        DocumentDto updatedDocumentDto = documentMapper.entityToDto(documentEntity);
+        updatedDocumentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return updatedDocumentDto;
     }
 
     @Transactional

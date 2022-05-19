@@ -236,7 +236,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
     switch (actionOption as CardActionMenuEnum) {
       case CardActionMenuEnum.SHARE: {
         const origin = window.location.origin;
-        this.clipboardService.copy(`${origin}/share/${this.item?.id}`);
+        this.clipboardService.copy(`${origin}/share/${this.item?.shareCode}`);
 
         this.snackbarService.openSuccessAnnouncement('Link for sharing was copied to clipboard.');
         break;

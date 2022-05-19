@@ -3,7 +3,7 @@
 
 :host {
   width: 100%;
-  min-height: calc(100vh - #{$app-top-navbar-height});
+  min-height: calc(100vh - #{$app-top-navbar-main-height});
   background-color: $color-background-gray;
   display: flex;
   flex-direction: column;

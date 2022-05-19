@@ -22,7 +22,7 @@
 
     <p class="summary">{{directories?.length ?? 0}} Directories - {{notes?.length ?? 0}} Notes</p>
 
-    <section class="started-section">
+    <section class="started-section" *ngIf="isDashboardPage">
       <h3 class="section-header">Started</h3>
       <div class="started-list-container">
         <app-notemon-card-empty

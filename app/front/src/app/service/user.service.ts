@@ -53,6 +53,11 @@ export class UserService {
     return this.http.post<DocumentModel>(createNewDocumentUrl, {...document});
   }
 
+  getDocumentById(userId: string, documentId: string): Observable<DocumentModel> {
+    const getDocumentByIdUrl = UserService.USER_URL + userId + '/documents/' + documentId;
+    return this.http.get<DocumentModel>(getDocumentByIdUrl);
+  }
+
   getAllDocuments(userId: string, parentId: string, isDirectory: boolean | null): Observable<DocumentModel[]> {
     const getAllDocumentsUrl = UserService.USER_URL + userId + '/documents';
     const queryParams = {
