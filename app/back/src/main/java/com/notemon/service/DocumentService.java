@@ -48,7 +48,10 @@ public class DocumentService {
         DocumentEntity documentEntity = documentRepository.findById(documentId)
                 .orElseThrow(() -> new EntityWithIdNotFoundException(DocumentEntity.class, documentId));
 
-        return documentMapper.entityToDto(documentEntity);
+        DocumentDto documentDto = documentMapper.entityToDto(documentEntity);
+        documentDto.setRelationship(userDocumentMapper.entityToDto(userDocumentEntity));
+
+        return documentDto;
     }
 
     @Transactional
