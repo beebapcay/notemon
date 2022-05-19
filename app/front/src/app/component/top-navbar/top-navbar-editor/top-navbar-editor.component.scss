@@ -136,21 +136,18 @@
 
   .account-btn {
     @include reset-button();
-    border-radius: 100%;
+    @include set-icon-button-size($btn-size: 36px, $icon-size: 32px);
+    border-radius: 50%;
     background-color: rgba(217, 217, 217, 0.9);
-    width: 36px;
-    height: 36px;
     border: 2px solid #C1C1C1;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: 25px;
+  }
 
-    .mat-icon {
-      width: 32px;
-      height: 32px;
-      font-size: 32px;
-      line-height: 32px;
-    }
+  .mat-icon {
+    position: relative;
+    top: 1px;
   }
 }
