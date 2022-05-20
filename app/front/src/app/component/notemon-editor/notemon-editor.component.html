@@ -5,4 +5,21 @@
     (change)="updateContent($event)"
     [(ngModel)]="note.content">
   </ckeditor>
+
+  <section class="editor-summary-footer">
+    <p class="guide-settings">
+      You can choose many options in setting
+      <button>here</button>
+    </p>
+    <summary>
+      <div class="time-summary">
+        <h5>Summary</h5>
+        <p>45 minutes 36 seconds</p>
+      </div>
+      <div class="content-summary">
+        <p>4 words</p>
+      </div>
+    </summary>
+  </section>
+
 </div>
