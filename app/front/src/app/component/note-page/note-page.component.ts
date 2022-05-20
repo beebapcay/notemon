@@ -13,6 +13,7 @@ import {SnackbarService} from '../../service/snackbar.service';
 import {UserService} from '../../service/user.service';
 import {ArrayUtil} from '../../utils/array.util';
 import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
+import {DocumentSummaryModel} from '../../model/document-summary.model';
 
 @Component({
   selector: 'app-notemon-page',
@@ -97,6 +98,7 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
         .subscribe({
           next: (documents) => {
             this.note = documents as NoteModel;
+            this.note['summary'] = DocumentSummaryModel.create();
           },
           error: error => this.snackbarService.openRequestErrorAnnouncement(error)
         })

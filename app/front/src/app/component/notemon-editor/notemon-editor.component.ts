@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import {take} from 'rxjs';
@@ -9,21 +9,18 @@ import {SnackbarService} from '../../service/snackbar.service';
 import {UserService} from '../../service/user.service';
 import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
 
-interface ICdkEditorConfig {
-  editorData: string;
-}
 
 @Component({
   selector: 'app-notemon-editor',
   templateUrl: './notemon-editor.component.html',
   styleUrls: ['./notemon-editor.component.scss']
 })
-export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent implements OnInit {
+export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent implements OnInit, OnDestroy {
   @Input() note: NoteModel = NoteModel.create() as NoteModel;
 
   user: UserModel;
 
-  loveNumber: number = 0;
+  sectionTimeInterval: number;
 
   readonly Editor = Editor;
 
@@ -40,6 +37,16 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
           this.user = user;
         }
       ));
+
+    this.sectionTimeInterval = setInterval(() => {
+      this.note.summary.sectionTime++;
+      console.log(this.note.summary.sectionTime);
+    }, 1000);
+  }
+
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    clearInterval(this.sectionTimeInterval);
   }
 
   public onReady(editor) {
@@ -60,7 +67,6 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
       this.documentService.updateContentDocument(this.user?.id, this.note?.id, this.note)
         .pipe(take(1))
         .subscribe({
-            next: () => console.log(`Successfully updated. Love MY DUYEN x${this.loveNumber++}`),
             error: error => this.handleErrorResponse(error)
           }
         ));

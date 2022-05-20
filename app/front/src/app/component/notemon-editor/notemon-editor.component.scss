@@ -102,7 +102,7 @@ $ck-color-content-border: #dadce0;
   background-color: $ck-color-content-background;
   border: 1px solid $ck-color-content-border !important;
   box-shadow: none !important;
-  padding: 27.5px 42.5px;
+  padding: 27.5px 52.5px;
   border-radius: 3.5px !important;
 }
 
@@ -113,6 +113,7 @@ $ck-color-content-border: #dadce0;
   flex-direction: column;
   background-color: $ck-color-editor-background;
   position: relative;
+  overflow: hidden;
 
   ckeditor {
     width: 100%;
