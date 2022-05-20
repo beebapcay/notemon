@@ -2,5 +2,10 @@
   <app-top-navbar-editor (updatedDocumentEmitted)="updateFromTopNav($event)" [isLoggedIn]="isLoggedIn" [item]="note"
                          *ngIf="!isQuickNotePage"></app-top-navbar-editor>
   <app-notemon-editor [note]="note"></app-notemon-editor>
+  <button class="setting-btn" mat-button>
+    <mat-icon>settings</mat-icon>
+    Settings
+  </button>
+  <app-option-sidebar></app-option-sidebar>
 </div>
 

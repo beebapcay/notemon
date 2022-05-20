@@ -37,6 +37,8 @@ import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashb
 import {LoadingProgressBarComponent} from './loading/loading-progress-bar/loading-progress-bar.component';
 import {LoadingProgressSpinnerComponent} from './loading/loading-progress-spinner/loading-progress-spinner.component';
 import {SharePageComponent} from './share-page/share-page.component';
+import {OptionSidebarComponent} from './note-page/option-sidebar/option-sidebar.component';
+import {OptionSidebarItemComponent} from './note-page/option-sidebar/option-sidebar-item/option-sidebar-item.component';
 
 @NgModule({
   imports: [
@@ -80,6 +82,8 @@ import {SharePageComponent} from './share-page/share-page.component';
     LoadingProgressBarComponent,
     LoadingProgressSpinnerComponent,
     SharePageComponent,
+    OptionSidebarComponent,
+    OptionSidebarItemComponent,
   ],
   exports: [
     CommonModule,

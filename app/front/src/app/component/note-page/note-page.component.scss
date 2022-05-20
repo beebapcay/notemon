@@ -11,6 +11,33 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+
+  .setting-btn {
+    position: absolute;
+    top: 119.5px;
+    z-index: 9;
+    left: 28.5px;
+    background-color: #78909C;
+    border-radius: 3.5px;
+    font-family: $font-family-tertiary;
+    color: white;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: initial;
+    padding: 4.5px 12.5px;
+
+    .mat-icon {
+      @include set-icon-size(14px);
+    }
+  }
+
+  app-option-sidebar {
+    position: absolute;
+    top: 155.5px;
+    z-index: 9;
+    left: 28.5px;
+  }
 
   app-top-navbar-editor {
     width: 100%;
