@@ -1,13 +1,13 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import {Component, Input, OnInit} from '@angular/core';
+import {ChangeEvent} from '@ckeditor/ckeditor5-angular';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import { take } from 'rxjs';
-import { NoteModel } from '../../model/note.model';
-import { UserModel } from '../../model/user.model';
-import { DocumentService } from '../../service/document.service';
-import { SnackbarService } from '../../service/snackbar.service';
-import { UserService } from '../../service/user.service';
-import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
+import {take} from 'rxjs';
+import {NoteModel} from '../../model/note.model';
+import {UserModel} from '../../model/user.model';
+import {DocumentService} from '../../service/document.service';
+import {SnackbarService} from '../../service/snackbar.service';
+import {UserService} from '../../service/user.service';
+import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
 
 interface ICdkEditorConfig {
   editorData: string;
@@ -18,14 +18,11 @@ interface ICdkEditorConfig {
   templateUrl: './notemon-editor.component.html',
   styleUrls: ['./notemon-editor.component.scss']
 })
-export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent implements OnInit, OnChanges {
+export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent implements OnInit {
   @Input() note: NoteModel = NoteModel.create() as NoteModel;
-
-  @ViewChild('editor') editorComponent: CKEditorComponent;
 
   user: UserModel;
 
-  isInitializingCompleted: boolean = false;
   loveNumber: number = 0;
 
   readonly Editor = Editor;
@@ -34,7 +31,6 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
               private userService: UserService,
               private snackbarService: SnackbarService) {
     super();
-    this.note = NoteModel.create() as NoteModel;
   }
 
 
@@ -44,13 +40,6 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
           this.user = user;
         }
       ));
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['note'].previousValue?.content && changes['note'].currentValue?.content && !this.isInitializingCompleted) {
-      this.isInitializingCompleted = true;
-      this.editorComponent.editorInstance.setData(this.note.content);
-    }
   }
 
   public onReady(editor) {

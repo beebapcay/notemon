@@ -3,6 +3,6 @@
     (ready)="onReady($event)"
     [editor]="Editor"
     (change)="updateContent($event)"
-    data=''>
+    [(ngModel)]="note.content">
   </ckeditor>
 </div>
