@@ -45,6 +45,11 @@ import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
 import WProofreader from "@webspellchecker/wproofreader-ckeditor5/src/wproofreader";
+import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage.js';
+import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert';
+import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage';
+import ImageResizeEditing from '@ckeditor/ckeditor5-image/src/imageresize/imageresizeediting';
+import ImageResizeHandles from '@ckeditor/ckeditor5-image/src/imageresize/imageresizehandles';
 
 class Editor extends DecoupledDocumentEditor {
 }
@@ -92,7 +97,12 @@ Editor.builtinPlugins = [
   TodoList,
   Underline,
   WordCount,
-  WProofreader
+  WProofreader,
+  EasyImage,
+  ImageInsert,
+  LinkImage,
+  ImageResizeEditing,
+  ImageResizeHandles
 ];
 
 // Editor configuration.
@@ -122,7 +132,7 @@ Editor.defaultConfig = {
       'todoList',
       'link',
       'blockQuote',
-      'imageUpload',
+      'insertImage',
       'insertTable',
       'mediaEmbed',
       '|',
@@ -142,11 +152,41 @@ Editor.defaultConfig = {
   },
   language: 'en',
   image: {
+    resizeOptions: [
+      {
+        name: 'resizeImage:25',
+        value: '25',
+        icon: 'medium'
+      },
+      {
+        name: 'resizeImage:50',
+        value: '50',
+        icon: 'medium'
+      },
+      {
+        name: 'resizeImage:75',
+        value: '75',
+        icon: 'large'
+      },
+      {
+        name: 'resizeImage:original',
+        value: null,
+        icon: 'original'
+      },],
     toolbar: [
-      'imageTextAlternative',
       'imageStyle:inline',
       'imageStyle:block',
-      'imageStyle:side'
+      'imageStyle:side',
+      '|',
+      'toggleImageCaption',
+      'imageTextAlternative',
+      '|',
+      'linkImage',
+      '|',
+      'resizeImage:25',
+      'resizeImage:50',
+      'resizeImage:75',
+      'resizeImage:original',
     ]
   },
   table: {
@@ -157,6 +197,10 @@ Editor.defaultConfig = {
       'tableCellProperties',
       'tableProperties'
     ]
+  },
+  cloudServices: {
+    tokenUrl: 'https://88477.cke-cs.com/token/dev/304e4bd16b39138128288650ab7650e88bccf69ecbf500e5990139f59d66?limit=10',
+    uploadUrl: 'https://88477.cke-cs.com/easyimage/upload/'
   }
 };
 
