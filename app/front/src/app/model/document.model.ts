@@ -1,6 +1,7 @@
-import { BaseModel } from './base.model';
-import { UserDocumentModel } from './user-document.model';
-import { UserModel } from './user.model';
+import {BaseModel} from './base.model';
+import {UserDocumentModel} from './user-document.model';
+import {UserModel} from './user.model';
+import {DocumentSummaryModel} from './document-summary.model';
 
 export class DocumentModel extends BaseModel {
   constructor(
@@ -15,6 +16,7 @@ export class DocumentModel extends BaseModel {
     public partner: UserModel[] | null = null,
     public createdAt: Date | null = null,
     public lastModifiedAt: Date | null = null,
+    public summary: DocumentSummaryModel | null = null,
     version: number | null = null,
   ) {
     super(id, version);
@@ -23,7 +25,7 @@ export class DocumentModel extends BaseModel {
   public static create(): DocumentModel {
     return new DocumentModel(
       null,
-      "New Document",
+      'New Document',
       null,
       null,
       null,
@@ -33,10 +35,7 @@ export class DocumentModel extends BaseModel {
       null,
       new Date(),
       new Date(),
+      DocumentSummaryModel.create(),
       0);
-  }
-
-  public hello() {
-    console.log("Hello");
   }
 }

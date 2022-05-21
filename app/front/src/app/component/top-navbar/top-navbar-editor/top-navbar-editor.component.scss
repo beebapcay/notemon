@@ -81,10 +81,7 @@
     }
 
     .mat-icon {
-      width: 20.5px;
-      height: 20.5px;
-      font-size: 20.5px;
-      line-height: 20.5px;
+      @include set-icon-size(20.5px);
     }
   }
 
@@ -98,11 +95,7 @@
     padding: 7.5px 12.5px;
 
     .mat-icon {
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
-      line-height: 16px;
-      margin-right: 2.5px;
+      @include set-icon-size(16px);
     }
 
     &:hover {
@@ -144,10 +137,5 @@
     justify-content: center;
     align-items: center;
     margin-left: 25px;
-  }
-
-  .mat-icon {
-    position: relative;
-    top: 1px;
   }
 }

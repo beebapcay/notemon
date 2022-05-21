@@ -1,6 +1,7 @@
-import { DocumentModel } from './document.model';
-import { UserDocumentModel } from './user-document.model';
-import { UserModel } from './user.model';
+import {DocumentModel} from './document.model';
+import {UserDocumentModel} from './user-document.model';
+import {UserModel} from './user.model';
+import {DocumentSummaryModel} from './document-summary.model';
 
 export class NoteModel extends DocumentModel {
   constructor(
@@ -16,9 +17,10 @@ export class NoteModel extends DocumentModel {
     partner: UserModel[] | null,
     createdAt: Date | null = null,
     lastModifiedAt: Date | null = null,
+    summary: DocumentSummaryModel | null = null,
     version: number | 0 = 0,
   ) {
-    super(id, name, description, isDirectory, parent, author, shareCode, permission, partner, createdAt, lastModifiedAt, version);
+    super(id, name, description, isDirectory, parent, author, shareCode, permission, partner, createdAt, lastModifiedAt, summary, version);
   }
 
   public static override create(): DocumentModel {
@@ -35,6 +37,7 @@ export class NoteModel extends DocumentModel {
       null,
       new Date(),
       new Date(),
+      DocumentSummaryModel.create(),
       0
     );
   }

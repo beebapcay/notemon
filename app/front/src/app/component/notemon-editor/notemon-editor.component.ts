@@ -1,40 +1,56 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
-import { ChangeEvent, CKEditorComponent } from '@ckeditor/ckeditor5-angular';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
-import { take } from 'rxjs';
+import { finalize, take } from 'rxjs';
+import { IKeyValue } from '../../common/common.interface';
+import { SizeEnum } from '../../enum/size.enum';
 import { NoteModel } from '../../model/note.model';
 import { UserModel } from '../../model/user.model';
 import { DocumentService } from '../../service/document.service';
+import { LoadingService } from '../../service/loading.service';
 import { SnackbarService } from '../../service/snackbar.service';
 import { UserService } from '../../service/user.service';
 import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
 
-interface ICdkEditorConfig {
-  editorData: string;
-}
 
 @Component({
   selector: 'app-notemon-editor',
   templateUrl: './notemon-editor.component.html',
   styleUrls: ['./notemon-editor.component.scss']
 })
-export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent implements OnInit, OnChanges {
+export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent implements OnInit, OnDestroy {
   @Input() note: NoteModel = NoteModel.create() as NoteModel;
-
-  @ViewChild('editor') editorComponent: CKEditorComponent;
 
   user: UserModel;
 
-  isInitializingCompleted: boolean = false;
-  loveNumber: number = 0;
+  sectionTimeInterval: number;
+
+  editorConfig: IKeyValue;
 
   readonly Editor = Editor;
+  readonly SizeEnum = SizeEnum;
 
   constructor(private documentService: DocumentService,
               private userService: UserService,
-              private snackbarService: SnackbarService) {
+              private snackbarService: SnackbarService,
+              private loadingService: LoadingService) {
     super();
-    this.note = NoteModel.create() as NoteModel;
+
+    this.configureEditor();
+  }
+
+  configureEditor() {
+    this.editorConfig = {
+      autosave: {
+        waitingTime: 1000,
+        save: editor => this.saveContent(editor.getData())
+      },
+      wordCount: {
+        onUpdate: stats => {
+          this.note.summary.words = stats.words;
+          this.note.summary.characters = stats.characters;
+        }
+      }
+    }
   }
 
 
@@ -44,13 +60,15 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
           this.user = user;
         }
       ));
+
+    this.sectionTimeInterval = setInterval(() => {
+      this.note.summary.sectionTime++;
+    }, 1000);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (!changes['note'].previousValue?.content && changes['note'].currentValue?.content && !this.isInitializingCompleted) {
-      this.isInitializingCompleted = true;
-      this.editorComponent.editorInstance.setData(this.note.content);
-    }
+  override ngOnDestroy(): void {
+    super.ngOnDestroy();
+    clearInterval(this.sectionTimeInterval);
   }
 
   public onReady(editor) {
@@ -60,18 +78,17 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
     );
   }
 
-  updateContent({editor}: ChangeEvent) {
-    const data = editor.getData();
-
+  saveContent(content: string) {
     if (!this.preProcessAction()) return;
 
-    this.note.content = data;
+    this.note.content = content;
+
+    this.loadingService.showLoadingSpinner();
 
     this.registerSubscription(
       this.documentService.updateContentDocument(this.user?.id, this.note?.id, this.note)
-        .pipe(take(1))
+        .pipe(take(1), finalize(() => this.loadingService.hideLoadingSpinner()))
         .subscribe({
-            next: () => console.log(`Successfully updated. Love MY DUYEN x${this.loveNumber++}`),
             error: error => this.handleErrorResponse(error)
           }
         ));

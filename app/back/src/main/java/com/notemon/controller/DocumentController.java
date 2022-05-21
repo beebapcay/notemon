@@ -35,7 +35,10 @@ public class DocumentController {
     public DocumentDto updateContentDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId, @RequestBody DocumentDto documentDto)
             throws EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException,
-            NotPermissionToEditDocumentException {
+            NotPermissionToEditDocumentException,
+            InterruptedException {
+        // TODO: delay for dev mode testing
+        Thread.sleep(1500);
         return documentService.updateContentDocument(id, userId, documentDto);
     }
 

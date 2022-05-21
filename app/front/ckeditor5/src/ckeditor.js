@@ -44,6 +44,7 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
+import WProofreader from "@webspellchecker/wproofreader-ckeditor5/src/wproofreader";
 
 class Editor extends DecoupledDocumentEditor {
 }
@@ -90,7 +91,8 @@ Editor.builtinPlugins = [
   TextTransformation,
   TodoList,
   Underline,
-  WordCount
+  WordCount,
+  WProofreader
 ];
 
 // Editor configuration.
@@ -109,6 +111,7 @@ Editor.defaultConfig = {
       'fontColor',
       'fontFamily',
       'fontSize',
+      'wproofreader',
       '|',
       'numberedList',
       'bulletedList',
@@ -132,6 +135,10 @@ Editor.defaultConfig = {
       'undo',
       'redo'
     ]
+  },
+  wproofreader: {
+    serviceId: 'VlS2Plm8ebUk7yw',
+    srcUrl: 'https://svc.webspellchecker.net/spellcheck31/wscbundle/wscbundle.js'
   },
   language: 'en',
   image: {
