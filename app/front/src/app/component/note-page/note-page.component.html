@@ -1,13 +1,21 @@
-<div class="note-page-container">
-  <app-top-navbar-editor (updatedDocumentEmitted)="updateFromTopNav($event)" [isLoggedIn]="isLoggedIn" [item]="note"
-                         *ngIf="!isQuickNotePage"></app-top-navbar-editor>
-  <app-notemon-editor [note]="note"></app-notemon-editor>
+<div class="note-page-container" [ngClass]="{'quick-page-note': isQuickNotePage}">
+  <app-top-navbar-editor (updatedDocumentEmitted)="updateFromTopNav($event)"
+                         [isLoggedIn]="isLoggedIn"
+                         [item]="note"
+                         *ngIf="!isQuickNotePage"
+  >
+  </app-top-navbar-editor>
+  <app-notemon-editor
+    [note]="note"
+    [isQuickNotePage]="isQuickNotePage"
+  >
+  </app-notemon-editor>
   <button class="setting-btn" mat-button>
     <mat-icon>settings</mat-icon>
     Settings
   </button>
-  <app-option-sidebar></app-option-sidebar>
-  <button class="message-btn" mat-button>
+  <app-option-sidebar *ngIf="!isQuickNotePage"></app-option-sidebar>
+  <button class="message-btn" *ngIf="!isQuickNotePage" mat-button>
     <mat-icon>forum</mat-icon>
     Message
   </button>
