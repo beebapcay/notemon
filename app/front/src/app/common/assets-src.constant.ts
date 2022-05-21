@@ -27,4 +27,6 @@ export class AssetsSrcConstant {
   public static NOTE = 'assets/images/document.svg';
   public static CARD_EMPTY = 'assets/images/card_empty.png';
 
+  public static LOVER_ASCII = 'assets/images/lover.txt';
+
 }
