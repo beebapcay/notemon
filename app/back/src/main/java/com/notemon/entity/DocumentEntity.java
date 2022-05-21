@@ -51,7 +51,7 @@ public class DocumentEntity extends BaseEntity {
     @NotNull
     private UserEntity author;
 
-    @Column(name = "CONTENT", nullable = true)
+    @Column(name = "CONTENT", nullable = true, columnDefinition = "VARCHAR(MAX)")
     private String content;
 
     @Column(name = "SHARE_CODE", nullable = true)

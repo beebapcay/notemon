@@ -127,7 +127,12 @@ $ck-color-content-border: #dadce0;
   }
 
   .editor-summary-footer {
+    position: relative;
     margin: 0 calc((100% - 1024px) / 2) 25px;
+
+    app-loading-progress-spinner {
+      position: absolute;
+    }
 
     .guide-settings {
       font-family: $font-family-tertiary;

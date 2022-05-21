@@ -2,11 +2,12 @@
   <ckeditor
     (ready)="onReady($event)"
     [editor]="Editor"
-    (change)="updateContent($event)"
+    [config]="editorConfig"
     [(ngModel)]="note.content">
   </ckeditor>
 
   <section class="editor-summary-footer">
+    <app-loading-progress-spinner [size]="SizeEnum.SUPER_SMALL"></app-loading-progress-spinner>
     <p class="guide-settings">
       You can choose many options in setting
       <button>here</button>
@@ -17,7 +18,7 @@
         <p>{{note?.summary?.sectionTime | seconds2Time}}</p>
       </div>
       <div class="content-summary">
-        <p>4 words</p>
+        <p>{{(note?.summary?.words | pluralSuffix: 'word': 's') + ', ' + (note?.summary?.characters |  pluralSuffix: 'character': 'es')}}</p>
       </div>
     </summary>
   </section>

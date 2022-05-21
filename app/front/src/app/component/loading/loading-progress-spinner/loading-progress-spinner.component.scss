@@ -34,13 +34,25 @@
 
   &.small {
     svg {
-      width: 30px !important;
-      height: 30px !important;
+      width: 25px !important;
+      height: 25px !important;
     }
 
     circle {
       stroke: $color-primary;
       stroke-width: 7.5px !important;
+    }
+  }
+
+  &.super-small {
+    svg {
+      width: 15.5px !important;
+      height: 15.5px !important;
+    }
+
+    circle {
+      stroke: $color-primary;
+      stroke-width: 11.5px !important;
     }
   }
 }
