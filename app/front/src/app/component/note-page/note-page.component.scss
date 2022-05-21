@@ -97,4 +97,14 @@
     }
   }
 
+  &.quick-page-note {
+    app-notemon-editor {
+      height: 100vh;
+    }
+
+    .setting-btn {
+      top: 70px;
+    }
+  }
+
 }
