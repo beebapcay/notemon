@@ -19,6 +19,7 @@ import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstra
 })
 export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent implements OnInit, OnDestroy {
   @Input() note: NoteModel = NoteModel.create() as NoteModel;
+  @Input() isQuickNotePage: boolean = true;
 
   user: UserModel;
 
@@ -42,7 +43,9 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
     this.editorConfig = {
       autosave: {
         waitingTime: 1000,
-        save: editor => this.saveContent(editor.getData())
+        save: editor => {
+          if (!this.isQuickNotePage) this.saveContent(editor.getData());
+        }
       },
       wordCount: {
         onUpdate: stats => {
@@ -100,6 +103,8 @@ export class NotemonEditorComponent extends SubscriptionAwareAbstractComponent i
   }
 
   preProcessAction(): boolean {
+    if (this.isQuickNotePage) return false;
+
     if (this.note?.author?.id === null || this.user === null) {
       this.snackbarService.openErrorAnnouncement('Something was wrong or You are not authorized to perform this action');
       return false;
