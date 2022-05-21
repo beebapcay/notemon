@@ -44,5 +44,9 @@
   },
   "scripts": {
     "build": "webpack --mode production"
+  },
+  "dependencies": {
+    "@webspellchecker/wproofreader-ckeditor5": "^2.1.0",
+    "build": "^0.1.4"
   }
 }
