@@ -7,7 +7,7 @@
   font-family: $font-family-tertiary;
   color: black;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 11px;
   line-height: initial;
   padding: 13.5px 2.5px;
   display: flex;
@@ -22,11 +22,11 @@
   p {
     writing-mode: vertical-lr;
     line-height: initial;
-    margin: 0 0 8.5px;
+    margin: 0 0 6.5px;
   }
 
   .mat-icon {
-    @include set-icon-size(14px);
+    @include set-icon-size(12px);
     color: black;
   }
 
