@@ -13,7 +13,7 @@ export interface ISnackbarConfig extends MatSnackBarConfig {
 @Injectable({providedIn: 'root'})
 export class SnackbarService {
   static DEFAULT_CONFIG: ISnackbarConfig = {
-    duration: 7500,
+    duration: 5000,
     verticalPosition: 'bottom',
     horizontalPosition: 'right',
     status: SnackbarStatusEnum.info

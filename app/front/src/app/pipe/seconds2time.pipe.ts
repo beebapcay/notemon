@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 
 @Pipe({
@@ -11,8 +11,6 @@ export class Seconds2timePipe implements PipeTransform {
     let h = Math.floor(seconds / 3600);
     let m = Math.floor((seconds - h * 3600) / 60);
     let s = seconds - h * 3600 - m * 60;
-
-    console.log(h, m, s);
 
     return `${this.format(h, 'hour')} ${this.format(m, 'minute')} ${this.format(s, 'second')}`;
   }

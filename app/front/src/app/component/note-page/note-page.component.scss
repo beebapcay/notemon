@@ -48,4 +48,53 @@
     height: calc(100vh - #{$app-top-navbar-editor-height});
   }
 
+  .message-btn {
+    position: absolute;
+    bottom: 125px;
+    right: 28.5px;
+    z-index: 9;
+    background-color: rgba(33, 150, 243, 0.95);
+    font-family: $font-family-tertiary;
+    color: white;
+    border-radius: 1.5px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: initial;
+    padding: 4.5px 12.5px;
+
+    .mat-icon {
+      @include set-icon-size(16px);
+    }
+
+    &:hover {
+      background-color: rgb(32, 145, 234);
+    }
+  }
+
+  .help-btn {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    bottom: 25px;
+    left: 28.5px;
+    z-index: 9;
+    background-color: rgba(133, 133, 133, 0.9);
+    color: white;
+    border-radius: 99px;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: initial;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mat-icon {
+      @include set-icon-size(22px);
+    }
+
+    &:hover {
+      background-color: #676767;
+    }
+  }
+
 }
