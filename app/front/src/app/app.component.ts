@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { TranslateService } from "@ngx-translate/core";
-import { filter, take } from 'rxjs';
+import { filter } from 'rxjs';
 
 import defaultLanguage from '../assets/i18n/en.json';
 
 import { AppRouteConstant } from './common/app-route.constant';
+import { AssetsSrcConstant } from './common/assets-src.constant';
 import { SubscriptionAwareAbstractComponent } from './component/subscription-aware.abstract.component';
 import { NotSupportedErrorModel } from './model/error.model';
 import { AuthService } from './service/auth.service';
@@ -55,5 +56,14 @@ export class AppComponent extends SubscriptionAwareAbstractComponent implements 
         this.isLoggedIn = isLoggedIn;
       })
     );
+
+    this.printLover();
+  }
+
+  printLover() {
+    console.log('MY QUEEN');
+    fetch(AssetsSrcConstant.LOVER_ASCII)
+      .then(response => response.text())
+      .then(text => console.log(text));
   }
 }
