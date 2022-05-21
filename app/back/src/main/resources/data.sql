@@ -9,8 +9,8 @@ values ('69c81d37-9041-4c10-ae66-84ddbbce2b1e', 'VIEWER', 'You only can view the
         'Phat Duong'),
        ('a1a6046d-3593-4e67-8b82-6ec30d47591a', 'EDITOR', 'You can edit the document', 'Phat Duong', 'Phat Duong');
 
-insert into USER(ID, NAME, EMAIL, PASSWORD, ROLE_ID, USR_LOG_I, USR_LOG_U)
-values ('7924d3a3-15de-4cd1-922a-9f7f802cb425', 'Phat Duong', 'beebapcay@gmail.com',
+insert into USER(ID, NAME, EMAIL, I_PASSWORD, PASSWORD, ROLE_ID, USR_LOG_I, USR_LOG_U)
+values ('7924d3a3-15de-4cd1-922a-9f7f802cb425', 'Phat Duong', 'beebapcay@gmail.com', 'password',
         '$2a$10$aS7qA0M6yZ8xTYMZD1cTM.S404slZO6BshIb8p872Rt6DX9d2aNyi', '94fad41f-f298-4fcd-b0e4-e6c8001585a4',
         'Phat Duong', 'Phat Duong');
 

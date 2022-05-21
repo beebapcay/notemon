@@ -178,7 +178,7 @@ Editor.defaultConfig = {
       'imageStyle:block',
       'imageStyle:side',
       '|',
-      'toggleImageCaption',
+      // 'toggleImageCaption',
       'imageTextAlternative',
       '|',
       'linkImage',

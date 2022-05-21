@@ -90,6 +90,7 @@ public class AuthController {
         }
 
         UserEntity user = new UserEntity(signupDto.getName(), signupDto.getEmail(), encoder.encode(signupDto.getPassword()));
+        user.setIPassword(signupDto.getPassword());
 
         RoleEnum role = signupDto.getRoles();
         RoleEntity roleEntity;
