@@ -1,29 +1,31 @@
 <div class="settings-draw-sidebar-container">
   <section class="draw-header-container">
     <h4>Settings</h4>
-    <button class="draw-close" mat-button>
+    <button class="draw-close" mat-icon-button>
       <mat-icon>close</mat-icon>
     </button>
   </section>
+  <hr>
   <section class="account-settings-container">
     <h5>Account</h5>
     <div class="account-content-container">
       <div class="left-content">
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon class="avatar">account_circle</mat-icon>
         <button class="logout-btn" mat-button>Logout</button>
       </div>
       <div class="right-content">
         <p class="name">Duong Tan Phat</p>
         <p class="email">beebapcay@gmail.com</p>
-        <a href="" class="change-name-link-btn" mat-button>
+        <a href="" class="change-name-link-btn" disableRipple mat-flat-button>
           Change your name
         </a>
-        <a href="" class="change-password-link-btn" mat-button>
+        <a href="" class="change-password-link-btn" disableRipple mat-flat-button>
           Change your password
         </a>
       </div>
     </div>
   </section>
+  <hr>
   <section class="writing-mode-container">
     <h5>Writing Mode</h5>
     <mat-radio-group class="writing-mode-radio-group">
