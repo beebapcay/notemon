@@ -32,6 +32,12 @@
   }
 }
 
+:host ::ng-deep app-sidebar-input {
+  .sidebar-input {
+    margin-top: 10px;
+  }
+}
+
 .settings-draw-sidebar-container {
   hr {
     margin: 0;
@@ -171,7 +177,11 @@
         font-weight: 500;
         font-size: 14.5px;
         color: $color-on-background;
-        margin-bottom: 5px;
+        margin-bottom: 8.5px;
+      }
+
+      app-sidebar-input {
+        margin-top: 5px;
       }
     }
   }

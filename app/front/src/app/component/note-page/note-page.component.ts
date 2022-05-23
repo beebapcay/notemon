@@ -149,6 +149,7 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
   updateFromTopNav(updatedDocument: DocumentModel) {
     this.note.relationship = updatedDocument?.relationship ?? this.note.relationship;
     this.note.name = updatedDocument?.name ?? this.note.name;
+    this.note.lastModifiedAt = updatedDocument?.lastModifiedAt ?? this.note.lastModifiedAt;
   }
 }
 
