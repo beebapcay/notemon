@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {WritingModeEnum} from '../../../enum/writing-mode.enum';
 
 @Component({
   selector: 'app-settings-draw-sidebar',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings-draw-sidebar.component.scss']
 })
 export class SettingsDrawSidebarComponent implements OnInit {
+
+  readonly WritingModeEnum = WritingModeEnum;
 
   constructor() {
   }

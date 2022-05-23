@@ -29,14 +29,15 @@
   <section class="writing-mode-container">
     <h5>Writing Mode</h5>
     <mat-radio-group class="writing-mode-radio-group">
-      <mat-radio-button class="writing-mode-radio-item">
+      <mat-radio-button class="writing-mode-radio-item" [value]="WritingModeEnum.NORMAL">
         Normal
       </mat-radio-button>
-      <mat-radio-button class="writing-mode-radio-item">
-        Normal
+      <mat-radio-button class="writing-mode-radio-item" [value]="WritingModeEnum.HERMINGWAY">
+        Hermingway - Focus
       </mat-radio-button>
     </mat-radio-group>
   </section>
+  <hr>
   <section class="setting-goal-container">
     <h5>Setting Goal</h5>
     <div class="goal-item">

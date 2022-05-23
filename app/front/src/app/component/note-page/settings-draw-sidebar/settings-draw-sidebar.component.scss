@@ -1,8 +1,42 @@
 @import "~src/variables";
 
+:host ::ng-deep .mat-radio-button {
+  .mat-radio-container {
+    margin-right: 10px;
+  }
+
+  .mat-radio-container, .mat-radio-outer-circle, .mat-radio-inner-circle {
+    height: 15px;
+    width: 15px;
+  }
+
+
+  .mat-radio-ripple {
+    border-radius: 100%;
+    height: 30px; /*double of your required circle radius*/
+    width: 30px; /*double of your required circle radius*/
+    left: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+    top: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+  }
+
+  &.mat-accent {
+
+    .mat-radio-ripple .mat-ripple-element,
+    .mat-radio-inner-circle {
+      background-color: $color-focus-primary !important;
+    }
+
+    &.mat-radio-checked .mat-radio-outer-circle {
+      border-color: $color-focus-primary !important; /*outer ring color change*/
+    }
+  }
+}
+
 .settings-draw-sidebar-container {
   hr {
     margin: 0;
+    color: $color-border-gray-light;
+    opacity: 0.95;
   }
 
   .section-base {
@@ -118,10 +152,26 @@
       align-items: flex-start;
 
       .writing-mode-radio-item {
-        margin: 8.5px 0;
+        margin-top: 8.5px;
         font-family: $font-family-tertiary;
         color: $color-on-background;
         font-size: 14px;
+      }
+    }
+  }
+
+  .setting-goal-container {
+    @extend .section-base;
+
+    .goal-item {
+      margin-top: 7.5px;
+
+      h6 {
+        font-family: $font-family-secondary;
+        font-weight: 500;
+        font-size: 14.5px;
+        color: $color-on-background;
+        margin-bottom: 5px;
       }
     }
   }
