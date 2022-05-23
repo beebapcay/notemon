@@ -1,14 +1,14 @@
 package com.notemon.controller;
 
 import com.notemon.constant.EndpointConstant;
-import com.notemon.dto.LoginRequestDto;
-import com.notemon.dto.LoginResponseDto;
-import com.notemon.dto.MessageResponseDto;
-import com.notemon.dto.SignupRequestDto;
+import com.notemon.dto.*;
 import com.notemon.entity.RoleEntity;
 import com.notemon.entity.UserEntity;
 import com.notemon.entity.impl.UserDetailsImpl;
 import com.notemon.enums.RoleEnum;
+import com.notemon.exception.EntityWithFieldNotFoundException;
+import com.notemon.exception.EntityWithIdNotFoundException;
+import com.notemon.exception.RefreshTokenException;
 import com.notemon.repository.RoleRepository;
 import com.notemon.repository.UserRepository;
 import com.notemon.security.JwtTokenUtil;
@@ -49,7 +49,8 @@ public class AuthController {
     }
 
     @PostMapping("login/local")
-    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto) {
+    public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto)
+            throws EntityWithFieldNotFoundException {
         try {
             Authentication authentication = authenticationManager
                     .authenticate(
@@ -67,6 +68,13 @@ public class AuthController {
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
 
+            UserEntity userEntity = userRepository.findByEmail(loginRequestDto.getEmail())
+                    .orElseThrow(() -> new EntityWithFieldNotFoundException(UserEntity.class, "email", loginRequestDto.getEmail()));
+
+            String refreshToken = jwtTokenUtil.generateRefreshToken();
+            userEntity.setRefreshToken(refreshToken);
+            userRepository.save(userEntity);
+
             return ResponseEntity.ok()
                     .body(new LoginResponseDto(
                             userDetails.getId(),
@@ -75,7 +83,7 @@ public class AuthController {
                             jwtToken,
                             roles,
                             securityUtil.getJwtExpiration(),
-                            userDetails.getRefreshToken()
+                            refreshToken
                     ));
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException("Invalid username or password");
@@ -108,4 +116,33 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponseDto("User signup successfully"));
     }
+
+    @PostMapping("refreshToken")
+    public ResponseEntity<LoginResponseDto> refreshToken(@RequestBody RefreshTokenRequestDto refreshTokenRequestDto)
+            throws EntityWithIdNotFoundException, RefreshTokenException {
+        String refreshToken = refreshTokenRequestDto.getRefreshToken();
+        return userRepository.findByRefreshToken(refreshToken)
+                .map(userEntity -> {
+                    UserDetailsImpl userDetails = UserDetailsImpl.build(userEntity);
+
+                    String jwtToken = jwtTokenUtil.generateJwtToken(userDetails);
+
+                    List<String> roles = userDetails.getAuthorities().stream()
+                            .map(GrantedAuthority::getAuthority)
+                            .collect(Collectors.toList());
+
+                    return ResponseEntity.ok()
+                            .body(new LoginResponseDto(
+                                    userDetails.getId(),
+                                    userDetails.getEmail(),
+                                    userDetails.getName(),
+                                    jwtToken,
+                                    roles,
+                                    securityUtil.getJwtExpiration(),
+                                    refreshToken
+                            ));
+                })
+                .orElseThrow(() -> new RefreshTokenException(refreshToken));
+    }
+
 }

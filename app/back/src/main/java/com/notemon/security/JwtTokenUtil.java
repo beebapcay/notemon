@@ -11,6 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.function.Function;
 
 @Component
@@ -52,9 +53,13 @@ public class JwtTokenUtil implements Serializable {
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + securityUtil.getJwtValidity() * 1000L))
+                .setExpiration(new Date(System.currentTimeMillis() + securityUtil.getJwtExpirationMs() * 1000L))
                 .signWith(SignatureAlgorithm.HS256, securityUtil.getJwtSecret())
                 .compact();
+    }
+
+    public String generateRefreshToken() {
+        return UUID.randomUUID().toString();
     }
 
     public Boolean validateToken(String authToken) throws AppRTException {

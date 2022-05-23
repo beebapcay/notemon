@@ -16,5 +16,7 @@ public interface UserRepository
     Boolean existsByEmail(String email);
 
     Set<UserEntity> findAllByEnableTrue();
+
+    Optional<UserEntity> findByRefreshToken(String refreshToken);
 }
 
