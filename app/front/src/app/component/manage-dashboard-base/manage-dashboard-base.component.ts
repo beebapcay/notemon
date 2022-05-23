@@ -99,7 +99,10 @@ export class ManageDashboardBaseComponent extends SubscriptionAwareAbstractCompo
           next: (documents) => {
             this.documentService.source.next(documents ?? []);
           },
-          error: error => this.snackbarService.openRequestErrorAnnouncement(error)
+          error: error => {
+            this.snackbarService.openRequestErrorAnnouncement(error);
+            this.router.navigate([`/${AppRouteConstant.PAGE_NOT_FOUND}`], {replaceUrl: true}).then();
+          }
         })
     );
 

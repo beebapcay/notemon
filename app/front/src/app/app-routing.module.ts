@@ -25,6 +25,7 @@ import {NotePageComponent} from './component/note-page/note-page.component';
       {path: `${AppRouteConstant.SHARE}/:shareCode`, component: SharePageComponent},
       {path: AppRouteConstant.NOTE, component: NotePageComponent},
       {path: `${AppRouteConstant.NOTE}/:noteId`, component: NotePageComponent},
+      {path: AppRouteConstant.PAGE_NOT_FOUND, component: ErrorPageComponent, data: PageNotFoundErrorModel.create()},
       {path: AppRouteConstant.OTHER, component: ErrorPageComponent, data: PageNotFoundErrorModel.create()}
     ])
   ],

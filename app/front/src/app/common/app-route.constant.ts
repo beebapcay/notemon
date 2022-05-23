@@ -10,6 +10,7 @@ export class AppRouteConstant {
   static readonly NOTE = 'note';
   static readonly SHARE = 'share';
   static readonly CONTACT_US = 'contact-us';
+  static readonly PAGE_NOT_FOUND = '404';
   static readonly OTHER = '**';
 
   static readonly FULL_PAGE_ROUTE_PATTERN_LIST = [/^\/login$/, /^\/signup$/, /^\/note/];
