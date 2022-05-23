@@ -1,0 +1,77 @@
+@import "~src/variables";
+
+.input-base-style {
+  font-family: $font-family-tertiary;
+  font-size: 12px;
+  margin: 0;
+}
+
+:host ::ng-deep .mat-form-field {
+  .mat-form-field-wrapper {
+    padding-bottom: 0;
+  }
+
+  .mat-form-field-flex {
+    background-color: $color-background-gray-light;
+    border-radius: 5px;
+    padding: 0 15px;
+    height: 32.5px;
+    align-items: center;
+    box-shadow: 0 0 0 1px $color-focus-gray;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    .mat-form-field-label-wrapper {
+      padding: 0;
+      top: 0;
+      left: 0;
+
+      .mat-form-field-label {
+        @extend .input-base-style;
+        top: 0;
+        left: 0;
+        transform: translateY(7.5px);
+        color: $color-on-background-gray-light;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 0 1px #898f91, 0 0 0 3.5px rgba(0, 160, 233, 0.2);
+    }
+
+    .mat-form-field-infix, .mat-form-field-outline-start, .mat-form-field-outline-gap, .mat-form-field-outline-end {
+      border: 0;
+    }
+  }
+
+  .mat-form-field-underline {
+    display: none;
+  }
+
+  &.mat-focused .mat-form-field-flex {
+    box-shadow: 0 0 0 1px $color-focus-primary, 0 0 0 3.5px rgba(0, 160, 233, 0.3);
+
+    .mat-form-field-label {
+      color: $color-on-background-gray;
+    }
+  }
+}
+
+.sidebar-input {
+  mat-label {
+    font-family: $font-family-tertiary;
+    font-size: 13.5px;
+    color: #4C5C6B;
+    display: inline-block;
+    width: 85px;
+    margin-right: 15px;
+  }
+
+  mat-form-field {
+    width: 225px;
+
+    .mat-input-element {
+      @extend .input-base-style;
+      color: $color-on-background;
+    }
+  }
+}

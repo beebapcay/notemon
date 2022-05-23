@@ -49,7 +49,9 @@ $color-on-variant: #fff;
 
 
 $color-background: #fff;
+$color-background-gray-light: rgba(250, 250, 250, 0.45);
 $color-background-gray: #F8F8F8;
+$color-on-background-emphasis: #04263D;
 $color-on-background: #000;
 $color-on-background-gray: #435358;
 $color-on-background-gray-light: #7C8183;
@@ -59,7 +61,7 @@ $color-on-background-variant: #04263D;
 $color-on-background-variant-dark: #212121;
 
 $color-focus-primary: #00a0e9;
-$color-focus-primary-light: #d0d8e4;
+$color-focus-primary-light: rgba(208, 216, 228, 0.75);
 $color-focus-gray: #c0c8ce;
 $color-focus-gray-light: #C0C8CE0C;
 

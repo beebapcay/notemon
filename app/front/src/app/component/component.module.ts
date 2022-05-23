@@ -20,25 +20,27 @@ import {FeaturePageComponent} from './feature-page/feature-page.component';
 import {FormFieldComponent} from './form-field/form-field.component';
 import {HashtagComponent} from './hashtag/hashtag.component';
 import {HomePageComponent} from './home-page/home-page.component';
+import {LoadingProgressBarComponent} from './loading/loading-progress-bar/loading-progress-bar.component';
+import {LoadingProgressSpinnerComponent} from './loading/loading-progress-spinner/loading-progress-spinner.component';
+import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashboard-base.component';
 import {NewNotemonButtonComponent} from './new-notemon-button/new-notemon-button.component';
 import {NotePageComponent} from './note-page/note-page.component';
+import {OptionSidebarItemComponent} from './note-page/option-sidebar/option-sidebar-item/option-sidebar-item.component';
+import {OptionSidebarComponent} from './note-page/option-sidebar/option-sidebar.component';
+import {SettingsDrawSidebarComponent} from './note-page/settings-draw-sidebar/settings-draw-sidebar.component';
 import {CardActionBarComponent} from './notemon-card/card-action-bar/card-action-bar.component';
 import {DirectoryCardComponent} from './notemon-card/directory-card/directory-card.component';
 import {NoteCardComponent} from './notemon-card/note-card/note-card.component';
 import {NotemonCardEmptyComponent} from './notemon-card/notemon-card-empty/notemon-card-empty.component';
 import {NotemonCardVariantComponent} from './notemon-card/notemon-card-variant/notemon-card-variant.component';
 import {NotemonEditorComponent} from './notemon-editor/notemon-editor.component';
+import {SharePageComponent} from './share-page/share-page.component';
 import {SnackbarComponent} from './snackbar/snackbar.component';
 import {ThemeToggleButtonComponent} from './theme-toggle-button/theme-toggle-button.component';
 import {TopNavbarEditorComponent} from './top-navbar/top-navbar-editor/top-navbar-editor.component';
 
 import {TopNavbarMainComponent} from './top-navbar/top-navbar-main/top-navbar-main.component';
-import {ManageDashboardBaseComponent} from './manage-dashboard-base/manage-dashboard-base.component';
-import {LoadingProgressBarComponent} from './loading/loading-progress-bar/loading-progress-bar.component';
-import {LoadingProgressSpinnerComponent} from './loading/loading-progress-spinner/loading-progress-spinner.component';
-import {SharePageComponent} from './share-page/share-page.component';
-import {OptionSidebarComponent} from './note-page/option-sidebar/option-sidebar.component';
-import {OptionSidebarItemComponent} from './note-page/option-sidebar/option-sidebar-item/option-sidebar-item.component';
+import {SidebarInputComponent} from './note-page/settings-draw-sidebar/sidebar-input/sidebar-input.component';
 
 @NgModule({
   imports: [
@@ -84,6 +86,8 @@ import {OptionSidebarItemComponent} from './note-page/option-sidebar/option-side
     SharePageComponent,
     OptionSidebarComponent,
     OptionSidebarItemComponent,
+    SettingsDrawSidebarComponent,
+    SidebarInputComponent,
   ],
   exports: [
     CommonModule,

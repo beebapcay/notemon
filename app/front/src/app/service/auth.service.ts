@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment'
-import { AuthModel } from '../model/auth.model';
-import { MessageResponseModel } from '../model/message-response.model';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {environment} from 'src/environments/environment'
+import {AuthModel} from '../model/auth.model';
+import {MessageResponseModel} from '../model/message-response.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -27,6 +27,10 @@ export class AuthService {
   signup(name: string, email: string, password: string): Observable<MessageResponseModel> {
     const signupLocalUrl = AuthService.AUTH_URL + '/signup';
     return this.http.post<MessageResponseModel>(signupLocalUrl, {name, email, password});
+  }
+
+  refreshToken(refreshToken: string): Observable<AuthModel> {
+    return this.http.post<AuthModel>(AuthService.AUTH_URL + '/refreshToken', {refreshToken});
   }
 }
 

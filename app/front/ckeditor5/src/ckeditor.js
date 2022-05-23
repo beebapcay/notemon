@@ -156,7 +156,7 @@ Editor.defaultConfig = {
       {
         name: 'resizeImage:25',
         value: '25',
-        icon: 'medium'
+        icon: 'small'
       },
       {
         name: 'resizeImage:50',
@@ -178,7 +178,7 @@ Editor.defaultConfig = {
       'imageStyle:block',
       'imageStyle:side',
       '|',
-      'toggleImageCaption',
+      // 'toggleImageCaption',
       'imageTextAlternative',
       '|',
       'linkImage',

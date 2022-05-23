@@ -18,6 +18,7 @@
     padding: 0 15px;
     height: 45px;
     align-items: center;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
     .mat-form-field-label-wrapper {
       padding: 0;

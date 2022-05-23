@@ -1,0 +1,62 @@
+<div class="settings-draw-sidebar-container">
+  <section class="draw-header-container">
+    <h4>Settings</h4>
+    <button class="draw-close" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </section>
+  <hr>
+  <section class="account-settings-container">
+    <h5>Account</h5>
+    <div class="account-content-container">
+      <div class="left-content">
+        <mat-icon class="avatar">account_circle</mat-icon>
+        <button class="logout-btn" mat-button>Logout</button>
+      </div>
+      <div class="right-content">
+        <p class="name">Duong Tan Phat</p>
+        <p class="email">beebapcay@gmail.com</p>
+        <a href="" class="change-name-link-btn" disableRipple mat-flat-button>
+          Change your name
+        </a>
+        <a href="" class="change-password-link-btn" disableRipple mat-flat-button>
+          Change your password
+        </a>
+      </div>
+    </div>
+  </section>
+  <hr>
+  <section class="writing-mode-container">
+    <h5>Writing Mode</h5>
+    <mat-radio-group class="writing-mode-radio-group">
+      <mat-radio-button class="writing-mode-radio-item" [value]="WritingModeEnum.NORMAL">
+        Normal
+      </mat-radio-button>
+      <mat-radio-button class="writing-mode-radio-item" [value]="WritingModeEnum.HERMINGWAY">
+        Hermingway - Focus
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
+  <hr>
+  <section class="setting-goal-container">
+    <h5>Setting Goal</h5>
+    <div class="goal-item">
+      <h6>Document</h6>
+      <app-sidebar-input label="Words"></app-sidebar-input>
+      <app-sidebar-input label="Characters"></app-sidebar-input>
+    </div>
+    <div class="goal-item">
+      <h6>Section</h6>
+      <app-sidebar-input label="Words"></app-sidebar-input>
+      <app-sidebar-input label="Characters"></app-sidebar-input>
+      <app-sidebar-input label="Time"></app-sidebar-input>
+    </div>
+  </section>
+  <section class="theme-container">
+
+  </section>
+</div>
+
+
+
+

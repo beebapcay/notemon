@@ -1,0 +1,188 @@
+@import "~src/variables";
+
+:host ::ng-deep .mat-radio-button {
+  .mat-radio-container {
+    margin-right: 10px;
+  }
+
+  .mat-radio-container, .mat-radio-outer-circle, .mat-radio-inner-circle {
+    height: 15px;
+    width: 15px;
+  }
+
+
+  .mat-radio-ripple {
+    border-radius: 100%;
+    height: 30px; /*double of your required circle radius*/
+    width: 30px; /*double of your required circle radius*/
+    left: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+    top: calc(50% - 15px); /*'10px'-same as your required circle radius*/
+  }
+
+  &.mat-accent {
+
+    .mat-radio-ripple .mat-ripple-element,
+    .mat-radio-inner-circle {
+      background-color: $color-focus-primary !important;
+    }
+
+    &.mat-radio-checked .mat-radio-outer-circle {
+      border-color: $color-focus-primary !important; /*outer ring color change*/
+    }
+  }
+}
+
+:host ::ng-deep app-sidebar-input {
+  .sidebar-input {
+    margin-top: 10px;
+  }
+}
+
+.settings-draw-sidebar-container {
+  hr {
+    margin: 0;
+    color: $color-border-gray-light;
+    opacity: 0.95;
+  }
+
+  .section-base {
+    padding: 20px;
+
+    h5 {
+      font-family: $font-family-secondary;
+      font-weight: 500;
+      font-size: 17px;
+      color: $color-on-background-emphasis;
+      margin-bottom: 15px;
+    }
+  }
+
+  .draw-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+    h4 {
+      font-family: $font-family-secondary;
+      font-weight: 500;
+      color: $color-on-background;
+      font-size: 18.5px;
+      margin: 0;
+    }
+
+    .draw-close {
+      @include set-icon-button-size(36px, 24px);
+      border-radius: 99px;
+      color: $color-on-background-gray-light;
+    }
+  }
+
+  .account-settings-container {
+    @extend .section-base;
+
+    .account-content-container {
+      display: flex;
+      align-items: flex-start;
+
+      .left-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-right: 30px;
+
+        .avatar {
+          @include set-icon-size(28px);
+          color: #2D3048;
+          display: block;
+          margin-bottom: 10px;
+        }
+
+        .logout-btn {
+          background-color: $color-primary;
+          color: $color-on-primary;
+          border-radius: 2.5px;
+          padding: 4.5px 17.5px;
+          font-family: $font-family-tertiary;
+          font-size: 12px;
+          line-height: initial;
+        }
+      }
+
+      .right-content {
+        .name {
+          font-family: $font-family-secondary;
+          font-weight: 500;
+          font-size: 15px;
+          color: #2D363F;
+          margin-bottom: 5px;
+        }
+
+        .email {
+          font-family: $font-family-mono;
+          font-size: 12px;
+          color: #4C5C6B;
+          margin-bottom: 10px;
+        }
+
+        .change-name-link-btn, .change-password-link-btn {
+          font-family: $font-family-tertiary;
+          font-size: 12px;
+          color: #2196F3;
+          padding: 0;
+          background-color: transparent !important;
+          line-height: initial;
+
+          .mat-button-focus-overlay {
+            display: none;
+          }
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
+        .change-name-link-btn {
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+
+  .writing-mode-container {
+    @extend .section-base;
+
+    .writing-mode-radio-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .writing-mode-radio-item {
+        margin-top: 8.5px;
+        font-family: $font-family-tertiary;
+        color: $color-on-background;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .setting-goal-container {
+    @extend .section-base;
+
+    .goal-item {
+      margin-top: 7.5px;
+
+      h6 {
+        font-family: $font-family-secondary;
+        font-weight: 500;
+        font-size: 14.5px;
+        color: $color-on-background;
+        margin-bottom: 8.5px;
+      }
+
+      app-sidebar-input {
+        margin-top: 5px;
+      }
+    }
+  }
+}

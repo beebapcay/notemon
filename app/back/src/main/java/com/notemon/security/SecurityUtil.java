@@ -15,8 +15,11 @@ public class SecurityUtil {
     @Value("${jwt.expiration}")
     private String jwtExpiration;
 
-    @Value("${jwt.validity}")
-    private int jwtValidity;
+    @Value("${jwt.expirationMs}")
+    private long jwtExpirationMs;
+
+    @Value("${jwt.refreshExpirationMs}")
+    private long jwtRefreshExpirationMs;
 
     @Value("${base.account.admin.username}")
     private String baseAccountAdminUsername;

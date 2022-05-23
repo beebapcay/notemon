@@ -20,7 +20,7 @@
         <div class="auth-action-buttons">
           <button type="submit" class="local-auth-btn" disableRipple mat-button>{{page | titlecase}}</button>
           <span class="or-divider">or</span>
-          <button class="google-auth-btn">
+          <button class="google-auth-btn" (click)="onGoogleLogin()" type="button">
             Google
             <img [src]="AssetsSrcConstant.GOOGLE_LOGO" alt="" class="google-logo">
           </button>

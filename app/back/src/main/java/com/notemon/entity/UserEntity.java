@@ -37,10 +37,15 @@ public class UserEntity extends BaseEntity {
     @NotNull
     private String email;
 
+    @Column(name = "I_PASSWORD", nullable = false)
+    @NotNull
+    private String iPassword;
+
     @Column(name = "PASSWORD", nullable = true)
     private String password;
+    ;
 
-    @Column(name = "REFESH_TOKEN", nullable = true)
+    @Column(name = "REFRESH_TOKEN", nullable = true)
     private String refreshToken;
 
     @Column(name = "GOOGLE_TOKEN", nullable = true)

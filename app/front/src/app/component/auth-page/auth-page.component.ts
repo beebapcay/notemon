@@ -1,20 +1,20 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FormGroup} from '@angular/forms';
-import {Title} from '@angular/platform-browser';
-import {ActivatedRoute, Router} from '@angular/router';
+import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 import _ from 'lodash';
-import {finalize, take} from 'rxjs';
-import { AppComponent } from '../../app.component';
-import {AppRouteConstant} from '../../common/app-route.constant';
-import {AssetsSrcConstant} from '../../common/assets-src.constant';
-import {AuthService} from '../../service/auth.service';
-import {PersistenceService} from '../../service/persistence.service';
-import {SnackbarService} from '../../service/snackbar.service';
+import { finalize, take } from 'rxjs';
+import { AppRouteConstant } from '../../common/app-route.constant';
+import { AssetsSrcConstant } from '../../common/assets-src.constant';
+import { AuthService } from '../../service/auth.service';
+import { LoadingService } from '../../service/loading.service';
+import { PersistenceService } from '../../service/persistence.service';
+import { SnackbarService } from '../../service/snackbar.service';
 import { UserService } from '../../service/user.service';
-import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
-import {LoginFormComponent} from './login-form/login-form.component';
-import {SignupFormComponent} from './signup-form/signup-form.component';
-import {LoadingService} from '../../service/loading.service';
+import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { SignupFormComponent } from './signup-form/signup-form.component';
 
 @Component({
   selector: 'app-auth-page',
@@ -41,7 +41,8 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
               private snackbarService: SnackbarService,
               private persistenceService: PersistenceService,
               private userService: UserService,
-              private loadingService: LoadingService) {
+              private loadingService: LoadingService,
+              private socialService: SocialAuthService) {
     super();
 
     this.registerSubscription(
@@ -85,6 +86,10 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
     } else {
       this.snackbarService.openErrorAnnouncement('Something was wrong. Unknown page');
     }
+  }
+
+  onGoogleLogin() {
+    this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID).then();
   }
 
   onSubmitLogin(data: { email: string, password: string }) {

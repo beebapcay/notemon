@@ -1,19 +1,20 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { finalize, take } from 'rxjs';
-import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
-import { SizeEnum } from '../../enum/size.enum';
-import { DocumentSummaryModel } from '../../model/document-summary.model';
-import { DocumentModel } from '../../model/document.model';
-import { NoteModel } from '../../model/note.model';
-import { UserModel } from '../../model/user.model';
-import { AuthService } from '../../service/auth.service';
-import { DocumentService } from '../../service/document.service';
-import { LoadingService } from '../../service/loading.service';
-import { SnackbarService } from '../../service/snackbar.service';
-import { UserService } from '../../service/user.service';
-import { ArrayUtil } from '../../utils/array.util';
-import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
+import {Component, OnChanges, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {finalize, take} from 'rxjs';
+import {NotemonTypeEnum} from '../../enum/notemon-type.enum';
+import {SizeEnum} from '../../enum/size.enum';
+import {DocumentSummaryModel} from '../../model/document-summary.model';
+import {DocumentModel} from '../../model/document.model';
+import {NoteModel} from '../../model/note.model';
+import {UserModel} from '../../model/user.model';
+import {AuthService} from '../../service/auth.service';
+import {DocumentService} from '../../service/document.service';
+import {LoadingService} from '../../service/loading.service';
+import {SnackbarService} from '../../service/snackbar.service';
+import {UserService} from '../../service/user.service';
+import {ArrayUtil} from '../../utils/array.util';
+import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
+import {AppRouteConstant} from '../../common/app-route.constant';
 
 @Component({
   selector: 'app-notemon-page',
@@ -104,7 +105,10 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
             this.note = documents as NoteModel;
             this.note['summary'] = DocumentSummaryModel.create();
           },
-          error: error => this.snackbarService.openRequestErrorAnnouncement(error)
+          error: error => {
+            this.snackbarService.openRequestErrorAnnouncement(error);
+            this.router.navigate([`/${AppRouteConstant.PAGE_NOT_FOUND}`], {replaceUrl: true}).then();
+          }
         })
     );
   }
@@ -145,6 +149,7 @@ export class NotePageComponent extends SubscriptionAwareAbstractComponent implem
   updateFromTopNav(updatedDocument: DocumentModel) {
     this.note.relationship = updatedDocument?.relationship ?? this.note.relationship;
     this.note.name = updatedDocument?.name ?? this.note.name;
+    this.note.lastModifiedAt = updatedDocument?.lastModifiedAt ?? this.note.lastModifiedAt;
   }
 }
 
