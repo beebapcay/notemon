@@ -29,7 +29,8 @@ public class UserController {
 
     @PostMapping("{id}/document")
     public DocumentDto createNewDocument(@PathVariable("id") UUID id, @RequestBody DocumentDto documentDto)
-            throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException {
+            throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException, InterruptedException {
+        Thread.sleep(1000);
         return documentService.createNewDocument(id, documentDto);
     }
 
@@ -37,13 +38,15 @@ public class UserController {
     public Set<DocumentDto> getUserDocuments(@PathVariable("id") UUID id,
                                              @RequestParam(value = "parentId", required = false) UUID parentId,
                                              @RequestParam(value = "isDirectory", required = false) Boolean isDirectory)
-            throws EntityWithIdNotFoundException, NotPermissionToAccessDocumentException {
+            throws EntityWithIdNotFoundException, NotPermissionToAccessDocumentException, InterruptedException {
+        Thread.sleep(1000);
         return documentService.getAllDocuments(id, parentId, isDirectory);
     }
 
     @GetMapping("{id}/documents/{documentId}")
     public DocumentDto getDocumentById(@PathVariable("id") UUID id, @PathVariable("documentId") UUID documentId)
-            throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException, NotPermissionToAccessDocumentException {
+            throws EntityWithIdNotFoundException, EntityWithFieldNotFoundException, NotPermissionToAccessDocumentException, InterruptedException {
+        Thread.sleep(1000);
         return documentService.getDocumentById(id, documentId);
     }
 }

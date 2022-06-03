@@ -14,7 +14,7 @@ export class AssetsSrcConstant {
   public static GOOGLE_LOGO = 'assets/images/google_logo.svg';
 
   // resource for feature page
-  public static FEATURE_INTRO_GIF = 'assets/images/intro_feature_onetime.gif';
+  public static FEATURE_INTRO_GIF = 'assets/images/intro_feature_once_delay.gif';
   public static TIME_SAVING = 'assets/images/time_saving.png';
   public static INTERFACE = 'assets/images/interface.png';
   public static FREE = 'assets/images/free.png';

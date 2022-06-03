@@ -3,8 +3,12 @@
 }
 
 :host ::ng-deep auth-input {
-  + auth-input .auth-input {
-    margin-top: 25px;
+  + auth-input .auth-input-container {
+    margin-top: 32.5px;
+  }
+
+  &:last-child .auth-input-container {
+    margin-bottom: 28.5px;
   }
 }
 

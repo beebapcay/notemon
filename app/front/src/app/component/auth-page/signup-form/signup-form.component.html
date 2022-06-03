@@ -6,6 +6,8 @@
     placeholder="Enter your name"
     type="text"
     [formGroup]="formGroup"
+    [showError]="showErrors"
+    [required]="true"
   >
   </auth-input>
   <auth-input
@@ -15,6 +17,8 @@
     placeholder="Enter your email"
     type="email"
     [formGroup]="formGroup"
+    [showError]="showErrors"
+    [required]="true"
   >
   </auth-input>
   <auth-input
@@ -24,6 +28,8 @@
     placeholder="Enter your password"
     type="password"
     [formGroup]="formGroup"
+    [showError]="showErrors"
+    [required]="true"
   >
   </auth-input>
 </ng-container>

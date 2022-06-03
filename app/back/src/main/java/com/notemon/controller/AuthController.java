@@ -50,7 +50,9 @@ public class AuthController {
 
     @PostMapping("login/local")
     public ResponseEntity<LoginResponseDto> login(@RequestBody @Valid LoginRequestDto loginRequestDto)
-            throws EntityWithFieldNotFoundException {
+            throws EntityWithFieldNotFoundException, InterruptedException {
+        Thread.sleep(1000);
+
         try {
             Authentication authentication = authenticationManager
                     .authenticate(
@@ -91,7 +93,9 @@ public class AuthController {
     }
 
     @PostMapping("signup")
-    public ResponseEntity<?> signup(@RequestBody @Valid SignupRequestDto signupDto) {
+    public ResponseEntity<?> signup(@RequestBody @Valid SignupRequestDto signupDto) throws InterruptedException {
+        Thread.sleep(1000);
+
         if (userRepository.existsByEmail(signupDto.getEmail())) {
             return ResponseEntity.badRequest()
                     .body(new MessageResponseDto("Error: Email is already taken"));

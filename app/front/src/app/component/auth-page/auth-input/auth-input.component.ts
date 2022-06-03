@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ControlContainer, FormGroup} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ControlContainer, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'auth-input',
@@ -14,6 +14,7 @@ export class AuthInputComponent implements OnInit {
   @Input() name: string = '';
   @Input() control: string = '';
   @Input() required: boolean = false;
+  @Input() showError: boolean = false;
   @Input() formGroup: FormGroup;
 
   @Output() valueChangeEmitted = new EventEmitter<string>();

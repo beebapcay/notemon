@@ -11,11 +11,13 @@
     <div class="d-flex flex-column">
       <img [src]="AssetsSrcConstant.LOGO" alt="" class="logo-img">
       <h1 class="auth-title">{{page | titlecase}} to Notemon</h1>
-      <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onAuthSubmit()" (keydown)="onEnterKeyPressed($event)">
+      <div class="message">
+        <p class="msg-error" *ngIf="errorMessage">{{errorMessage}}</p>
+        <p class="msg-success" *ngIf="successMessage">{{successMessage}}</p>
+      </div>
+      <form class="auth-form" [formGroup]="formGroup" (ngSubmit)="onSubmit()" (keydown)="onEnterKeyPressed($event)">
         <login-form *ngIf="isLoginPage"></login-form>
         <signup-form *ngIf="isSignupPage"></signup-form>
-        <p class="msg-error">{{errorMessage}}</p>
-        <p class="msg-success">{{successMessage}}</p>
         <a class="forgot-password" *ngIf="isLoginPage" href="">Forgot Password?</a>
         <div class="auth-action-buttons">
           <button type="submit" class="local-auth-btn" disableRipple mat-button>{{page | titlecase}}</button>

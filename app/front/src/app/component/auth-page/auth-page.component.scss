@@ -6,9 +6,15 @@
 }
 
 .msg-base {
-  margin-top: 10px;
   font-family: $font-family-tertiary;
-  font-size: 12px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 3.5px 7.5px;
+  font-size: 12.5px;
+  font-weight: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .auth-page-container {
@@ -68,26 +74,37 @@
       font-size: 28px;
       color: $color-on-background-variant;
       margin-top: 15px;
+      margin-bottom: 10px;
     }
 
-    .auth-form {
-      margin-top: 25px;
+    .message {
+      margin-top: 15px;
+      margin-bottom: 45px;
+      position: relative;
 
       .msg {
         &-error {
           @extend .msg-base;
           color: $color-error;
+          background-color: $color-background-error;
+          border-color: $color-border-error;
         }
 
         &-success {
           @extend .msg-base;
           color: $color-success;
+          background-color: $color-background-success;
+          border-color: $color-border-success;
         }
       }
+    }
+
+    .auth-form {
+      margin-top: 12.5px;
 
       .forgot-password {
         display: block;
-        margin-top: 7.5px;
+        margin-top: 20px;
         text-align: right;
         font-family: $font-family-primary;
         font-size: 15.5px;
@@ -96,7 +113,7 @@
       }
 
       .auth-action-buttons {
-        margin-top: 45px;
+        margin-top: 50px;
         display: flex;
         justify-content: space-between;
         align-items: stretch;

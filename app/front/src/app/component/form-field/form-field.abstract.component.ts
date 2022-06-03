@@ -1,19 +1,18 @@
-import { Component } from '@angular/core';
+import { ElementRef } from '@angular/core';
 import { FormControl, FormControlName } from '@angular/forms';
 import { IKeyValue } from '../../common/common.interface';
 import { CommonRegex } from '../../common/common.regex';
 import { StringUtil } from '../../utils/string.util';
 import { FormFieldErrorMessageConstant } from './error-message.constant';
 
-@Component({
-  templateUrl: ''
-})
 export abstract class FormFieldAbstractComponent {
   errorArgs: IKeyValue = {};
 
   controlName: FormControlName;
 
-  protected constructor() {
+  protected constructor(
+    protected elementRef: ElementRef
+  ) {
   }
 
   get isRequired(): boolean {

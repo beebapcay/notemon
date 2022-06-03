@@ -16,4 +16,11 @@ export class AppRouteConstant {
   static readonly FULL_PAGE_ROUTE_PATTERN_LIST = [/^\/login$/, /^\/signup$/, /^\/note/];
 
   static readonly ANONYMOUS_PAGE_ROUTE_PATTERN_LIST = [/^\/login$/, /^\/signup$/, /^\/feature$/, /^\/note$/]
+
+  static readonly FACEBOOK_CONTACT = 'https://www.facebook.com/phatduong.2000';
+  static readonly YOUTUBE_CONTACT = 'https://www.youtube.com/channel/UCiLW5PeFvqzyqEV70DXgCtg';
+  static readonly INSTAGRAM_CONTACT = 'https://www.instagram.com/beebapcay';
+  static readonly GITHUB_CONTACT = 'https://github.com/beebapcay';
+
+  static readonly MAIL_CONTACT = 'mailto:beebapcay@gmail.com';
 }

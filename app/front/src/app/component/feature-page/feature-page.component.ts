@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import AOS from 'aos';
 import { AppRouteConstant } from '../../common/app-route.constant';
-import {AssetsSrcConstant} from '../../common/assets-src.constant';
+import { AssetsSrcConstant } from '../../common/assets-src.constant';
 
 @Component({
   selector: 'app-feature-page',
@@ -15,6 +16,10 @@ export class FeaturePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    AOS.init({
+        once: false,
+      }
+    );
   }
 
 }

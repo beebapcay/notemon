@@ -1,0 +1,23 @@
+@import "~src/variables";
+
+.form-field-container {
+  position: relative;
+
+  mat-label {
+    display: inline-block;
+    font-family: $font-family-primary;
+    font-size: 16px;
+    color: $color-on-background;
+    margin-right: 2.5px;
+    margin-bottom: 7.5px;
+  }
+
+  .error-message {
+    font-family: $font-family-primary;
+    font-size: 12px;
+    color: $color-error;
+    position: absolute;
+    bottom: -25px;
+    margin: 0;
+  }
+}

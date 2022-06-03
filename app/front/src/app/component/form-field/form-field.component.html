@@ -1,1 +1,14 @@
-<p>form-field works!</p>
+<div class="form-field-container">
+  <div class="label-container" *ngIf="label">
+    <mat-label class="label-text">{{label}}</mat-label>
+    <span class="label-required" *ngIf="required">*</span>
+  </div>
+
+  <ng-content></ng-content>
+
+  <ng-container *ngIf="invalid && errorMessage.length > 0 && showError">
+    <p class="error-message">
+      {{errorMessage[0]}}
+    </p>
+  </ng-container>
+</div>

@@ -1,5 +1,5 @@
 export class FormFieldErrorMessageConstant {
-  static readonly AUTHENTICATION = "Authentication failed. USERNAME or PASSWORD is wrong";
+  static readonly AUTHENTICATION = "Authentication failed. Your input credentials is wrong";
   static readonly REQUIRED = "This field is required";
   static readonly MAXLENGTH = "The value of this field must not exceed {{maxlength}} characters";
   static readonly MINLENGTH = "The value of this field must be at least {{minlength}} characters";
