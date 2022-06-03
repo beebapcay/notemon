@@ -5,29 +5,29 @@
         <img [src]="AssetsSrcConstant.SOLID_LOGO" alt="">
       </a>
       <div class="nav-links col">
-        <a href="#">About us</a>
-        <a href="#">Contact</a>
-        <a href="#">Help</a>
+        <a [href]="AppRouteConstant.FACEBOOK_CONTACT">About us</a>
+        <a [href]="AppRouteConstant.FACEBOOK_CONTACT">Contact</a>
+        <a [href]="AppRouteConstant.FACEBOOK_CONTACT">Help</a>
       </div>
     </div>
     <div class="row align-items-end justify-content-between">
       <div class="social-links col-auto">
-        <a href="#">
+        <a [href]="AppRouteConstant.FACEBOOK_CONTACT">
           <fa-icon [icon]="socialIcons.facebook"></fa-icon>
         </a>
-        <a href="#">
+        <a [href]="AppRouteConstant.INSTAGRAM_CONTACT">
           <fa-icon [icon]="socialIcons.instagram"></fa-icon>
         </a>
-        <a href="#">
+        <a [href]="AppRouteConstant.YOUTUBE_CONTACT">
           <fa-icon [icon]="socialIcons.youtube"></fa-icon>
         </a>
-        <a href="#">
+        <a [href]="AppRouteConstant.GITHUB_CONTACT">
           <fa-icon [icon]="socialIcons.github"></fa-icon>
         </a>
       </div>
       <p class="contact-email col">
         Email: &nbsp;
-        <a class="email" href="mailto:beebapcay@gmail.com">beebapcay@gmai.com</a>
+        <a class="email" [href]="AppRouteConstant.MAIL_CONTACT">beebapcay@gmai.com</a>
       </p>
     </div>
   </div>
@@ -39,7 +39,7 @@
     </div>
     <p class="copyright">
       Copyright &copy;
-      <a href="#">beebapcay</a>
+      <a [href]="AppRouteConstant.GITHUB_CONTACT">beebapcay</a>
     </p>
   </div>
 </footer>
