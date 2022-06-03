@@ -1,10 +1,8 @@
 import { GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import _ from 'lodash';
-import { finalize, take } from 'rxjs';
 import { AppRouteConstant } from '../../common/app-route.constant';
 import { AssetsSrcConstant } from '../../common/assets-src.constant';
 import { AuthService } from '../../service/auth.service';
@@ -12,7 +10,7 @@ import { LoadingService } from '../../service/loading.service';
 import { PersistenceService } from '../../service/persistence.service';
 import { SnackbarService } from '../../service/snackbar.service';
 import { UserService } from '../../service/user.service';
-import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
+import { FormAbstractComponent } from '../form.abstract.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { SignupFormComponent } from './signup-form/signup-form.component';
 
@@ -21,14 +19,10 @@ import { SignupFormComponent } from './signup-form/signup-form.component';
   templateUrl: './auth-page.component.html',
   styleUrls: ['./auth-page.component.scss']
 })
-export class AuthPageComponent extends SubscriptionAwareAbstractComponent implements OnInit, AfterViewInit {
+export class AuthPageComponent extends FormAbstractComponent implements OnInit, AfterViewInit {
   readonly AppRouteConstant = AppRouteConstant;
   readonly AssetsSrcConstant = AssetsSrcConstant;
 
-  showMessage: boolean;
-  errorMessage: string | null;
-  successMessage: string | null;
-  authForm: FormGroup = new FormGroup({});
   page: string = AppRouteConstant.LOGIN.toLocaleLowerCase();
 
   @ViewChild(LoginFormComponent) loginForm: LoginFormComponent;
@@ -57,7 +51,7 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
   }
 
   ngAfterViewInit(): void {
-    this.authForm = this.isLoginPage
+    this.formGroup = this.isLoginPage
       ? this.loginForm.buildForm()
       : this.signupForm.buildForm();
   }
@@ -68,21 +62,20 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
     }
   }
 
-  onAuthSubmit() {
-    this.showMessage = true;
-    this.authForm.markAllAsTouched();
+  override onSubmit() {
+    super.onSubmit();
 
-    if (this.authForm.invalid) {
-      this.showErrorMessage('Form is invalid. Please check your input');
+    if (this.formGroup.invalid) {
+      this.loginForm?.forceShowError();
+      this.signupForm?.forceShowError();
+
       return;
     }
 
-    const data = this.authForm.value;
-
     if (this.isLoginPage) {
-      this.onSubmitLogin(data);
+      this.loginForm.onSubmit();
     } else if (this.isSignupPage) {
-      this.onSubmitSignup(data);
+      this.signupForm.onSubmit();
     } else {
       this.snackbarService.openErrorAnnouncement('Something was wrong. Unknown page');
     }
@@ -90,66 +83,6 @@ export class AuthPageComponent extends SubscriptionAwareAbstractComponent implem
 
   onGoogleLogin() {
     this.socialService.signIn(GoogleLoginProvider.PROVIDER_ID).then();
-  }
-
-  onSubmitLogin(data: { email: string, password: string }) {
-    this.loadingService.showLoadingBar();
-    this.registerSubscription(
-      this.authService
-        .loginLocal(data.email, data.password)
-        .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
-        .subscribe({
-          next: (authData) => {
-            this.persistenceService.write(authData);
-            this.authService.isLoggedIn.next(true);
-            this.userService.fetchUser();
-            this.router.navigate([AppRouteConstant.DASHBOARD]).then();
-          },
-          error: (error) => {
-            this.snackbarService.openRequestErrorAnnouncement(error);
-            this.authService.isLoggedIn.next(false);
-            this.showErrorMessage(error);
-          }
-        })
-    );
-  }
-
-  onSubmitSignup(data: { name: string, email: string, password: string }) {
-    this.loadingService.showLoadingBar();
-    this.registerSubscription(
-      this.authService
-        .signup(data.name, data.email, data.password)
-        .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
-        .subscribe({
-          next: (authData) => {
-            const signupSuccessMessage = 'You have successfully signed up';
-            this.snackbarService.openSaveSuccessAnnouncement(signupSuccessMessage);
-            this.showSuccessMessage(signupSuccessMessage);
-          },
-          error: (error) => {
-            this.snackbarService.openRequestErrorAnnouncement(error);
-            this.showErrorMessage(error);
-          }
-        })
-    );
-  }
-
-  showErrorMessage(error: any) {
-    if (this.showMessage) {
-      this.successMessage = null;
-      this.errorMessage = error?.error?.message ?? error?.message ?? error?.statusText ?? error ?? 'Request error';
-    } else {
-      this.errorMessage = null;
-    }
-  }
-
-  showSuccessMessage(message: string) {
-    if (this.showMessage) {
-      this.errorMessage = null;
-      this.successMessage = message;
-    } else {
-      this.successMessage = null;
-    }
   }
 
   get isLoginPage() {

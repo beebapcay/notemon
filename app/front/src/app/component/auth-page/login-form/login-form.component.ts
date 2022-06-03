@@ -1,6 +1,15 @@
-import {Component} from '@angular/core';
-import {FormAbstractComponent} from '../../form.abstract.component';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { take } from 'rxjs';
+import { AppRouteConstant } from '../../../common/app-route.constant';
+import { AuthService } from '../../../service/auth.service';
+import { LoadingService } from '../../../service/loading.service';
+import { PersistenceService } from '../../../service/persistence.service';
+import { SnackbarService } from '../../../service/snackbar.service';
+import { UserService } from '../../../service/user.service';
+import { FormAbstractComponent } from '../../form.abstract.component';
+import { AuthPageComponent } from '../auth-page.component';
 
 @Component({
   selector: 'login-form',
@@ -8,7 +17,16 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent extends FormAbstractComponent {
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private userService: UserService,
+    private persistenceService: PersistenceService,
+    private snackbarService: SnackbarService,
+    private loadingService: LoadingService,
+    private router: Router,
+    private authPage: AuthPageComponent
+  ) {
     super();
   }
 
@@ -23,5 +41,32 @@ export class LoginFormComponent extends FormAbstractComponent {
     }, {updateOn: 'blur'});
 
     return this.formGroup;
+  }
+
+  override onSubmit() {
+    super.onSubmit();
+
+    this.loadingService.showLoadingBar();
+
+    const data = this.formGroup.value;
+
+    this.authService
+      .loginLocal(data.email, data.password)
+      .pipe(take(1))
+      .subscribe({
+        next: (authData) => {
+          this.authPage.showSuccessMessage('You have successfully logged in');
+          this.persistenceService.write(authData);
+          this.authService.isLoggedIn.next(true);
+          this.userService.fetchUser();
+          this.router.navigate([AppRouteConstant.DASHBOARD]).then();
+        },
+        error: (error) => {
+          this.snackbarService.openRequestErrorAnnouncement(error);
+          this.authService.isLoggedIn.next(false);
+          this.authPage.showErrorMessage(error);
+        }
+      })
+      .add(() => this.loadingService.hideLoadingBar());
   }
 }
