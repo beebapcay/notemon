@@ -65,7 +65,6 @@ public class JwtTokenUtil implements Serializable {
     public Boolean validateToken(String authToken) throws AppRTException {
         try {
             Jwts.parser().setSigningKey(securityUtil.getJwtSecret()).parseClaimsJws(authToken);
-            Claims claims = getAllClaimsFromToken(authToken);
             return true;
         } catch (SignatureException e) {
             log.error("Invalid JWT signature: {}", e.getMessage());
