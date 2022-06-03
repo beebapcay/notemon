@@ -27,7 +27,9 @@ public class DocumentController {
     public DocumentDto updateNameDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId, @RequestBody DocumentDto documentDto)
             throws EntityWithIdNotFoundException,
             NotPermissionToAccessDocumentException,
-            NotPermissionToEditDocumentException {
+            NotPermissionToEditDocumentException,
+            InterruptedException {
+        Thread.sleep(1000);
         return documentService.updateNameDocument(id, userId, documentDto);
     }
 
@@ -38,14 +40,16 @@ public class DocumentController {
             NotPermissionToEditDocumentException,
             InterruptedException {
         // TODO: delay for dev mode testing
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         return documentService.updateContentDocument(id, userId, documentDto);
     }
 
     @PatchMapping("{id}/users/{userId}/starred")
     public DocumentDto updateStarredDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId, @RequestBody UserDocumentDto userDocumentDto)
             throws EntityWithIdNotFoundException,
-            NotPermissionToAccessDocumentException {
+            NotPermissionToAccessDocumentException,
+            InterruptedException {
+        Thread.sleep(1000);
         return documentService.updateStarredDocument(id, userId, userDocumentDto);
     }
 
@@ -61,7 +65,9 @@ public class DocumentController {
     @DeleteMapping("{id}/users/{userId}")
     public MessageResponseDto deleteDocument(@PathVariable("id") UUID id, @PathVariable("userId") UUID userId)
             throws EntityWithIdNotFoundException,
-            NotPermissionToAccessDocumentException {
+            NotPermissionToAccessDocumentException,
+            InterruptedException {
+        Thread.sleep(1000);
         return documentService.deleteDocument(id, userId);
     }
 }

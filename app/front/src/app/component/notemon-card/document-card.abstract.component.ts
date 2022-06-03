@@ -10,16 +10,17 @@ import {
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import {take} from 'rxjs';
-import {CardActionMenuEnum} from '../../enum/card-action-nemu.enum';
-import {NotemonTypeEnum} from '../../enum/notemon-type.enum';
-import {DocumentModel} from '../../model/document.model';
-import {UserDocumentModel} from '../../model/user-document.model';
-import {DocumentService} from '../../service/document.service';
-import {SnackbarService} from '../../service/snackbar.service';
-import {UserService} from '../../service/user.service';
-import {SubscriptionAwareAbstractComponent} from '../subscription-aware.abstract.component';
-import {UserModel} from '../../model/user.model';
+import { finalize, take } from 'rxjs';
+import { CardActionMenuEnum } from '../../enum/card-action-nemu.enum';
+import { NotemonTypeEnum } from '../../enum/notemon-type.enum';
+import { DocumentModel } from '../../model/document.model';
+import { UserDocumentModel } from '../../model/user-document.model';
+import { UserModel } from '../../model/user.model';
+import { DocumentService } from '../../service/document.service';
+import { LoadingService } from '../../service/loading.service';
+import { SnackbarService } from '../../service/snackbar.service';
+import { UserService } from '../../service/user.service';
+import { SubscriptionAwareAbstractComponent } from '../subscription-aware.abstract.component';
 
 @Component({
   template: ''
@@ -46,6 +47,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
     protected snackbarService: SnackbarService,
     protected documentService: DocumentService,
     protected clipboardService: Clipboard,
+    protected loadingService: LoadingService
   ) {
     super();
   }
@@ -102,11 +104,13 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
     this.name = this.name ?? this.DEFAULT_NAME;
     this.item = {...this.item, name: this.name};
 
+    this.loadingService.showLoadingBar();
+
     if (this.item?.id === null) {
       this.item.author = this.user;
       this.registerSubscription(
         this.userService.createNewDocument(this.user?.id, this.item)
-          .pipe(take(1))
+          .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
           .subscribe({
             next: (document) => {
               this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was created successfully.`);
@@ -119,7 +123,7 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
     } else {
       this.registerSubscription(
         this.documentService.updateNameDocument(this.user?.id, this.item?.id, this.item)
-          .pipe(take(1))
+          .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
           .subscribe({
             next: (document) => {
               this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${initName}</strong> was renamed to <strong>${this.item?.name}</strong> successfully.`);
@@ -139,9 +143,11 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
 
     const relationship: UserDocumentModel = {...this.item?.relationship, isStarred};
 
+    this.loadingService.showLoadingBar();
+
     this.registerSubscription(
       this.documentService.updateStarredDocument(this.user?.id, this.item?.id, relationship)
-        .pipe(take(1))
+        .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
         .subscribe({
           next: (document) => {
             this.snackbarService.openSaveSuccessAnnouncement(`Document <strong>${this.item?.name}</strong> was ${isStarred ? 'added to' : 'removed from'} Starred successfully.`);
@@ -156,9 +162,11 @@ export abstract class DocumentCardAbstractComponent<T extends DocumentModel>
   onDocumentDelete() {
     if (!this.preProcessAction()) return;
 
+    this.loadingService.showLoadingBar();
+
     this.registerSubscription(
       this.documentService.deleteDocument(this.user?.id, this.item?.id)
-        .pipe(take(1))
+        .pipe(take(1), finalize(() => this.loadingService.hideLoadingBar()))
         .subscribe({
           next: () => {
             this.snackbarService.openWarningAnnouncement(`Document <strong>${this.item?.name}</strong> was deleted successfully.`);

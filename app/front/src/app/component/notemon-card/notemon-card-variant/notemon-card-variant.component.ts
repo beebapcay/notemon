@@ -1,11 +1,12 @@
 import { Clipboard } from '@angular/cdk/clipboard';
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {NotemonTypeEnum} from '../../../enum/notemon-type.enum';
-import {DocumentModel} from '../../../model/document.model';
-import {DocumentService} from '../../../service/document.service';
-import {SnackbarService} from '../../../service/snackbar.service';
-import {UserService} from '../../../service/user.service';
-import {DocumentCardAbstractComponent} from '../document-card.abstract.component';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { NotemonTypeEnum } from '../../../enum/notemon-type.enum';
+import { DocumentModel } from '../../../model/document.model';
+import { DocumentService } from '../../../service/document.service';
+import { LoadingService } from '../../../service/loading.service';
+import { SnackbarService } from '../../../service/snackbar.service';
+import { UserService } from '../../../service/user.service';
+import { DocumentCardAbstractComponent } from '../document-card.abstract.component';
 
 @Component({
   selector: 'app-notemon-card-variant',
@@ -19,8 +20,9 @@ export class NotemonCardVariantComponent extends DocumentCardAbstractComponent<D
     userService: UserService,
     snackbarService: SnackbarService,
     documentService: DocumentService,
-    clipboardService: Clipboard) {
-    super(userService, snackbarService, documentService, clipboardService);
+    clipboardService: Clipboard,
+    loadingService: LoadingService) {
+    super(userService, snackbarService, documentService, clipboardService, loadingService);
   }
 
   public getType(): NotemonTypeEnum {
