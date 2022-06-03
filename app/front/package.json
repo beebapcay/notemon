@@ -33,6 +33,7 @@
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "@popperjs/core": "^2.10.2",
+    "aos": "^2.3.4",
     "bootstrap": "^5.1.3",
     "ckeditor5-custom-build": "file:./ckeditor5",
     "jquery": "^3.6.0",
